@@ -1,0 +1,230 @@
+{
+	"editor.lineNumbers": "relative",
+	"editor.wordWrap": "on",
+	"editor.suggestSelection": "first",
+	"editor.fontFamily": "'Fira Code Nerd Font', 'Fira Code', monospace",
+	"editor.lineHeight": 30,
+	"editor.formatOnSave": true,
+	"editor.inlineSuggest.enabled": true,
+	"editor.bracketPairColorization.enabled": true,
+	"editor.guides.bracketPairs": true,
+	"editor.fontLigatures": true,
+	"workbench.startupEditor": "none",
+	"workbench.statusBar.visible": true,
+
+	"files.autoSaveDelay": 1500,
+	"files.autoSave": "afterDelay",
+	"files.associations": {
+		"*.jsx": "javascriptreact"
+	},
+
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+
+	"diffEditor.wordWrap": "on",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"code-runner.saveFileBeforeRun": true,
+	"cSpell.language": "en,pt,pt-BR,pt_BR",
+
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	"gitlens.advanced.messages": {
+		"suppressGitMissingWarning": true
+	},
+	"security.workspace.trust.untrustedFiles": "open",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"git.autofetch": true,
+
+	"editor.linkedEditing": true,
+
+	"terminal.integrated.fontFamily": "'Fira Code Nerd Font', 'Fira Code NF', 'Fira Code', 'monospace'",
+	"terminal.external.windowsExec": "wt -p cmd cmd",
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+
+	"json.schemas": [],
+
+	"cSpell.languageSettings": [],
+
+	"typescript.inlayHints.enumMemberValues.enabled": true,
+
+	"markdown.extension.syntax.plainTheme": true,
+
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"prettier.endOfLine": "lf",
+	"prettier.enable": true,
+	"prettier.semi": true,
+	"prettier.useEditorConfig": true,
+	"eslint.format.enable": true,
+
+	"typescript.updateImportsOnFileMove.enabled": "always",
+
+	"material-icon-theme.activeIconPack": "react",
+	"material-icon-theme.files.associations": {},
+
+	"[powershell]": {
+		"editor.semanticHighlighting.enabled": true
+	},
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "explicit"
+	},
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"Ubuntu (WSL)": {
+			"path": "C:\\Windows\\System32\\wsl.exe",
+			"args": ["-d", "Ubuntu"]
+		}
+	},
+
+	"terminal.integrated.defaultProfile.linux": "zsh",
+
+	"indentRainbow.indicatorStyle": "light",
+
+	"git.openRepositoryInParentFolders": "always",
+
+	"files.eol": "\n",
+
+	"git.confirmSync": false,
+
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	"jest.autoRun": "off",
+
+	"githubPullRequests.pullBranch": "never",
+
+	"terminal.integrated.env.linux": {},
+	"terminal.integrated.env.windows": {},
+
+	//VIM
+	"vim.camelCaseMotion.enable": true,
+	"vim.easymotion": true,
+	"vim.enableNeovim": true,
+	"vim.foldfix": true,
+	"vim.highlightedyank.enable": true,
+	"vim.targets.enable": true,
+	"vim.useSystemClipboard": true,
+	"vim.showMarksInGutter": true,
+	"vim.smartRelativeLine": true,
+	"vim.autoSwitchInputMethod.enable": true,
+	"vim.changeWordIncludesWhitespace": true,
+	"vim.gdefault": true,
+	"vim.hlsearch": true,
+	"vim.sneak": true,
+	"vim.sneakUseIgnorecaseAndSmartcase": true,
+	"vim.visualstar": true,
+	"vim.leader": "<Space>",
+	"vim.normalModeKeyBindingsNonRecursive": [
+		// NAVIGATION
+		// switch b/w buffers
+		{ "before": ["<S-h>"], "commands": [":bprevious"] },
+		{ "before": ["<S-l>"], "commands": [":bnext"] },
+		// splits
+		{ "before": ["leader", "v"], "commands": [":vsplit"] },
+		{ "before": ["leader", "s"], "commands": [":split"] },
+		// panes
+		{
+			"before": ["leader", "h"],
+			"commands": ["workbench.action.focusLeftGroup"]
+		},
+		{
+			"before": ["leader", "j"],
+			"commands": ["workbench.action.focusBelowGroup"]
+		},
+		{
+			"before": ["leader", "k"],
+			"commands": ["workbench.action.focusAboveGroup"]
+		},
+		{
+			"before": ["leader", "l"],
+			"commands": ["workbench.action.focusRightGroup"]
+		},
+
+		// FILE TREE
+		{
+			"before": ["leader", "n", "e"],
+			"commands": ["workbench.explorer.fileView.focus"]
+		},
+
+		// NICE TO HAVE
+		{
+			"before": ["leader", "w"],
+			"commands": ["workbench.action.files.save"]
+		},
+		{
+			"before": ["leader", "f"],
+			"commands": ["workbench.action.quickOpen"]
+		},
+		{
+			"before": ["leader", "p"],
+			"commands": ["editor.action.formatDocument"]
+		},
+		{
+			"before": ["g", "h"],
+			"commands": ["editor.action.showDefinitionPreviewHover"]
+		}
+	],
+	"vim.visualModeKeyBindings": [
+		// Stay in visual mode while indenting
+		{ "before": ["<"], "commands": ["editor.action.outdentLines"] },
+		{ "before": [">"], "commands": ["editor.action.indentLines"] },
+		// Move selected lines while staying in visual mode
+		{ "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+		{ "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+		// toggle comment selection
+		{ "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+	],
+	"editor.formatOnSaveMode": "modificationsIfAvailable",
+	"diffEditor.codeLens": true,
+	"diffEditor.experimental.showMoves": true,
+	"diffEditor.experimental.useVersion2": true,
+	"editor.minimap.autohide": true,
+	"editor.inlineSuggest.showToolbar": "always",
+	"workbench.commandPalette.experimental.suggestCommands": true,
+	"workbench.reduceMotion": "on",
+	"workbench.iconTheme": "material-icon-theme",
+	"workbench.tree.renderIndentGuides": "always",
+	"zenMode.fullScreen": false,
+	"zenMode.hideLineNumbers": false,
+	"zenMode.hideStatusBar": false,
+	"zenMode.silentNotifications": false,
+	"window.autoDetectHighContrast": false,
+	"window.restoreWindows": "preserve",
+	"window.newWindowDimensions": "inherit",
+	"explorer.incrementalNaming": "smart",
+	"telemetry.telemetryLevel": "off",
+	"jest.autoRevealOutput": "off",
+	"editor.quickSuggestionsDelay": 3,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"cSpell.userWords": ["Agrometrika", "DIGBRAZ", "nagro"],
+	"gitHistory.alwaysPromptRepositoryPicker": true,
+	"workbench.sideBar.location": "right",
+	"diffEditor.hideUnchangedRegions.enabled": true,
+	"window.menuBarVisibility": "toggle",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.black-formatter"
+	},
+	"tabnine.experimentalAutoImports": true,
+	"workbench.colorTheme": "Material Theme"
+}
