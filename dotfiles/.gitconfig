@@ -11,6 +11,7 @@
   aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
   # Command shortcuts
   ci = commit
+  cim = commit -m
   co = checkout
   st = status
   # Display tree-like log, because default log is a pain…

@@ -231,6 +231,5 @@
 	"window.menuBarVisibility": "toggle",
 	"diffEditor.ignoreTrimWhitespace": false,
 	"editor.multiCursorModifier": "ctrlCmd",
-	"workbench.colorTheme": "Community Material Theme Darker",
 	"tabnine.experimentalAutoImports": true
 }

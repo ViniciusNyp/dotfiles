@@ -230,8 +230,8 @@
 	"window.menuBarVisibility": "toggle",
 	"diffEditor.ignoreTrimWhitespace": false,
 	"editor.multiCursorModifier": "ctrlCmd",
-	"workbench.colorTheme": "Community Material Theme Darker",
 	"tabnine.experimentalAutoImports": true,
 	"prettify-ts.viewNestedTypes": true,
-	"workbench.sideBar.location": "right"
+	"workbench.sideBar.location": "right",
+	"workbench.colorTheme": "Material Theme Darker"
 }
