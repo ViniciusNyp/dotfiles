@@ -8,7 +8,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# antigen must be installed beforehand
 source ~/antigen.zsh
 
 antigen use oh-my-zsh
@@ -25,7 +24,6 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-# thefuck must be installed for this to work
 plugins=(thefuck)
 
 export ZSH="$HOME/.oh-my-zsh"

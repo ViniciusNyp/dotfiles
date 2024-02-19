@@ -12,7 +12,7 @@
 	"workbench.startupEditor": "none",
 	"workbench.statusBar.visible": true,
 
-	"files.autoSaveDelay": 1500,
+	"files.autoSaveDelay": 2000,
 	"files.autoSave": "afterDelay",
 	"files.associations": {
 		"*.jsx": "javascriptreact"
@@ -40,7 +40,6 @@
 	"editor.linkedEditing": true,
 
 	"terminal.integrated.fontFamily": "'Fira Code Nerd Font', 'Fira Code NF', 'Fira Code', 'monospace'",
-	"terminal.external.windowsExec": "wt -p cmd cmd",
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
 
 	"json.schemas": [],
@@ -109,7 +108,7 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 
-	"jest.autoRun": "off",
+	"jest.runMode": "on-demand",
 
 	"githubPullRequests.pullBranch": "never",
 
@@ -233,5 +232,7 @@
 	"tabnine.experimentalAutoImports": true,
 	"prettify-ts.viewNestedTypes": true,
 	"workbench.sideBar.location": "right",
-	"workbench.colorTheme": "Material Theme Darker"
+	"workbench.colorTheme": "Material Theme Darker High Contrast",
+	"js/ts.implicitProjectConfig.checkJs": true,
+	"js/ts.implicitProjectConfig.target": "ESNext"
 }

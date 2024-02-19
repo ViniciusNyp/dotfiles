@@ -1,0 +1,11 @@
+.env
+tsconfig*.json
+*.tsbuildinfo
+.eslintcache
+coverage
+*.lcov
+dist
+out
+.serverless/
+.vscode
+
