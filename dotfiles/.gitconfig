@@ -3,6 +3,8 @@
 [user]
   name = Vinícius Cristofari Barbosa
   email = viniciusnypbarbosa@outlook.com
+[includeIf "gitdir:**/nutrien/"]
+    path = .gitconfig_nutrien
 [color]
   # Enable colors in color-supporting terminals
   ui = auto
@@ -13,12 +15,13 @@
   ci = commit
   cim = commit -m
   co = checkout
+  sw = switch
   st = status
   # Display tree-like log, because default log is a pain…
   lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
   # Useful when you have to update your last commit
   # with staged files without editing the commit message.
-  amend = commit --amend --no-edit
+  append = commit --amend --no-edit
   # Ensure that force-pushing won't lose someone else's work (only mine).
   push-with-lease = push --force-with-lease
   # Rebase won’t trigger hooks on each "replayed" commit.
@@ -34,8 +37,7 @@
   # Remove file(s) from Git but not from disk
   untrack = rm --cache --
   # Switch to main/master branch besides name
-  sm="!f() { git switch master 2>/dev/null || git switch main; }; f"
-
+  swm="!f() { git switch master 2>/dev/null || git switch main; }; f"
   # Assume that file is unchanged
   skip = update-index --skip-worktree
   unskip = update-index --no-skip-worktree

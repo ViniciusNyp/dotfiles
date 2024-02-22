@@ -15,6 +15,7 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle agkozak/zsh-z
 antigen bundle lukechilds/zsh-nvm
+antigen bundle kiurchv/asdf.plugin.zsh
 antigen bundle unixorn/fzf-zsh-plugin@main
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
