@@ -10,7 +10,6 @@
 	"editor.guides.bracketPairs": true,
 	"editor.fontLigatures": true,
 	"workbench.startupEditor": "none",
-	"workbench.statusBar.visible": true,
 
 	"files.autoSaveDelay": 2000,
 	"files.autoSave": "afterDelay",
@@ -194,10 +193,8 @@
 		{ "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
 	],
 	"editor.formatOnSaveMode": "modificationsIfAvailable",
-	"diffEditor.codeLens": true,
 	"diffEditor.experimental.showMoves": true,
 	"diffEditor.experimental.useVersion2": true,
-	"editor.minimap.autohide": true,
 	"editor.inlineSuggest.showToolbar": "always",
 	"workbench.commandPalette.experimental.suggestCommands": true,
 	"workbench.reduceMotion": "on",
@@ -234,5 +231,17 @@
 	"workbench.sideBar.location": "right",
 	"workbench.colorTheme": "Material Theme Darker High Contrast",
 	"js/ts.implicitProjectConfig.checkJs": true,
-	"js/ts.implicitProjectConfig.target": "ESNext"
+	"js/ts.implicitProjectConfig.target": "ESNext",
+	"editor.minimap.enabled": false,
+	"editor.minimap.autohide": true,
+	"gitlens.telemetry.enabled": false,
+	"code-runner.enableAppInsights": false,
+	"editor.codeLens": false,
+	"gitlens.codeLens.enabled": false,
+	"gitlens.codeLens.recentChange.enabled": false,
+	"gitlens.codeLens.authors.enabled": false,
+	"merge-conflict.codeLens.enabled": false,
+	"regex-previewer.enableCodeLens": false,
+	"tabnine.codeLensEnabled": false,
+	"workbench.activityBar.location": "hidden"
 }
