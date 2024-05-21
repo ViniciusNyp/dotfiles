@@ -17,5 +17,19 @@
 	{
 		"key": "ctrl+shift+[BracketLeft]",
 		"command": "-workbench.action.terminal.toggleTerminal"
+	},
+	{
+		"key": "alt+x",
+		"command": "editor.action.showHover",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+k ctrl+i",
+		"command": "-editor.action.showHover",
+		"when": "editorTextFocus"
+	},
+	{
+		"key": "ctrl+p",
+		"command": "workbench.action.quickOpen"
 	}
 ]
