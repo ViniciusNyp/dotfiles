@@ -15,7 +15,8 @@
 	"files.autoSaveDelay": 2000,
 	"files.autoSave": "afterDelay",
 	"files.associations": {
-		"*.jsx": "javascriptreact"
+		"*.jsx": "javascriptreact",
+		".env*": "dotenv"
 	},
 
 	"explorer.confirmDelete": true,
@@ -276,5 +277,15 @@
 	"javascript.inlayHints.functionLikeReturnTypes.enabled": true,
 	"errorLens.delayMode": "debounce",
 	"search.smartCase": true,
-	"sql-formatter.uppercase": true
+	"sql-formatter.uppercase": true,
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "keyword.other.dotenv",
+				"settings": {
+					"foreground": "#FF000000"
+				}
+			}
+		]
+	}
 }

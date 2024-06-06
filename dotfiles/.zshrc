@@ -25,7 +25,7 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-plugins=(thefuck)
+plugins=(poetry)
 
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='code'
@@ -57,3 +57,5 @@ load-nvmrc() {
 
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
