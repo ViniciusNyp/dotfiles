@@ -5,7 +5,6 @@
 	"editor.fontFamily": "'Fira Code Nerd Font', 'Fira Code', monospace",
 	"editor.lineHeight": 30,
 	"editor.formatOnSave": true,
-	"beautify.onSave": true,
 	"editor.inlineSuggest.enabled": true,
 	"editor.bracketPairColorization.enabled": true,
 	"editor.guides.bracketPairs": true,
@@ -22,12 +21,11 @@
 	"gitlens.advanced.messages": {
 		"suppressGitMissingWarning": true
 	},
-	"security.workspace.trust.untrustedFiles": "open",
 	"git.autofetch": true,
 	"editor.linkedEditing": true,
 	"terminal.integrated.fontFamily": "'Fira Code Nerd Font', 'Fira Code NF', 'Fira Code', 'monospace'",
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
-	"typescript.inlayHints.enumMemberValues.enabled": true,
+	"markdown.extension.syntax.plainTheme": true,
 	"editor.semanticHighlighting.enabled": true,
 	// "editor.codeActionsOnSave": {
 	// 	"source.addMissingImports": "always",
@@ -276,9 +274,6 @@
 	"merge-conflict.codeLens.enabled": false,
 	"regex-previewer.enableCodeLens": false,
 	"gitlens.currentLine.enabled": false,
-	"[sql]": {
-		"editor.defaultFormatter": "adpyke.vscode-sql-formatter"
-	},
 	"editor.minimap.maxColumn": 80,
 	"editor.formatOnPaste": true,
 	"githubPullRequests.showPullRequestNumberInTree": true,
@@ -305,7 +300,6 @@
 	"github.gitProtocol": "ssh",
 	"githubPullRequests.notifications": "pullRequests",
 	"search.useParentIgnoreFiles": true,
-	"js/ts.implicitProjectConfig.experimentalDecorators": true,
 	"cSpell.maxNumberOfProblems": 20,
 	"cSpell.numSuggestions": 4,
 	"cSpell.ignorePaths": [
@@ -322,6 +316,7 @@
 	"search.smartCase": true,
 	"sql-formatter.uppercase": true,
 	"workbench.activityBar.location": "hidden",
+	"workbench.colorTheme": "One Dark Pro Darker",
 	"[jsonc]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
@@ -340,5 +335,5 @@
 			}
 		]
 	},
-	
+	"workbench.iconTheme": "eq-material-theme-icons-darker"
 }

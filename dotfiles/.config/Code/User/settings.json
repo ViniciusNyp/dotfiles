@@ -11,37 +11,28 @@
 	"editor.guides.bracketPairs": true,
 	"editor.fontLigatures": true,
 	"workbench.startupEditor": "none",
-
 	"files.autoSaveDelay": 2000,
 	"files.autoSave": "afterDelay",
 	"files.associations": {
 		"*.jsx": "javascriptreact"
 	},
-
 	"explorer.confirmDelete": true,
 	"explorer.confirmDragAndDrop": true,
-
 	"diffEditor.wordWrap": "on",
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	"code-runner.saveFileBeforeRun": true,
 	"cSpell.language": "en,pt,pt-BR,pt_BR",
-
 	"gitlens.advanced.messages": {
 		"suppressGitMissingWarning": true
 	},
 	"security.workspace.trust.untrustedFiles": "open",
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"git.autofetch": true,
-
 	"editor.linkedEditing": true,
-
 	"terminal.integrated.fontFamily": "'Fira Code Nerd Font', 'Fira Code NF', 'Fira Code', 'monospace'",
 	"terminal.integrated.defaultProfile.windows": "PowerShell",
-
 	"typescript.inlayHints.enumMemberValues.enabled": true,
-
 	"markdown.extension.syntax.plainTheme": true,
-
 	"prettier.tabWidth": 4,
 	"prettier.useTabs": true,
 	"prettier.endOfLine": "lf",
@@ -49,14 +40,10 @@
 	"prettier.semi": true,
 	"prettier.useEditorConfig": true,
 	"eslint.format.enable": true,
-
 	"typescript.updateImportsOnFileMove.enabled": "always",
-
 	"material-icon-theme.activeIconPack": "react",
 	"material-icon-theme.files.associations": {},
-
 	"editor.semanticHighlighting.enabled": true,
-
 	"editor.codeActionsOnSave": {
 		"source.addMissingImports": "always",
 		"source.organizeImports": "always",
@@ -70,28 +57,23 @@
 		},
 		"Ubuntu (WSL)": {
 			"path": "C:\\Windows\\System32\\wsl.exe",
-			"args": ["-d", "Ubuntu"]
+			"args": [
+				"-d",
+				"Ubuntu"
+			]
 		}
 	},
-
 	"terminal.integrated.defaultProfile.linux": "zsh",
-
 	"indentRainbow.indicatorStyle": "light",
-
 	"git.openRepositoryInParentFolders": "always",
-
 	"files.eol": "\n",
-
 	"git.confirmSync": false,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[typescript]": {
 		"editor.formatOnSave": false
 	},
-
 	"jest.runMode": "on-demand",
-
 	"githubPullRequests.pullBranch": "always",
-
 	//VIM
 	"vim.camelCaseMotion.enable": true,
 	"vim.easymotion": true,
@@ -110,66 +92,178 @@
 	"vim.sneakUseIgnorecaseAndSmartcase": true,
 	"vim.visualstar": true,
 	"vim.leader": "<Space>",
-	"vim.handleKeys": { "<C-f>": false },
+	"vim.handleKeys": {
+		"<C-f>": false
+	},
 	"vim.normalModeKeyBindingsNonRecursive": [
 		// NAVIGATION
 		// switch b/w buffers
-		{ "before": ["<S-h>"], "commands": [":bprevious"] },
-		{ "before": ["<S-l>"], "commands": [":bnext"] },
+		{
+			"before": [
+				"<S-h>"
+			],
+			"commands": [
+				":bprevious"
+			]
+		},
+		{
+			"before": [
+				"<S-l>"
+			],
+			"commands": [
+				":bnext"
+			]
+		},
 		// splits
-		{ "before": ["leader", "v"], "commands": [":vsplit"] },
-		{ "before": ["leader", "s"], "commands": [":split"] },
+		{
+			"before": [
+				"leader",
+				"v"
+			],
+			"commands": [
+				":vsplit"
+			]
+		},
+		{
+			"before": [
+				"leader",
+				"s"
+			],
+			"commands": [
+				":split"
+			]
+		},
 		// panes
 		{
-			"before": ["leader", "h"],
-			"commands": ["workbench.action.focusLeftGroup"]
+			"before": [
+				"leader",
+				"h"
+			],
+			"commands": [
+				"workbench.action.focusLeftGroup"
+			]
 		},
 		{
-			"before": ["leader", "j"],
-			"commands": ["workbench.action.focusBelowGroup"]
+			"before": [
+				"leader",
+				"j"
+			],
+			"commands": [
+				"workbench.action.focusBelowGroup"
+			]
 		},
 		{
-			"before": ["leader", "k"],
-			"commands": ["workbench.action.focusAboveGroup"]
+			"before": [
+				"leader",
+				"k"
+			],
+			"commands": [
+				"workbench.action.focusAboveGroup"
+			]
 		},
 		{
-			"before": ["leader", "l"],
-			"commands": ["workbench.action.focusRightGroup"]
+			"before": [
+				"leader",
+				"l"
+			],
+			"commands": [
+				"workbench.action.focusRightGroup"
+			]
 		},
-
 		// FILE TREE
 		{
-			"before": ["leader", "n", "e"],
-			"commands": ["workbench.explorer.fileView.focus"]
+			"before": [
+				"leader",
+				"n",
+				"e"
+			],
+			"commands": [
+				"workbench.explorer.fileView.focus"
+			]
 		},
-
 		// NICE TO HAVE
 		{
-			"before": ["leader", "w"],
-			"commands": ["workbench.action.files.save"]
+			"before": [
+				"leader",
+				"w"
+			],
+			"commands": [
+				"workbench.action.files.save"
+			]
 		},
 		{
-			"before": ["leader", "f"],
-			"commands": ["workbench.action.quickOpen"]
+			"before": [
+				"leader",
+				"f"
+			],
+			"commands": [
+				"workbench.action.quickOpen"
+			]
 		},
 		{
-			"before": ["leader", "p"],
-			"commands": ["editor.action.formatDocument"]
+			"before": [
+				"leader",
+				"p"
+			],
+			"commands": [
+				"editor.action.formatDocument"
+			]
 		},
 		{
-			"before": ["g", "h"],
-			"commands": ["editor.action.showDefinitionPreviewHover"]
+			"before": [
+				"g",
+				"h"
+			],
+			"commands": [
+				"editor.action.showDefinitionPreviewHover"
+			]
 		}
 	],
 	"vim.visualModeKeyBindings": [
 		// Stay in visual mode while indenting
-		{ "before": ["<"], "commands": ["editor.action.outdentLines"] },
-		{ "before": [">"], "commands": ["editor.action.indentLines"] },
+		{
+			"before": [
+				"<"
+			],
+			"commands": [
+				"editor.action.outdentLines"
+			]
+		},
+		{
+			"before": [
+				">"
+			],
+			"commands": [
+				"editor.action.indentLines"
+			]
+		},
 		// Move selected lines while staying in visual mode
-		{ "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
-		{ "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+		{
+			"before": [
+				"J"
+			],
+			"commands": [
+				"editor.action.moveLinesDownAction"
+			]
+		},
+		{
+			"before": [
+				"K"
+			],
+			"commands": [
+				"editor.action.moveLinesUpAction"
+			]
+		},
 		// toggle comment selection
-		{ "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+		{
+			"before": [
+				"leader",
+				"c"
+			],
+			"commands": [
+				"editor.action.commentLine"
+			]
+		}
 	],
 	"editor.formatOnSaveMode": "modificationsIfAvailable",
 	"diffEditor.experimental.showMoves": true,
@@ -201,7 +295,6 @@
 	],
 	"gitHistory.alwaysPromptRepositoryPicker": true,
 	"diffEditor.hideUnchangedRegions.enabled": true,
-	"window.menuBarVisibility": "toggle",
 	"diffEditor.ignoreTrimWhitespace": false,
 	"editor.multiCursorModifier": "ctrlCmd",
 	"tabnine.experimentalAutoImports": true,
@@ -271,6 +364,7 @@
 	"typescript.tsserver.nodePath": "node",
 	"javascript.inlayHints.enumMemberValues.enabled": true,
 	"javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-	"errorLens.delayMode": "debounce"
+	"errorLens.delayMode": "debounce",
+	"window.menuBarVisibility": "toggle",
+	"extensions.autoUpdate": "onlyEnabledExtensions"
 }
-

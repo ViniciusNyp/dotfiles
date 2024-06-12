@@ -58,4 +58,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
