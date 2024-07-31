@@ -8,6 +8,11 @@ fi
 export EDITOR='code --wait'
 export SUDO_EDITOR="$EDITOR"
 
+ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
+fpath=($ZFUNCDIR $fpath)
+[[ -d $ZSH_COMPDUMP:h ]] || mkdir -p $ZSH_COMPDUMP:h
+autoload -Uz compinit && compinit -i -d $ZSH_COMPDUMP
+
 [[ -e ${ZDOTDIR:-~}/.antidote ]] ||
   git clone https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
 
@@ -15,23 +20,17 @@ source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
 source <(antidote init)
 
+antidote bundle belak/zsh-utils path:editor
+antidote bundle belak/zsh-utils path:history
+antidote bundle belak/zsh-utils path:utility
 antidote bundle ohmyzsh/ohmyzsh path:plugins/git
 antidote bundle agkozak/zsh-z
-antidote bundle lukechilds/zsh-nvm
-antidote bundle kiurchv/asdf.plugin.zsh
 antidote bundle unixorn/fzf-zsh-plugin
 antidote bundle jeffreytse/zsh-vi-mode
-antidote bundle zsh-users/zsh-completions
-antidote bundle zsh-users/zsh-autosuggestions
-antidote bundle zsh-users/zsh-syntax-highlighting
-antidote bundle romkatv/powerlevel10k
 
-autoload -U compinit; compinit
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval $(thefuck --alias)
-
-fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 if [[ -z "$ZELLIJ" ]]; then
     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
@@ -87,6 +86,12 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Compression
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
 alias decompress="tar -xzf"
+
+antidote bundle zsh-users/zsh-autosuggestions
+antidote bundle zsh-users/zsh-completions
+antidote bundle belak/zsh-utils path:completion
+antidote bundle zsh-users/zsh-syntax-highlighting
+antidote bundle romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
