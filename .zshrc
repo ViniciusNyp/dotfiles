@@ -26,6 +26,8 @@ antidote bundle zsh-users/zsh-autosuggestions
 antidote bundle zsh-users/zsh-syntax-highlighting
 antidote bundle romkatv/powerlevel10k
 
+autoload -U compinit; compinit
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval $(thefuck --alias)
 
