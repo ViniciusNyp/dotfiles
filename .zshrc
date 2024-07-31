@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export EDITOR='code --wait'
 export SUDO_EDITOR="$EDITOR"
 
@@ -8,11 +15,11 @@ source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
 source <(antidote init)
 
-antidote bundle git
+antidote bundle ohmyzsh/ohmyzsh path:plugins/git
 antidote bundle agkozak/zsh-z
 antidote bundle lukechilds/zsh-nvm
 antidote bundle kiurchv/asdf.plugin.zsh
-antidote bundle unixorn/fzf-zsh-plugin@main
+antidote bundle unixorn/fzf-zsh-plugin
 antidote bundle jeffreytse/zsh-vi-mode
 antidote bundle zsh-users/zsh-completions
 antidote bundle zsh-users/zsh-autosuggestions
@@ -73,8 +80,11 @@ alias d='docker'
 alias bat='batcat'
 alias lzg='lazygit'
 alias lzd='lazydocker'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Compression
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
 alias decompress="tar -xzf"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
