@@ -7,6 +7,7 @@ fi
 
 export EDITOR='code --wait'
 export SUDO_EDITOR="$EDITOR"
+export THEFUCK_REQUIRE_CONFIRMATION='false'
 
 ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
 fpath=($ZFUNCDIR $fpath)
@@ -68,6 +69,7 @@ alias lta='lt -a'
 alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
 alias fd='fdfind'
 alias cd='z'
+alias diff='diff-so-fancy'
 
 # Directories
 alias ..='cd ..'
