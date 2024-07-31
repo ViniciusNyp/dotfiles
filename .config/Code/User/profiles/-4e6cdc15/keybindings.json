@@ -1,0 +1,35 @@
+// Place your key bindings in this file to override the defaults
+[
+		{
+			"key": "alt+f",
+			"command": "editor.action.addSelectionToNextFindMatch",
+			"when": "editorFocus"
+		},
+		{
+			"key": "ctrl+d",
+			"command": "-editor.action.addSelectionToNextFindMatch",
+			"when": "editorFocus"
+		},
+		{
+			"key": "ctrl+'",
+			"command": "workbench.action.terminal.toggleTerminal"
+		},
+		{
+			"key": "ctrl+shift+[BracketLeft]",
+			"command": "-workbench.action.terminal.toggleTerminal"
+		},
+		{
+			"key": "alt+x",
+			"command": "editor.action.showHover",
+			"when": "editorTextFocus"
+		},
+		{
+			"key": "ctrl+k ctrl+i",
+			"command": "-editor.action.showHover",
+			"when": "editorTextFocus"
+		},
+		{
+			"key": "ctrl+p",
+			"command": "workbench.action.quickOpen"
+		}
+]

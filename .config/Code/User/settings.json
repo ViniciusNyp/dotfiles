@@ -1,0 +1,296 @@
+{
+	"editor.lineNumbers": "relative",
+	"editor.wordWrap": "on",
+	"editor.suggestSelection": "first",
+	"editor.fontFamily": "'Fira Code Nerd Font', 'Fira Code', monospace",
+	"editor.lineHeight": 30,
+	"editor.formatOnSave": true,
+	"beautify.onSave": true,
+	"editor.inlineSuggest.enabled": true,
+	"editor.bracketPairColorization.enabled": true,
+	"editor.guides.bracketPairs": true,
+	"editor.fontLigatures": true,
+	"workbench.startupEditor": "none",
+	"files.autoSaveDelay": 2000,
+	"files.autoSave": "afterDelay",
+	"files.associations": {
+		"*.jsx": "javascriptreact",
+		".env*": "dotenv"
+	},
+	"explorer.confirmDelete": true,
+	"explorer.confirmDragAndDrop": true,
+	"diffEditor.wordWrap": "on",
+	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+	"code-runner.saveFileBeforeRun": true,
+	"cSpell.language": "en,pt,pt-BR,pt_BR",
+	"gitlens.advanced.messages": {
+		"suppressGitMissingWarning": true
+	},
+	"security.workspace.trust.untrustedFiles": "open",
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"git.autofetch": true,
+	"editor.linkedEditing": true,
+	"terminal.integrated.fontFamily": "'Fira Code Nerd Font', 'Fira Code NF', 'Fira Code', 'monospace'",
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"typescript.inlayHints.enumMemberValues.enabled": true,
+	"markdown.extension.syntax.plainTheme": true,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"prettier.endOfLine": "lf",
+	"prettier.enable": true,
+	"prettier.semi": true,
+	"prettier.useEditorConfig": true,
+	"eslint.format.enable": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"material-icon-theme.activeIconPack": "react",
+	"material-icon-theme.files.associations": {},
+	"editor.semanticHighlighting.enabled": true,
+	"editor.codeActionsOnSave": {
+		"source.addMissingImports": "always",
+		"source.organizeImports": "always",
+		"source.formatDocument": "always",
+		"source.fixAll": "always"
+	},
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"Ubuntu (WSL)": {
+			"path": "C:\\Windows\\System32\\wsl.exe",
+			"args": ["-d", "Ubuntu"]
+		}
+	},
+	"terminal.integrated.defaultProfile.linux": "zsh",
+	"indentRainbow.indicatorStyle": "light",
+	"git.openRepositoryInParentFolders": "always",
+	"files.eol": "\n",
+	"git.confirmSync": false,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[typescript]": {
+		"editor.formatOnSave": false
+	},
+	"jest.runMode": "on-demand",
+	"githubPullRequests.pullBranch": "always",
+	//VIM
+	"vim.camelCaseMotion.enable": true,
+	"vim.easymotion": true,
+	"vim.enableNeovim": true,
+	"vim.foldfix": true,
+	"vim.highlightedyank.enable": true,
+	"vim.targets.enable": true,
+	"vim.useSystemClipboard": true,
+	"vim.showMarksInGutter": true,
+	"vim.smartRelativeLine": true,
+	"vim.autoSwitchInputMethod.enable": true,
+	"vim.changeWordIncludesWhitespace": true,
+	"vim.gdefault": true,
+	"vim.hlsearch": true,
+	"vim.sneak": true,
+	"vim.sneakUseIgnorecaseAndSmartcase": true,
+	"vim.visualstar": true,
+	"vim.leader": "<Space>",
+	"vim.handleKeys": {
+		"<C-f>": false
+	},
+	"vim.normalModeKeyBindingsNonRecursive": [
+		// NAVIGATION
+		// switch b/w buffers
+		{
+			"before": ["<S-h>"],
+			"commands": [":bprevious"]
+		},
+		{
+			"before": ["<S-l>"],
+			"commands": [":bnext"]
+		},
+		// splits
+		{
+			"before": ["leader", "v"],
+			"commands": [":vsplit"]
+		},
+		{
+			"before": ["leader", "s"],
+			"commands": [":split"]
+		},
+		// panes
+		{
+			"before": ["leader", "h"],
+			"commands": ["workbench.action.focusLeftGroup"]
+		},
+		{
+			"before": ["leader", "j"],
+			"commands": ["workbench.action.focusBelowGroup"]
+		},
+		{
+			"before": ["leader", "k"],
+			"commands": ["workbench.action.focusAboveGroup"]
+		},
+		{
+			"before": ["leader", "l"],
+			"commands": ["workbench.action.focusRightGroup"]
+		},
+		// FILE TREE
+		{
+			"before": ["leader", "n", "e"],
+			"commands": ["workbench.explorer.fileView.focus"]
+		},
+		// NICE TO HAVE
+		{
+			"before": ["leader", "w"],
+			"commands": ["workbench.action.files.save"]
+		},
+		{
+			"before": ["leader", "f"],
+			"commands": ["workbench.action.quickOpen"]
+		},
+		{
+			"before": ["leader", "p"],
+			"commands": ["editor.action.formatDocument"]
+		},
+		{
+			"before": ["g", "h"],
+			"commands": ["editor.action.showDefinitionPreviewHover"]
+		}
+	],
+	"vim.visualModeKeyBindings": [
+		// Stay in visual mode while indenting
+		{
+			"before": ["<"],
+			"commands": ["editor.action.outdentLines"]
+		},
+		{
+			"before": [">"],
+			"commands": ["editor.action.indentLines"]
+		},
+		// Move selected lines while staying in visual mode
+		{
+			"before": ["J"],
+			"commands": ["editor.action.moveLinesDownAction"]
+		},
+		{
+			"before": ["K"],
+			"commands": ["editor.action.moveLinesUpAction"]
+		},
+		// toggle comment selection
+		{
+			"before": ["leader", "c"],
+			"commands": ["editor.action.commentLine"]
+		}
+	],
+	"editor.formatOnSaveMode": "modificationsIfAvailable",
+	"diffEditor.experimental.showMoves": true,
+	"diffEditor.experimental.useVersion2": true,
+	"editor.inlineSuggest.showToolbar": "always",
+	"workbench.commandPalette.experimental.suggestCommands": true,
+	"workbench.reduceMotion": "on",
+	"workbench.iconTheme": "eq-material-theme-icons-darker",
+	"workbench.tree.renderIndentGuides": "always",
+	"zenMode.fullScreen": false,
+	"zenMode.hideLineNumbers": false,
+	"zenMode.hideStatusBar": false,
+	"zenMode.silentNotifications": false,
+	"window.autoDetectHighContrast": false,
+	"window.restoreWindows": "preserve",
+	"window.newWindowDimensions": "inherit",
+	"explorer.incrementalNaming": "smart",
+	"telemetry.telemetryLevel": "off",
+	"jest.outputConfig": "test-results-based",
+	"editor.quickSuggestionsDelay": 3,
+	"cSpell.userWords": [
+		"Agrometrika",
+		"cnpj",
+		"Cnpj",
+		"DIGBRAZ",
+		"nagro",
+		"nutrien",
+		"serasa"
+	],
+	"gitHistory.alwaysPromptRepositoryPicker": true,
+	"diffEditor.hideUnchangedRegions.enabled": true,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"editor.multiCursorModifier": "ctrlCmd",
+	"tabnine.experimentalAutoImports": true,
+	"prettify-ts.viewNestedTypes": true,
+	"workbench.sideBar.location": "right",
+	"js/ts.implicitProjectConfig.checkJs": true,
+	"js/ts.implicitProjectConfig.target": "ESNext",
+	"editor.minimap.enabled": false,
+	"editor.minimap.autohide": true,
+	"gitlens.telemetry.enabled": false,
+	"code-runner.enableAppInsights": false,
+	"editor.codeLens": false,
+	"gitlens.codeLens.enabled": false,
+	"gitlens.codeLens.recentChange.enabled": false,
+	"gitlens.codeLens.authors.enabled": false,
+	"merge-conflict.codeLens.enabled": false,
+	"regex-previewer.enableCodeLens": false,
+	"tabnine.codeLensEnabled": false,
+	"workbench.activityBar.location": "hidden",
+	"gitlens.currentLine.enabled": false,
+	"[sql]": {
+		"editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+	},
+	"editor.minimap.maxColumn": 80,
+	"editor.formatOnPaste": true,
+	"githubPullRequests.showPullRequestNumberInTree": true,
+	"gitlens.views.worktrees.files.layout": "tree",
+	"scm.defaultViewMode": "tree",
+	"search.defaultViewMode": "tree",
+	"gitlens.views.commits.files.layout": "tree",
+	"gitlens.views.commitDetails.files.layout": "tree",
+	"gitlens.views.branches.files.layout": "tree",
+	"gitlens.views.remotes.files.layout": "tree",
+	"gitlens.views.stashes.files.layout": "tree",
+	"gitlens.views.tags.files.layout": "tree",
+	"gitlens.views.contributors.files.layout": "tree",
+	"gitlens.views.searchAndCompare.files.layout": "tree",
+	"gitlens.views.workspaces.files.layout": "tree",
+	"gitlens.views.patchDetails.files.layout": "tree",
+	"vim.replaceWithRegister": true,
+	"git.repositoryScanIgnoredFolders": [
+		"node_modules",
+		"coverage",
+		"dist",
+		"out"
+	],
+	"github.gitProtocol": "ssh",
+	"githubPullRequests.notifications": "pullRequests",
+	"search.useParentIgnoreFiles": true,
+	"typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+	"typescript.surveys.enabled": false,
+	"typescript.tsserver.maxTsServerMemory": 4096,
+	"typescript.preferGoToSourceDefinition": true,
+	"js/ts.implicitProjectConfig.experimentalDecorators": true,
+	"cSpell.maxNumberOfProblems": 20,
+	"cSpell.numSuggestions": 4,
+	"cSpell.ignorePaths": [
+		"package-lock.json",
+		"node_modules",
+		"vscode-extension",
+		".git/objects",
+		".vscode",
+		".vscode-insiders",
+		".*"
+	],
+	"workbench.editor.limit.enabled": true,
+	"typescript.tsserver.nodePath": "node",
+	"javascript.inlayHints.enumMemberValues.enabled": true,
+	"javascript.inlayHints.functionLikeReturnTypes.enabled": true,
+	"errorLens.delayMode": "debounce",
+	"window.menuBarVisibility": "toggle",
+	"extensions.autoUpdate": "onlyEnabledExtensions",
+	"editor.tokenColorCustomizations": {
+		"textMateRules": [
+			{
+				"scope": "keyword.other.dotenv",
+				"settings": {
+					"foreground": "#FF000000"
+				}
+			}
+		]
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	}
+}
