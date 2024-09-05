@@ -33,25 +33,27 @@ antidote bundle jeffreytse/zsh-vi-mode
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval $(thefuck --alias)
 
-if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c
-    else
-        zellij
-    fi
 
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
-fi
+  # if [[ -z "$ZELLIJ" ]]; then
+  #     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+  #         zellij attach -c
+  #     else
+  #         zellij
+  #     fi
+
+  #     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+  #         exit
+  #     fi
+  # fi
+
 
 if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
-if command -v zellij &> /dev/null; then
-    eval "$(zellij setup --generate-auto-start zsh)"
-fi
+# if command -v zellij &> /dev/null; then
+#     eval "$(zellij setup --generate-auto-start zsh)"
+# fi
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"

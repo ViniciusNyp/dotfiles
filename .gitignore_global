@@ -1,6 +1,5 @@
 .env
 *.tsbuildinfo
-tsconfig*.json
 .eslintcache
 coverage
 *.lcov

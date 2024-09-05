@@ -1,8 +1,8 @@
 [user]
   name = Vinícius Cristofari Barbosa
   email = viniciusnypbarbosa@outlook.com
-[includeIf "gitdir:**/nutrien/"]
-    path = .gitconfig_nutrien
+[includeIf "gitdir:**/speedchain/"]
+    path = .gitconfig_speedchain
 [color]
   ui = auto
 [alias]

@@ -8,7 +8,7 @@
 	"beautify.onSave": true,
 	"editor.inlineSuggest.enabled": true,
 	"editor.bracketPairColorization.enabled": true,
-	"editor.guides.bracketPairs": true,
+	"editor.guides.bracketPairs": "active",
 	"editor.fontLigatures": true,
 	"workbench.startupEditor": "none",
 
@@ -19,7 +19,7 @@
 		".env*": "dotenv"
 	},
 
-	"explorer.confirmDelete": true,
+	"explorer.confirmDelete": false,
 	"explorer.confirmDragAndDrop": true,
 
 	"diffEditor.wordWrap": "on",
@@ -76,6 +76,13 @@
 	},
 
 	"terminal.integrated.defaultProfile.linux": "zsh",
+	"terminal.integrated.profiles.linux": {
+		"zsh": {
+			"path": "zsh",
+			"args": ["-i"],
+			"color": "terminal.ansiBlue"
+		}
+	},
 
 	"indentRainbow.indicatorStyle": "light",
 
@@ -85,7 +92,7 @@
 
 	"git.confirmSync": false,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"[typescript, typescriptreact, javascript, javascriptreact]": {
+	"[typescript]": {
 		"editor.formatOnSave": false
 	},
 
@@ -204,12 +211,10 @@
 	],
 	"gitHistory.alwaysPromptRepositoryPicker": true,
 	"diffEditor.hideUnchangedRegions.enabled": true,
-	"window.menuBarVisibility": "toggle",
 	"diffEditor.ignoreTrimWhitespace": false,
 	"editor.multiCursorModifier": "ctrlCmd",
 	"tabnine.experimentalAutoImports": true,
 	"prettify-ts.viewNestedTypes": true,
-	"workbench.sideBar.location": "right",
 	"js/ts.implicitProjectConfig.checkJs": true,
 	"js/ts.implicitProjectConfig.target": "ESNext",
 	"editor.minimap.enabled": false,
@@ -223,11 +228,7 @@
 	"merge-conflict.codeLens.enabled": false,
 	"regex-previewer.enableCodeLens": false,
 	"tabnine.codeLensEnabled": false,
-	"workbench.activityBar.location": "hidden",
 	"gitlens.currentLine.enabled": false,
-	"[sql]": {
-		"editor.defaultFormatter": "adpyke.vscode-sql-formatter"
-	},
 	"editor.minimap.maxColumn": 80,
 	"editor.formatOnPaste": true,
 	"githubPullRequests.showPullRequestNumberInTree": true,
@@ -271,15 +272,52 @@
 		".*"
 	],
 	"workbench.editor.limit.enabled": true,
-	"typescript.tsserver.nodePath": "node",
+	"typescript.tsserver.nodePath": "/home/vinicius_barbosa/.local/share/mise/installs/node/lts/bin/node",
 	"javascript.inlayHints.enumMemberValues.enabled": true,
 	"javascript.inlayHints.functionLikeReturnTypes.enabled": true,
 	"errorLens.delayMode": "debounce",
 	"search.smartCase": true,
-	"sql-formatter.uppercase": true,
 	"editor.tokenColorCustomizations": {
 		"textMateRules": []
 	},
+	"Prettier-SQL.keywordCase": "upper",
+	"Prettier-SQL.tabulateAlias": true,
+	"Prettier-SQL.SQLFlavourOverride": "postgresql",
+	"Prettier-SQL.insertSpacesOverride": false,
 	"dotenv.enableAutocloaking": false,
+	"search.quickOpen.history.filterSortOrder": "recency",
+	"explorer.fileNesting.enabled": true,
+	"editor.renderWhitespace": "boundary",
+	"editor.accessibilitySupport": "off",
+	"editor.dragAndDrop": false,
+	"editor.foldingImportsByDefault": true,
+	"editor.gotoLocation.multipleDeclarations": "gotoAndPeek",
+	"editor.gotoLocation.multipleDefinitions": "gotoAndPeek",
+	"editor.gotoLocation.multipleImplementations": "gotoAndPeek",
+	"editor.gotoLocation.multipleReferences": "gotoAndPeek",
+	"editor.gotoLocation.multipleTypeDefinitions": "gotoAndPeek",
+	"editor.hover.delay": 150,
+	"editor.hover.hidingDelay": 200,
+	"workbench.activityBar.location": "top",
+	"git.ignoreMissingGitWarning": true,
+	"editor.occurrencesHighlight": "off",
+	"editor.selectionHighlight": false,
+	"editor.suggestOnTriggerCharacters": false,
+	"editor.tabCompletion": "on",
+	"editor.quickSuggestions": {
+		"other": false,
+		"comments": false,
+		"strings": false
+	},
+	"files.trimTrailingWhitespace": true,
+	"extensions.ignoreRecommendations": true,
+	"terminal.explorerKind": "external",
+	"debug.terminal.clearBeforeReusing": true,
+	"terminal.integrated.fontSize": 12,
+	"workbench.sideBar.location": "right",
+	"window.commandCenter": false,
+	"continue.enableTabAutocomplete": false,
+	"continue.showInlineTip": false,
+	"continue.telemetryEnabled": false,
 	"workbench.colorTheme": "Dracula Theme"
 }

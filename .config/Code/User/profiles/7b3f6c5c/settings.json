@@ -76,6 +76,13 @@
 	},
 
 	"terminal.integrated.defaultProfile.linux": "zsh",
+	"terminal.integrated.profiles.linux": {
+		"zsh": {
+			"path": "zsh",
+			"args": ["-i"],
+			"color": "terminal.ansiBlue"
+		}
+	},
 
 	"indentRainbow.indicatorStyle": "light",
 
@@ -200,6 +207,7 @@
 		"DIGBRAZ",
 		"nagro",
 		"nutrien",
+		"Paidol",
 		"serasa"
 	],
 	"gitHistory.alwaysPromptRepositoryPicker": true,
@@ -208,11 +216,7 @@
 	"editor.multiCursorModifier": "ctrlCmd",
 	"tabnine.experimentalAutoImports": true,
 	"prettify-ts.viewNestedTypes": true,
-	"workbench.sideBar.location": "right",
-	"workbench.colorTheme": "Material Theme Darker High Contrast",
-	"js/ts.implicitProjectConfig.checkJs": true,
 	"js/ts.implicitProjectConfig.target": "ESNext",
-	"editor.minimap.enabled": false,
 	"editor.minimap.autohide": true,
 	"gitlens.telemetry.enabled": false,
 	"code-runner.enableAppInsights": false,
@@ -267,12 +271,32 @@
 		".*"
 	],
 	"workbench.editor.limit.enabled": true,
-	"typescript.tsserver.nodePath": "node",
+	"typescript.tsserver.nodePath": "/home/vinicius_barbosa/.local/share/mise/installs/node/lts/bin/node",
 	"javascript.inlayHints.enumMemberValues.enabled": true,
 	"javascript.inlayHints.functionLikeReturnTypes.enabled": true,
 	"errorLens.delayMode": "debounce",
 	"search.smartCase": true,
 	"editor.tokenColorCustomizations": {
+		"[*Light*]": {
+			"textMateRules": [
+				{
+					"scope": "ref.matchtext",
+					"settings": {
+						"foreground": "#000"
+					}
+				}
+			]
+		},
+		"[*Dark*]": {
+			"textMateRules": [
+				{
+					"scope": "ref.matchtext",
+					"settings": {
+						"foreground": "#fff"
+					}
+				}
+			]
+		},
 		"textMateRules": []
 	},
 	"Prettier-SQL.keywordCase": "upper",
@@ -296,7 +320,7 @@
 	"editor.gotoLocation.multipleTypeDefinitions": "gotoAndPeek",
 	"editor.hover.delay": 150,
 	"editor.hover.hidingDelay": 200,
-	"workbench.activityBar.location": "hidden",
+	"workbench.activityBar.location": "top",
 	"git.ignoreMissingGitWarning": true,
 	"editor.occurrencesHighlight": "off",
 	"editor.selectionHighlight": false,
@@ -311,5 +335,28 @@
 	"extensions.ignoreRecommendations": true,
 	"terminal.explorerKind": "external",
 	"debug.terminal.clearBeforeReusing": true,
-	"terminal.integrated.fontSize": 12
+	"terminal.integrated.fontSize": 12,
+	"workbench.sideBar.location": "right",
+	"window.commandCenter": false,
+
+	"workbench.colorTheme": "Dracula Theme",
+	"window.confirmSaveUntitledWorkspace": false,
+	"github.copilot.chat.welcomeMessage": "never",
+	"gitlens.showWelcomeOnInstall": false,
+	"gitlens.showWhatsNewAfterUpgrades": false,
+	"gitlens.outputLevel": "off",
+	"gitlens.plusFeatures.enabled": false,
+	"gitlens.currentLine.pullRequests.enabled": false,
+	"gitlens.currentLine.scrollable": false,
+	"gitlens.hovers.enabled": false,
+	"gitlens.hovers.avatars": false,
+	"gitlens.hovers.pullRequests.enabled": false,
+	"gitlens.hovers.autolinks.enabled": false,
+	"gitlens.hovers.autolinks.enhanced": false,
+	"gitlens.hovers.currentLine.enabled": false,
+	"gitlens.hovers.currentLine.changes": false,
+	"gitlens.hovers.currentLine.details": false,
+	"gitlens.hovers.annotations.enabled": false,
+	"gitlens.hovers.annotations.details": false,
+	"gitlens.hovers.annotations.changes": false
 }

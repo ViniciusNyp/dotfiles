@@ -151,6 +151,10 @@
 		{
 			"before": ["g", "h"],
 			"commands": ["editor.action.showDefinitionPreviewHover"]
+		},
+		{
+			"before": ["leader", "q"],
+			"commands": ["editor.action.quickFix"]
 		}
 	],
 	"vim.visualModeKeyBindings": [
@@ -176,6 +180,10 @@
 		{
 			"before": ["leader", "c"],
 			"commands": ["editor.action.commentLine"]
+		},
+		{
+			"before": ["leader", "."],
+			"commands": ["editor.action.quickFix"]
 		}
 	],
 	"editor.formatOnSaveMode": "modificationsIfAvailable",
@@ -292,5 +300,6 @@
 	},
 	"[javascript]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features"
-	}
+	},
+	"window.customTitleBarVisibility": "auto"
 }

@@ -1,5 +1,5 @@
 [tools]
-node = 'lts'
+node = "20"
 
 [settings]
 plugin_autoupdate_last_check_duration = '1 week'
