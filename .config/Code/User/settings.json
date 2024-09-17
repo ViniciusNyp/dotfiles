@@ -301,5 +301,5 @@
 	"[javascript]": {
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
-	"window.customTitleBarVisibility": "auto"
+	"window.titleBarStyle": "custom"
 }

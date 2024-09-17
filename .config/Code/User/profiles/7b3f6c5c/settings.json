@@ -358,5 +358,12 @@
 	"gitlens.hovers.currentLine.details": false,
 	"gitlens.hovers.annotations.enabled": false,
 	"gitlens.hovers.annotations.details": false,
-	"gitlens.hovers.annotations.changes": false
+	"gitlens.hovers.annotations.changes": false,
+	"vim.sneakReplacesF": true,
+	"javascript.preferences.importModuleSpecifier": "non-relative",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"github.copilot.chat.experimental.temporalContext.enabled": true,
+	"github.copilot.chat.experimental.generateTests.codeLens": true,
+	"github.copilot.chat.experimental.inlineChatCompletionTrigger.enabled": true,
+	"github.copilot.chat.experimental.startDebugging.enabled": true
 }
