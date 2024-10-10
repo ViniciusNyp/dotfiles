@@ -365,5 +365,12 @@
 	"github.copilot.chat.experimental.temporalContext.enabled": true,
 	"github.copilot.chat.experimental.generateTests.codeLens": true,
 	"github.copilot.chat.experimental.inlineChatCompletionTrigger.enabled": true,
-	"github.copilot.chat.experimental.startDebugging.enabled": true
+	"github.copilot.chat.experimental.startDebugging.enabled": true,
+	"aws.experiments": {
+		"jsonResourceModification": true
+	},
+	"aws.telemetry": false,
+	"js/ts.implicitProjectConfig.checkJs": true,
+	"javascript.experimental.updateImportsOnPaste": true,
+	"typescript.experimental.updateImportsOnPaste": true
 }
