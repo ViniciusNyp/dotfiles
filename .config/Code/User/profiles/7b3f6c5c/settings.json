@@ -372,5 +372,10 @@
 	"aws.telemetry": false,
 	"js/ts.implicitProjectConfig.checkJs": true,
 	"javascript.experimental.updateImportsOnPaste": true,
-	"typescript.experimental.updateImportsOnPaste": true
+	"typescript.experimental.updateImportsOnPaste": true,
+	"aws.lambda.recentlyUploaded": {
+		"profile:vinicius-dev": {
+			"us-east-2": "speedchatUserList-vinicius"
+		}
+	}
 }
