@@ -302,5 +302,6 @@
 		"editor.defaultFormatter": "vscode.typescript-language-features"
 	},
 	"window.titleBarStyle": "custom",
-	"window.customTitleBarVisibility": "auto"
+	"window.customTitleBarVisibility": "auto",
+	"chat.editing.alwaysSaveWithGeneratedChanges": true
 }

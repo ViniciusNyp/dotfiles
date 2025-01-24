@@ -301,4 +301,6 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+.mise.toml
 
+!src/lib

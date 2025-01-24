@@ -60,7 +60,6 @@
 
 	"editor.codeActionsOnSave": {
 		"source.addMissingImports": "always",
-		"source.organizeImports": "always",
 		"source.formatDocument": "always",
 		"source.fixAll": "always"
 	},
@@ -360,12 +359,7 @@
 	"gitlens.hovers.annotations.details": false,
 	"gitlens.hovers.annotations.changes": false,
 	"vim.sneakReplacesF": true,
-	"javascript.preferences.importModuleSpecifier": "non-relative",
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"github.copilot.chat.experimental.temporalContext.enabled": true,
-	"github.copilot.chat.experimental.generateTests.codeLens": true,
-	"github.copilot.chat.experimental.inlineChatCompletionTrigger.enabled": true,
-	"github.copilot.chat.experimental.startDebugging.enabled": true,
+	"typescript.preferences.importModuleSpecifier": "project-relative",
 	"aws.experiments": {
 		"jsonResourceModification": true
 	},
@@ -376,6 +370,15 @@
 	"aws.lambda.recentlyUploaded": {
 		"profile:vinicius-dev": {
 			"us-east-2": "speedchatUserList-vinicius"
+		},
+		"profile:default": {
+			"us-east-2": "issuePaymentCard-vinithree"
 		}
-	}
+	},
+	"github.copilot.chat.startDebugging.enabled": true,
+	"github.copilot.chat.generateTests.codeLens": true,
+	"github.copilot.chat.inlineChatCompletionTrigger.enabled": true,
+	"github.copilot.chat.temporalContext.enabled": true,
+	"terminal.integrated.fontLigatures": true,
+	"javascript.preferences.importModuleSpecifier": "project-relative"
 }
