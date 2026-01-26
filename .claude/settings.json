@@ -3,6 +3,10 @@
 		"ENABLE_TOOL_SEARCH": "true"
 	},
 	"includeCoAuthoredBy": false,
+	"attribution": {
+		"commit": "",
+		"pr": ""
+	},
 	"permissions": {
 		"allow": [
 			"Read(~/.claude)",
