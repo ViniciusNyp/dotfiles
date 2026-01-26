@@ -1,8 +1,6 @@
 [user]
-  name = Vinícius Cristofari Barbosa
-  email = viniciusnypbarbosa@outlook.com
-[includeIf "gitdir:**/speedchain/"]
-    path = .gitconfig_speedchain
+	name = Vinícius Cristofari Barbosa
+	email = vinicius.barbosa@everest-erp.com
 [alias]
   aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
   ci = commit
@@ -77,10 +75,12 @@
   sort = -committerdate
 [gpg]
   format = ssh
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = !/usr/bin/gh auth git-credential
+# [credential "https://github.com"]
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
+# [credential "https://gist.github.com"]
+# 	helper =
+# 	helper = !/opt/homebrew/bin/gh auth git-credential
 # Dracula Dark Theme
 [color]
   ui = auto

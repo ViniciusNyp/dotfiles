@@ -1,0 +1,26 @@
+{
+  "claude-plugins-official": {
+    "source": {
+      "source": "github",
+      "repo": "anthropics/claude-plugins-official"
+    },
+    "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/claude-plugins-official",
+    "lastUpdated": "2026-01-26T13:00:00.383Z"
+  },
+  "ykdojo": {
+    "source": {
+      "source": "github",
+      "repo": "ykdojo/claude-code-tips"
+    },
+    "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/ykdojo",
+    "lastUpdated": "2026-01-23T11:50:08.596Z"
+  },
+  "dev-browser-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "sawyerhood/dev-browser"
+    },
+    "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/dev-browser-marketplace",
+    "lastUpdated": "2026-01-26T12:53:43.998Z"
+  }
+}

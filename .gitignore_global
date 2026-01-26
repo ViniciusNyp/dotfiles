@@ -304,3 +304,7 @@ cython_debug/
 .mise.toml
 
 !src/lib
+
+mise.toml
+
+.claude/

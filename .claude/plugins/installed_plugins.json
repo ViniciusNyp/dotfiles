@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "plugins": {
+    "dx@ykdojo": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/ykdojo/dx/0.3.0",
+        "version": "0.3.0",
+        "installedAt": "2026-01-23T11:50:09.051Z",
+        "lastUpdated": "2026-01-23T11:50:09.051Z",
+        "gitCommitSha": "81aad2867e5aa985496d6c404c5aff2f3e2cd055"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-review/e30768372b41",
+        "version": "e30768372b41",
+        "installedAt": "2026-01-26T12:42:07.936Z",
+        "lastUpdated": "2026-01-26T12:42:07.936Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "feature-dev@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/feature-dev/e30768372b41",
+        "version": "e30768372b41",
+        "installedAt": "2026-01-26T12:42:24.879Z",
+        "lastUpdated": "2026-01-26T12:42:24.879Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "typescript-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/typescript-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-01-26T12:42:31.551Z",
+        "lastUpdated": "2026-01-26T12:42:31.551Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/superpowers/4.1.1",
+        "version": "4.1.1",
+        "installedAt": "2026-01-26T12:47:55.941Z",
+        "lastUpdated": "2026-01-26T12:47:55.941Z",
+        "gitCommitSha": "469a6d81ebb8b827e284d4afb090c6c622d97747"
+      }
+    ],
+    "dev-browser@dev-browser-marketplace": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/dev-browser-marketplace/dev-browser/66682fb0513a",
+        "version": "66682fb0513a",
+        "installedAt": "2026-01-26T12:53:48.992Z",
+        "lastUpdated": "2026-01-26T12:53:48.992Z",
+        "gitCommitSha": "66682fb0513aec308e68d71740e2b0394a29d884"
+      }
+    ]
+  }
+}

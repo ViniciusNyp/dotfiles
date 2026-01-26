@@ -1,0 +1,42 @@
+{
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Read(~/.claude)",
+      "Bash(git log:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Skill(dev-browser:dev-browser)",
+      "Task",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "ask": [
+      "Edit",
+      "MultiEdit",
+      "Write"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/scripts/context-bar.sh"
+  },
+  "enabledPlugins": {
+    "dx@ykdojo": true,
+    "code-review@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "dev-browser@dev-browser-marketplace": true
+  },
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest"
+}

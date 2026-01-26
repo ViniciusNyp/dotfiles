@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -30,30 +30,29 @@ antidote bundle unixorn/fzf-zsh-plugin
 antidote bundle jeffreytse/zsh-vi-mode
 
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval $(thefuck --alias)
 
 
-  # if [[ -z "$ZELLIJ" ]]; then
-  #     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-  #         zellij attach -c
-  #     else
-  #         zellij
-  #     fi
+  if [[ -z "$ZELLIJ" ]]; then
+      if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+          zellij attach -c
+      else
+          zellij
+      fi
 
-  #     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-  #         exit
-  #     fi
-  # fi
+      if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+          exit
+      fi
+  fi
 
 
 if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
-# if command -v zellij &> /dev/null; then
-#     eval "$(zellij setup --generate-auto-start zsh)"
-# fi
+if command -v zellij &> /dev/null; then
+    eval "$(zellij setup --generate-auto-start zsh)"
+fi
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
@@ -86,6 +85,8 @@ alias bat='batcat'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias c='claude'
+
 
 # Compression
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
@@ -99,4 +100,7 @@ antidote bundle romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 eval "$(~/.local/bin/mise activate zsh)"
+eval "$(direnv hook zsh)"
+export PATH="$HOME/.local/bin:$PATH"

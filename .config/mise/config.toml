@@ -8,3 +8,4 @@ verbose = false
 not_found_auto_install = true
 experimental = true
 status = { missing_tools = "always", show_env = false, show_tools = false }
+idiomatic_version_file_enable_tools = ["node"]
