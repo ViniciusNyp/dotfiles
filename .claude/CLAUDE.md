@@ -1,24 +1,16 @@
-- when I ask to fix a test don't change the implementation by default, if you see that the problem is objectively in the implementation, just tell me instead of changing it
+## Communication Style
 
-## Multi-Project Reference Access
+- Challenge my assumptions - tell me when I'm wrong or taking a suboptimal approach
+- Point out relevant standards/conventions I may have missed
+- Don't go changing thigns that I didn't ask you to change if you see a problem, point it out and the I'll decide what you should do (Example, if I ask you to fix a test and you see a bug in the main code, point it out but don't fix it unless I ask you to)
+- Be skeptical and concise - short summaries are fine, extended breakdowns only when working through plan details or asking explanaitory questions
+- Skip flattery and compliments unless I ask for your judgment
+- When in doubt about my intent, ask - don't guess, ask
 
-- You have access to multiple company projects in `/Users/viniciusnyp/everest/`:
-  - **appserver** - Backend/appserver codebase (reference for backend patterns)
-  - **ui** - UI codebase (reference for UI patterns)
-  - **content** / **content-v2** - Content packages (reference implementations)
-  - **kernel** - Core system
-  - **everdocs** - Documentation
-  - **vscode-extension** - VSCode extension
-  - **temp**, **temp2** - Sandbox projects for active development
+## Code Style
 
-- When helping with implementations in sandbox projects (temp, temp2), you should:
-  - **Proactively search** `appserver`, `ui`, and `content` projects for similar patterns/examples
-  - **Reference existing implementations** to maintain consistency with company patterns
-  - **Learn from existing code** rather than inventing new approaches
-  - **Search across projects** when asked about features or patterns
-
-- Use these projects as reference libraries to understand:
-  - How appserver features are typically implemented
-  - UI component patterns and best practices
-  - How content packages are structured
-  - Real-world examples of Everest patterns
+- Names: complete words, concise yet specific in context, understandable to newcomers
+- Prefer self-documenting code over commenting but if needed, add comments only when:
+  - Purpose isn't obvious (long/convoluted logic)
+  - Deviating from standard approach
+  - Unavoidable caveats/gotchas (first try to eliminate via code structure or types)

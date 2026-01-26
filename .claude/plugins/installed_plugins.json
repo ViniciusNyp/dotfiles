@@ -60,6 +60,26 @@
         "lastUpdated": "2026-01-26T12:53:48.992Z",
         "gitCommitSha": "66682fb0513aec308e68d71740e2b0394a29d884"
       }
+    ],
+    "context7@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/context7/e30768372b41",
+        "version": "e30768372b41",
+        "installedAt": "2026-01-26T15:34:34.165Z",
+        "lastUpdated": "2026-01-26T15:34:34.165Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "ralph-loop@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/e30768372b41",
+        "version": "e30768372b41",
+        "installedAt": "2026-01-26T15:34:47.296Z",
+        "lastUpdated": "2026-01-26T15:34:47.296Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
     ]
   }
 }
