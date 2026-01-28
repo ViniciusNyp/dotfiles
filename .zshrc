@@ -104,3 +104,5 @@ antidote bundle romkatv/powerlevel10k
 #eval "$(~/.local/bin/mise activate zsh)"
 eval "$(direnv hook zsh)"
 export PATH="$HOME/.local/bin:$PATH"
+
+source $HOME/everest/everdocs/scripts/tools.sh

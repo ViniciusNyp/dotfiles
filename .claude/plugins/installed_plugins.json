@@ -80,6 +80,16 @@
         "lastUpdated": "2026-01-26T15:34:47.296Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
+    ],
+    "frontend-design@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/e30768372b41",
+        "version": "e30768372b41",
+        "installedAt": "2026-01-27T12:30:16.934Z",
+        "lastUpdated": "2026-01-27T12:30:16.934Z",
+        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
     ]
   }
 }
