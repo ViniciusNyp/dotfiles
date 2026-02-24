@@ -29,8 +29,9 @@ antidote bundle agkozak/zsh-z
 antidote bundle unixorn/fzf-zsh-plugin
 antidote bundle jeffreytse/zsh-vi-mode
 
-
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 eval $(thefuck --alias)
+eval "$(direnv hook zsh)"
 
 
   if [[ -z "$ZELLIJ" ]]; then
@@ -70,7 +71,7 @@ alias lta='lt -a'
 alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
 alias fd='fdfind'
 alias cd='z'
-alias diff='diff-so-fancy'
+#alias diff='diff-so-fancy'
 
 # Directories
 alias ..='cd ..'
@@ -101,8 +102,5 @@ antidote bundle romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#eval "$(~/.local/bin/mise activate zsh)"
-eval "$(direnv hook zsh)"
 export PATH="$HOME/.local/bin:$PATH"
 
-source $HOME/everest/everdocs/scripts/tools.sh

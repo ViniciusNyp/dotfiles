@@ -14,20 +14,20 @@
     "code-review@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-review/e30768372b41",
-        "version": "e30768372b41",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-review/99e11d959269",
+        "version": "99e11d959269",
         "installedAt": "2026-01-26T12:42:07.936Z",
-        "lastUpdated": "2026-01-26T12:42:07.936Z",
+        "lastUpdated": "2026-02-24T10:41:21.318Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
     "feature-dev@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/feature-dev/e30768372b41",
-        "version": "e30768372b41",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/feature-dev/99e11d959269",
+        "version": "99e11d959269",
         "installedAt": "2026-01-26T12:42:24.879Z",
-        "lastUpdated": "2026-01-26T12:42:24.879Z",
+        "lastUpdated": "2026-02-24T10:41:21.320Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -44,10 +44,10 @@
     "superpowers@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/superpowers/4.1.1",
-        "version": "4.1.1",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/superpowers/4.3.1",
+        "version": "4.3.1",
         "installedAt": "2026-01-26T12:47:55.941Z",
-        "lastUpdated": "2026-01-26T12:47:55.941Z",
+        "lastUpdated": "2026-02-23T11:32:02.913Z",
         "gitCommitSha": "469a6d81ebb8b827e284d4afb090c6c622d97747"
       }
     ],
@@ -64,30 +64,30 @@
     "context7@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/context7/e30768372b41",
-        "version": "e30768372b41",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/context7/99e11d959269",
+        "version": "99e11d959269",
         "installedAt": "2026-01-26T15:34:34.165Z",
-        "lastUpdated": "2026-01-26T15:34:34.165Z",
+        "lastUpdated": "2026-02-24T10:41:21.316Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
     "ralph-loop@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/e30768372b41",
-        "version": "e30768372b41",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/99e11d959269",
+        "version": "99e11d959269",
         "installedAt": "2026-01-26T15:34:47.296Z",
-        "lastUpdated": "2026-01-26T15:34:47.296Z",
+        "lastUpdated": "2026-02-24T10:41:21.325Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
     "frontend-design@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/e30768372b41",
-        "version": "e30768372b41",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/99e11d959269",
+        "version": "99e11d959269",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-01-27T12:30:16.934Z",
+        "lastUpdated": "2026-02-24T10:41:21.318Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ]

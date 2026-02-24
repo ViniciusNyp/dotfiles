@@ -25,8 +25,11 @@ input=$(cat)
 
 # Extract model, directory, and cwd
 model=$(echo "$input" | jq -r '.model.display_name // .model.id // "?"')
+cost=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 cwd=$(echo "$input" | jq -r '.cwd // empty')
 dir=$(basename "$cwd" 2>/dev/null || echo "?")
+
+cost_fmt=$(printf '$%.2f' "$cost")
 
 # Get git branch, uncommitted file count, and sync status
 branch=""
@@ -169,9 +172,10 @@ else
 fi
 
 # Build output: Model | Dir | Branch (uncommitted) | Context
-output="${C_ACCENT}${model}${C_GRAY} | 📁${dir}"
-[[ -n "$branch" ]] && output+=" | 🔀${branch} ${git_status}"
+output="${C_ACCENT}${model}${C_GRAY} | 📁 ${dir}"
+output+=" | ${C_ACCENT}${cost_fmt}${C_GRAY}"
 output+=" | ${ctx}${C_RESET}"
+[[ -n "$branch" ]] && output+=" | 🌿 ${branch} ${git_status}"
 
 printf '%b\n' "$output"
 

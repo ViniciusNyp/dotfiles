@@ -7,10 +7,20 @@
 - Skip flattery and compliments unless I ask for your judgment
 - When in doubt about my intent, ask - don't guess
 
+## Plan Mode
+
+- Make the plan extremely concise. Sacrifice grammar for the sake of concision.
+- At the end of each plan, give me a list of unresolved questions to answer, if any.
+
 ## Code Style
 
-- Names: complete words, concise yet specific in context, understandable to newcomers
 - Prefer self-documenting code over commenting but if needed, add comments only when:
   - Purpose isn't obvious (long/convoluted logic)
   - Deviating from standard approach
   - Unavoidable caveats/gotchas (first try to eliminate via code structure or types)
+
+## Testing Style
+
+- Test behavior and outcomes, not implementation details
+- Don't write tests only for coverage metrics, only write meaningful tests
+- Prefer integration tests - use real dependencies when practical

@@ -1,44 +1,48 @@
 {
-  "env": {
-    "ENABLE_TOOL_SEARCH": "true"
-  },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "includeCoAuthoredBy": false,
-  "permissions": {
-    "allow": [
-      "Read(~/.claude)",
-      "Bash(git log:*)",
-      "Bash(ls:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Skill(dev-browser:dev-browser)",
-      "Task",
-      "Glob",
-      "Grep",
-      "LS",
-      "Read",
-      "WebFetch",
-      "WebSearch"
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/scripts/context-bar.sh"
-  },
-  "enabledPlugins": {
-    "dx@ykdojo": true,
-    "code-review@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": false,
-    "dev-browser@dev-browser-marketplace": false,
-    "context7@claude-plugins-official": false,
-    "ralph-loop@claude-plugins-official": false,
-    "frontend-design@claude-plugins-official": true
-  },
-  "alwaysThinkingEnabled": true,
-  "autoUpdatesChannel": "latest"
+	"env": {
+		"ENABLE_TOOL_SEARCH": "true"
+	},
+	"attribution": {
+		"commit": "",
+		"pr": ""
+	},
+	"includeCoAuthoredBy": false,
+	"permissions": {
+		"allow": [
+			"Read(~/.claude)",
+			"Bash(git log:*)",
+			"Bash(git diff:*)",
+			"Bash(git tag:*)",
+			"Bash(ls:*)",
+			"Bash(find:*)",
+			"Bash(grep:*)",
+			"Bash(sed:*)",
+			"Bash(cat:*)",
+			"Skill(dev-browser:dev-browser)",
+			"Task",
+			"Glob",
+			"Grep",
+			"LS",
+			"Read",
+			"WebFetch",
+			"WebSearch"
+		]
+	},
+	"statusLine": {
+		"type": "command",
+		"command": "~/.claude/scripts/context-bar.sh"
+	},
+	"enabledPlugins": {
+		"dx@ykdojo": true,
+		"code-review@claude-plugins-official": true,
+		"feature-dev@claude-plugins-official": true,
+		"typescript-lsp@claude-plugins-official": true,
+		"superpowers@claude-plugins-official": false,
+		"dev-browser@dev-browser-marketplace": false,
+		"context7@claude-plugins-official": false,
+		"ralph-loop@claude-plugins-official": false,
+		"frontend-design@claude-plugins-official": true
+	},
+	"alwaysThinkingEnabled": true,
+	"autoUpdatesChannel": "latest"
 }
