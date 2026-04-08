@@ -71,7 +71,6 @@ alias lta='lt -a'
 alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
 alias fd='fdfind'
 alias cd='z'
-#alias diff='diff-so-fancy'
 
 # Directories
 alias ..='cd ..'
@@ -86,7 +85,10 @@ alias bat='batcat'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias c='claude'
+alias cc='claude'
+alias ccdev='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/dev.md)"'
+alias ccreview='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/review.md)"'
+alias ccresearch='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/research.md)"'
 
 
 # Compression
@@ -103,4 +105,7 @@ antidote bundle romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$HOME/.local/bin:$PATH"
+
+source $HOME/everest/everdocs/scripts/tools.sh
+
 

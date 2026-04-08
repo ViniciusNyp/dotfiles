@@ -308,3 +308,5 @@ cython_debug/
 mise.toml
 
 .claude/
+
+.DS_Store

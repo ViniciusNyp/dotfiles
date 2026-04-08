@@ -18,9 +18,3 @@
   - Purpose isn't obvious (long/convoluted logic)
   - Deviating from standard approach
   - Unavoidable caveats/gotchas (first try to eliminate via code structure or types)
-
-## Testing Style
-
-- Test behavior and outcomes, not implementation details
-- Don't write tests only for coverage metrics, only write meaningful tests
-- Prefer integration tests - use real dependencies when practical

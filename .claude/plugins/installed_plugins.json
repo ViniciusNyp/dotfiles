@@ -14,20 +14,20 @@
     "code-review@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-review/99e11d959269",
-        "version": "99e11d959269",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-review/unknown",
+        "version": "unknown",
         "installedAt": "2026-01-26T12:42:07.936Z",
-        "lastUpdated": "2026-02-24T10:41:21.318Z",
+        "lastUpdated": "2026-03-25T15:42:34.860Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
     "feature-dev@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/feature-dev/99e11d959269",
-        "version": "99e11d959269",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/feature-dev/unknown",
+        "version": "unknown",
         "installedAt": "2026-01-26T12:42:24.879Z",
-        "lastUpdated": "2026-02-24T10:41:21.320Z",
+        "lastUpdated": "2026-03-25T15:42:34.860Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -41,16 +41,6 @@
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
-    "superpowers@claude-plugins-official": [
-      {
-        "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/superpowers/4.3.1",
-        "version": "4.3.1",
-        "installedAt": "2026-01-26T12:47:55.941Z",
-        "lastUpdated": "2026-02-23T11:32:02.913Z",
-        "gitCommitSha": "469a6d81ebb8b827e284d4afb090c6c622d97747"
-      }
-    ],
     "dev-browser@dev-browser-marketplace": [
       {
         "scope": "user",
@@ -61,34 +51,88 @@
         "gitCommitSha": "66682fb0513aec308e68d71740e2b0394a29d884"
       }
     ],
-    "context7@claude-plugins-official": [
-      {
-        "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/context7/99e11d959269",
-        "version": "99e11d959269",
-        "installedAt": "2026-01-26T15:34:34.165Z",
-        "lastUpdated": "2026-02-24T10:41:21.316Z",
-        "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
-      }
-    ],
     "ralph-loop@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/99e11d959269",
-        "version": "99e11d959269",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/1.0.0",
+        "version": "1.0.0",
         "installedAt": "2026-01-26T15:34:47.296Z",
-        "lastUpdated": "2026-02-24T10:41:21.325Z",
+        "lastUpdated": "2026-03-30T11:56:42.923Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
     "frontend-design@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/99e11d959269",
-        "version": "99e11d959269",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
+        "version": "unknown",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-02-24T10:41:21.318Z",
+        "lastUpdated": "2026-03-25T15:42:34.860Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
+      }
+    ],
+    "code-simplifier@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/code-simplifier/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-04-06T13:46:55.245Z",
+        "lastUpdated": "2026-04-06T13:46:55.245Z"
+      }
+    ],
+    "commit-commands@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/commit-commands/unknown",
+        "version": "unknown",
+        "installedAt": "2026-04-06T13:47:19.980Z",
+        "lastUpdated": "2026-04-06T13:47:19.980Z"
+      }
+    ],
+    "pr-review-toolkit@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/pr-review-toolkit/unknown",
+        "version": "unknown",
+        "installedAt": "2026-04-06T13:47:55.803Z",
+        "lastUpdated": "2026-04-06T13:47:55.803Z"
+      }
+    ],
+    "explanatory-output-style@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/explanatory-output-style/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-04-06T13:48:40.227Z",
+        "lastUpdated": "2026-04-06T13:48:40.227Z"
+      }
+    ],
+    "hookify@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/hookify/unknown",
+        "version": "unknown",
+        "installedAt": "2026-04-06T13:49:46.767Z",
+        "lastUpdated": "2026-04-06T13:49:46.767Z"
+      }
+    ],
+    "security-guidance@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/security-guidance/unknown",
+        "version": "unknown",
+        "installedAt": "2026-04-06T13:50:01.332Z",
+        "lastUpdated": "2026-04-06T13:50:01.332Z"
+      }
+    ],
+    "ecc@ecc": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/ecc/ecc/1.10.0",
+        "version": "1.10.0",
+        "installedAt": "2026-04-07T11:47:06.409Z",
+        "lastUpdated": "2026-04-07T11:47:06.409Z",
+        "gitCommitSha": "62519f2b622b44d8289d573bb6e74c4c95fc7400"
       }
     ]
   }
