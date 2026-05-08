@@ -15,6 +15,7 @@ __pycache__/
 env/
 venv/
 *.egg-info/
+settings.local.json
 # Logs
 logs
 *.log

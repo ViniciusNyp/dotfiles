@@ -1,109 +1,128 @@
 #!/usr/bin/env node
 /**
- * PostToolUse Hook: Auto-format JS/TS files after edits
+ * PostToolUse format hook (Edit | Write | MultiEdit)
  *
- * Cross-platform (Windows, macOS, Linux)
+ * Walks up from the edited file looking for a formatter config
+ * (.prettierrc*, biome.json, deno.json, .eslintrc.*). If found and the file
+ * extension is supported, runs the formatter in-place. No-ops otherwise.
  *
- * Runs after Edit tool use. If the edited file is a JS/TS file,
- * auto-detects the project formatter (Biome or Prettier) by looking
- * for config files, then formats accordingly.
+ * Best-effort: never blocks the tool, never throws on stdin parse errors.
  *
- * For Biome, uses `check --write` (format + lint in one pass) to
- * avoid a redundant second invocation from quality-gate.js.
- *
- * Prefers the local node_modules/.bin binary over npx to skip
- * package-resolution overhead (~200-500ms savings per invocation).
- *
- * Fails silently if no formatter is found or installed.
+ * Hook ID: post:edit:format-auto
  */
 
-const { execFileSync, spawnSync } = require('child_process');
+'use strict';
+
+const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 
-// Shell metacharacters that cmd.exe interprets as command separators/operators
-const UNSAFE_PATH_CHARS = /[&|<>^%!]/;
+const MAX_STDIN = 1024 * 1024;
+const FORMAT_TIMEOUT_MS = 10000;
 
-const { findProjectRoot, detectFormatter, resolveFormatterBin } = require('../lib/resolve-formatter');
+const PRETTIER_CONFIGS = [
+  '.prettierrc',
+  '.prettierrc.json',
+  '.prettierrc.js',
+  '.prettierrc.cjs',
+  '.prettierrc.mjs',
+  '.prettierrc.yaml',
+  '.prettierrc.yml',
+  '.prettierrc.toml',
+  'prettier.config.js',
+  'prettier.config.cjs',
+  'prettier.config.mjs',
+];
+const BIOME_CONFIGS = ['biome.json', 'biome.jsonc'];
+const DENO_CONFIGS = ['deno.json', 'deno.jsonc'];
 
-const MAX_STDIN = 1024 * 1024; // 1MB limit
+const FORMATTABLE_EXTS = new Set([
+  '.ts', '.tsx', '.js', '.jsx', '.mjs', '.cjs',
+  '.json', '.jsonc', '.css', '.scss', '.less',
+  '.html', '.vue', '.svelte', '.md', '.mdx', '.yaml', '.yml',
+]);
 
-/**
- * Core logic — exported so run-with-flags.js can call directly
- * without spawning a child process.
- *
- * @param {string} rawInput - Raw JSON string from stdin
- * @returns {string} The original input (pass-through)
- */
-function run(rawInput) {
-  try {
-    const input = JSON.parse(rawInput);
-    const filePath = input.tool_input?.file_path;
-
-    if (filePath && /\.(ts|tsx|js|jsx)$/.test(filePath)) {
-      try {
-        const resolvedFilePath = path.resolve(filePath);
-        const projectRoot = findProjectRoot(path.dirname(resolvedFilePath));
-        const formatter = detectFormatter(projectRoot);
-        if (!formatter) return rawInput;
-
-        const resolved = resolveFormatterBin(projectRoot, formatter);
-        if (!resolved) return rawInput;
-
-        // Biome: `check --write` = format + lint in one pass
-        // Prettier: `--write` = format only
-        const args = formatter === 'biome' ? [...resolved.prefix, 'check', '--write', resolvedFilePath] : [...resolved.prefix, '--write', resolvedFilePath];
-
-        if (process.platform === 'win32' && resolved.bin.endsWith('.cmd')) {
-          // Windows: .cmd files require shell to execute. Guard against
-          // command injection by rejecting paths with shell metacharacters.
-          if (UNSAFE_PATH_CHARS.test(resolvedFilePath)) {
-            throw new Error('File path contains unsafe shell characters');
-          }
-          const result = spawnSync(resolved.bin, args, {
-            cwd: projectRoot,
-            shell: true,
-            stdio: 'pipe',
-            timeout: 15000
-          });
-          if (result.error) throw result.error;
-          if (typeof result.status === 'number' && result.status !== 0) {
-            throw new Error(result.stderr?.toString() || `Formatter exited with status ${result.status}`);
-          }
-        } else {
-          execFileSync(resolved.bin, args, {
-            cwd: projectRoot,
-            stdio: ['pipe', 'pipe', 'pipe'],
-            timeout: 15000
-          });
-        }
-      } catch {
-        // Formatter not installed, file missing, or failed — non-blocking
-      }
+function findUpwards(startDir, candidates) {
+  let dir = path.resolve(startDir);
+  const root = path.parse(dir).root;
+  while (true) {
+    for (const c of candidates) {
+      const candidate = path.join(dir, c);
+      if (fs.existsSync(candidate)) return { configPath: candidate, dir };
     }
-  } catch {
-    // Invalid input — pass through
+    if (dir === root) return null;
+    const parent = path.dirname(dir);
+    if (parent === dir) return null;
+    dir = parent;
   }
-
-  return rawInput;
 }
 
-// ── stdin entry point (backwards-compatible) ────────────────────
-if (require.main === module) {
-  let data = '';
-  process.stdin.setEncoding('utf8');
+function detectFormatter(filePath) {
+  const startDir = path.dirname(filePath);
+  const biome = findUpwards(startDir, BIOME_CONFIGS);
+  if (biome) return { kind: 'biome', dir: biome.dir };
+  const prettier = findUpwards(startDir, PRETTIER_CONFIGS);
+  if (prettier) return { kind: 'prettier', dir: prettier.dir };
+  const deno = findUpwards(startDir, DENO_CONFIGS);
+  if (deno) return { kind: 'deno', dir: deno.dir };
+  return null;
+}
 
-  process.stdin.on('data', chunk => {
-    if (data.length < MAX_STDIN) {
-      const remaining = MAX_STDIN - data.length;
-      data += chunk.substring(0, remaining);
-    }
-  });
+function runFormatter(filePath, formatter) {
+  const ext = path.extname(filePath).toLowerCase();
+  if (!FORMATTABLE_EXTS.has(ext)) return;
+  if (!fs.existsSync(filePath)) return;
 
-  process.stdin.on('end', () => {
-    data = run(data);
-    process.stdout.write(data);
-    process.exit(0);
+  let cmd, args;
+  switch (formatter.kind) {
+    case 'biome':
+      cmd = 'npx';
+      args = ['--no-install', 'biome', 'format', '--write', filePath];
+      break;
+    case 'prettier':
+      cmd = 'npx';
+      args = ['--no-install', 'prettier', '--write', filePath];
+      break;
+    case 'deno':
+      cmd = 'deno';
+      args = ['fmt', filePath];
+      break;
+    default:
+      return;
+  }
+
+  spawnSync(cmd, args, {
+    cwd: formatter.dir,
+    stdio: ['ignore', 'ignore', 'pipe'],
+    timeout: FORMAT_TIMEOUT_MS,
   });
+}
+
+function run(raw) {
+  try {
+    const input = raw.trim() ? JSON.parse(raw) : {};
+    const filePath = input?.tool_input?.file_path;
+    if (!filePath || typeof filePath !== 'string') return raw;
+
+    const formatter = detectFormatter(filePath);
+    if (!formatter) return raw;
+
+    runFormatter(filePath, formatter);
+  } catch {
+    // best-effort: never block the tool
+  }
+  return raw;
 }
 
 module.exports = { run };
+
+if (require.main === module) {
+  let data = '';
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('data', chunk => {
+    if (data.length < MAX_STDIN) data += chunk.substring(0, MAX_STDIN - data.length);
+  });
+  process.stdin.on('end', () => {
+    process.stdout.write(run(data));
+  });
+}

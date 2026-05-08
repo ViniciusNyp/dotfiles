@@ -5,7 +5,7 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-04-08T15:50:40.427Z"
+    "lastUpdated": "2026-05-08T17:49:02.409Z"
   },
   "ykdojo": {
     "source": {
@@ -23,12 +23,12 @@
     "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/dev-browser-marketplace",
     "lastUpdated": "2026-01-26T12:53:43.998Z"
   },
-  "ecc": {
+  "wakatime": {
     "source": {
       "source": "git",
-      "url": "https://github.com/affaan-m/everything-claude-code.git"
+      "url": "https://github.com/wakatime/claude-code-wakatime.git"
     },
-    "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/ecc",
-    "lastUpdated": "2026-04-07T11:46:52.379Z"
+    "installLocation": "/Users/viniciusnyp/.claude/plugins/marketplaces/wakatime",
+    "lastUpdated": "2026-04-14T11:32:21.375Z"
   }
 }
