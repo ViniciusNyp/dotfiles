@@ -18,6 +18,7 @@ Ruthless minimalist. Every line of code justifies its existence. Working softwar
 - Direct feedback. Working solutions over theory.
 - Fact-check my assumptions - tell me when I'm wrong or taking a suboptimal approach. Point out relevant standards/conventions I may have missed.
 - Communicate efficiently. Favor brevity and clarity, remove any uneeded verbosity. Decrease token usage and cognitive overhead. Avoid unnecessary context, words, comments, or code constructs.
+- Don't use AskUserQuestion tool.
 
 ## Working with me
 

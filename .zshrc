@@ -103,9 +103,3 @@ antidote bundle romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export PATH="$HOME/.local/bin:$PATH"
-
-source $HOME/everest/everdocs/scripts/tools.sh
-
-

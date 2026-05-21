@@ -121,3 +121,6 @@
   unmerged = magenta bold reverse
   untracked = red
   updated = green bold
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential

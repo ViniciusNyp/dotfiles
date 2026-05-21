@@ -23,9 +23,9 @@ Phases 1–4 run before any code. Ask, scout, clarify, propose. These phases may
 - **No args:** ask "What should we build? Describe it, paste an issue URL, or point me to a spec." Wait for the user's response.
 - **Prompt:** use as requirements.
 - **URL:** fetch content.
-  - GitHub issue: `gh issue view <number> --json title,body --jq '.title + "\n\n" + .body'`
-  - GitHub PR: `gh pr view <number> --json title,body --jq '.title + "\n\n" + .body'`
-  - Linear: `lineark issues read <identifier>`
+    - GitHub issue: `gh issue view <number> --json title,body --jq '.title + "\n\n" + .body'`
+    - GitHub PR: `gh pr view <number> --json title,body --jq '.title + "\n\n" + .body'`
+    - Linear: `lineark issues read <identifier>`
 - **File path:** read the file.
 
 Store resolved requirements as `{requirements}`.
@@ -70,12 +70,6 @@ This is the last gate. After approval, switch to execution mode.
 - `solo`, `I drive` → Mode 2
 - `pair with me`, `pair`, `dojo` → Mode 3
 
-Create a feature branch, then enter the selected mode:
-
-```bash
-git checkout -b feature/{short-name}
-```
-
 ---
 
 ## Mode 1: agent-pair
@@ -94,7 +88,7 @@ For each test case, run this sequence. Each turn is a separate subagent invocati
 6. **Navigator gate.** Verify minimum and no anticipation.
 7. **Driver WRITE — Impl.** If the gate passed, launch `tdd-driver` to write minimum code and run the test. Collect GREEN.
 8. **Navigator gate.** Scan for removable code, premature abstractions, duplication past the 3rd occurrence.
-9. **Commit.** Use `/commit` for a small incremental commit.
+9. **Commit.**
 
 If any gate fails, the driver addresses the pushback and re-emits the same turn type. No skipping ahead.
 
@@ -105,6 +99,7 @@ When the first 2–3 tests are GREEN, propose more tests as the code reveals new
 ### Completion
 
 When requirements are met:
+
 1. Run the full test suite.
 2. Report: tests passed, files changed, commits made.
 
@@ -121,7 +116,6 @@ You do everything. Same strict TDD. No subagents. Self-review at each checkpoint
 3. **IDEA — Impl.** Narrate: minimum change, files touched, what you are NOT changing.
 4. **GREEN.** Write minimum code. Run. Confirm pass. Self-check: can any line be deleted while staying GREEN?
 5. **REFACTOR.** Clean up if useful. Run tests — must stay GREEN.
-6. **Commit.** `/commit`.
 
 Narrate each step in the chat. The user reads and will interrupt if needed.
 
@@ -173,14 +167,15 @@ Cycle: spawn watcher → wait → run tests → read context → display results
 
 1. **No production code without a failing test.**
 2. **Baby steps.** One behavior per test. One assertion per test.
-3. **Commit each RED-GREEN-REFACTOR cycle.** Use `/commit`.
+3. **Commit each RED-GREEN-REFACTOR cycle.**
 4. **Reproduce before fixing.** Bug? Demonstrate the failure first.
+5. **Follow the the /tdd skill.**
 
 ## Phase-scoped rules
 
 **Phases 1–4 (pre-TDD):** Questions and waits are expected. Clarifying questions, plan approval, scope alignment happen here.
 
-**Phase 5+ (TDD execution):** Narrate and proceed. Do not ask for permission between turns of the protocol. The user watches the narration and interrupts if needed.
+**Phase 5+ (TDD execution):** Narrate and proceed. Do not ask for permission between turns of the protocol. The user watches the narration and interrupts if needed. Use the /tdd skill.
 
 ## Escalation
 
