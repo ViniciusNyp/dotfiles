@@ -97,7 +97,7 @@ if [[ -n "$cwd" && -d "$cwd" ]]; then
     fi
 fi
 
-# Get transcript path for context calculation and last message feature
+# Get transcript path for context calculation
 transcript_path=$(echo "$input" | jq -r '.transcript_path // empty')
 
 # Get context window size from JSON (accurate), but calculate tokens from transcript
@@ -178,38 +178,3 @@ output+=" | 📁 ${dir}${C_RESET}"
 [[ -n "$branch" ]] && output+=" | 🌿 ${branch} ${git_status}"
 
 printf '%b\n' "$output"
-
-# Get user's last message (text only, not tool results, skip unhelpful messages)
-if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
-    # Calculate visible length (without ANSI codes) - 10 chars for bar + content
-    plain_output="${model} | 📁 ${dir} | ${cost_fmt}"
-    [[ -n "$branch" ]] && plain_output+=" | 🌿 ${branch} ${git_status}"
-    plain_output+=" | xxxxxxxxxx ${pct}% of ${max_k}k tokens"
-    max_len=${#plain_output}
-    last_user_msg=$(jq -rs '
-        # Messages to skip (not useful as context)
-        def is_unhelpful:
-            startswith("[Request interrupted") or
-            startswith("[Request cancelled") or
-            . == "";
-
-        [.[] | select(.type == "user") |
-         select(.message.content | type == "string" or
-                (type == "array" and any(.[]; .type == "text")))] |
-        reverse |
-        map(.message.content |
-            if type == "string" then .
-            else [.[] | select(.type == "text") | .text] | join(" ") end |
-            gsub("\n"; " ") | gsub("  +"; " ")) |
-        map(select(is_unhelpful | not)) |
-        first // ""
-    ' < "$transcript_path" 2>/dev/null)
-
-    if [[ -n "$last_user_msg" ]]; then
-        if [[ ${#last_user_msg} -gt $max_len ]]; then
-            echo "💬 ${last_user_msg:0:$((max_len - 3))}..."
-        else
-            echo "💬 ${last_user_msg}"
-        fi
-    fi
-fi
