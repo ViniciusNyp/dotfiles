@@ -169,13 +169,13 @@ Cycle: spawn watcher → wait → run tests → read context → display results
 2. **Baby steps.** One behavior per test. One assertion per test.
 3. **Commit each RED-GREEN-REFACTOR cycle.**
 4. **Reproduce before fixing.** Bug? Demonstrate the failure first.
-5. **Follow the the /tdd skill.**
+5. **Invoke the /tdd skill.**
 
 ## Phase-scoped rules
 
 **Phases 1–4 (pre-TDD):** Questions and waits are expected. Clarifying questions, plan approval, scope alignment happen here.
 
-**Phase 5+ (TDD execution):** Narrate and proceed. Do not ask for permission between turns of the protocol. The user watches the narration and interrupts if needed. Use the /tdd skill.
+**Phase 5+ (TDD execution):** Narrate and proceed. Do not ask for permission between turns of the protocol. The user watches the narration and interrupts if needed. Invoke the /tdd skill.
 
 ## Escalation
 
