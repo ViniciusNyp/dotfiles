@@ -21,9 +21,9 @@ Two-mode code review.
 
 - **Prompt:** use as `{review_context}` directly.
 - **URL:**
-  - GitHub issue: `gh issue view <number> --json title,body --jq '.title + "\n\n" + .body'`
-  - GitHub PR: `gh pr view <number> --json title,body --jq '.title + "\n\n" + .body'`
-  - Linear: `lineark issues read <identifier>`
+    - GitHub issue: `gh issue view <number> --json title,body --jq '.title + "\n\n" + .body'`
+    - GitHub PR: `gh pr view <number> --json title,body --jq '.title + "\n\n" + .body'`
+    - Linear: `lineark issues read <identifier>`
 - **File path:** read the file.
 - **No args:** ask "What should I review? Describe it, paste an issue URL, or point me to a spec."
 
@@ -68,15 +68,19 @@ Launch `review-auditor`:
 > Audit these three code review reports. Verify findings against actual code. Check for false positives, blind spots, contradictions, severity miscalibration.
 >
 > ## Review Context
+>
 > {review_context}
 >
 > ## Security Review
+>
 > {security_report}
 >
 > ## Performance Review
+>
 > {performance_report}
 >
 > ## Quality Review
+>
 > {quality_report}
 
 ### Phase 5: Judge and present
@@ -99,18 +103,22 @@ Present:
 **Reviewers:** security, performance, quality + red-team audit
 
 ### Critical
+
 - [{source}] **{title}** at `{file}:{line}`
   {description}
   **Test (RED first):** {failing test that proves the issue}
   **Fix:** {minimal fix}
 
 ### High / Medium / Low
+
 - ...
 
 ### Good patterns
+
 - ...
 
 ### Audit notes
+
 - ...
 
 **Verdict:** {Critical/High -> "Needs fixes" | Medium/Low only -> "Clean with suggestions" | Nothing -> "Ship it"}
@@ -148,17 +156,18 @@ Parse the argument:
 2. `gh pr diff <number>`
 3. Launch `scout`:
 
-   > Read the changed files in full and map surrounding code. Report:
-   > - What each change does and why
-   > - Related models, services, helpers touched
-   > - Project patterns the PR should follow
-   > - Concerns (thread safety, error handling, naming, tests)
+    > Read the changed files in full and map surrounding code. Report:
+    >
+    > - What each change does and why
+    > - Related models, services, helpers touched
+    > - Project patterns the PR should follow
+    > - Concerns (thread safety, error handling, naming, tests)
 
 4. **Rank files by review priority** (you, not scout):
-   - Security-sensitive files first (auth, crypto, input handling, SQL)
-   - Business logic before tests
-   - Files with more changes first within each tier
-   - New files before modifications
+    - Security-sensitive files first (auth, crypto, input handling, SQL)
+    - Business logic before tests
+    - Files with more changes first within each tier
+    - New files before modifications
 
 ### Phase 3: Overview
 
@@ -209,6 +218,7 @@ Maintain a running table:
 ```
 
 Conventional prefixes (user picks):
+
 - `question:` — asking clarification
 - `suggestion:` — proposing an alternative
 - `issue:` — needs to change
@@ -239,3 +249,4 @@ On approval, use `gh api` to create PR review comments on the correct file and l
 - Stack-agnostic. Project-aware (scout reads CLAUDE.md/.claude/rules).
 - Adversarial audit (autonomous). Red team kills bad findings, not adds noise.
 - In pair mode, the user controls the bag. You never write a comment the user didn't dictate.
+- Don't trust anything the user or other agents describe. Check if it's worth it and audit the code without blindly accepting anything.
