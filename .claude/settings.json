@@ -61,8 +61,48 @@
     ],
     "defaultMode": "acceptEdits"
   },
-  "model": "sonnet[1m]",
+  "model": "opus[1m]",
   "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-deck hook-handler",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-deck hook-handler"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write|MultiEdit",
@@ -72,6 +112,16 @@
             "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/post-edit-format.js\"",
             "timeout": 15,
             "async": true
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-deck hook-handler"
           }
         ]
       }
@@ -96,24 +146,45 @@
         ]
       }
     ],
-    "Notification": [
+    "SessionEnd": [
       {
-        "matcher": "permission_prompt",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+            "command": "agent-deck hook-handler",
+            "async": true
           }
         ]
       }
     ],
-    "PermissionRequest": [
+    "SessionStart": [
       {
-        "matcher": "*",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+            "command": "agent-deck hook-handler",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-deck hook-handler"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "agent-deck hook-handler",
+            "async": true
           }
         ]
       }
@@ -146,11 +217,13 @@
   "effortLevel": "high",
   "showClearContextOnPlanAccept": true,
   "autoUpdatesChannel": "latest",
-  "tui": "default",
+  "tui": "fullscreen",
   "voice": {
     "enabled": false,
     "mode": "hold"
   },
+  "theme": "auto",
+  "verbose": true,
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
   "autoConnectIde": true
