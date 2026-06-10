@@ -270,6 +270,7 @@
       }
     ]
   },
+  "workflowKeywordTriggerEnabled": false,
   "statusLine": {
     "type": "command",
     "command": "~/.claude/scripts/context-bar.sh"
@@ -306,6 +307,5 @@
   "verbose": false,
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "autoConnectIde": true,
-  "workflowKeywordTriggerEnabled": false
+  "autoConnectIde": true
 }
