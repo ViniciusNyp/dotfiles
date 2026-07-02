@@ -27,7 +27,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "version": "unknown",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-03-25T15:42:34.860Z",
+        "lastUpdated": "2026-07-02T10:54:11.275Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -46,16 +46,16 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/hookify/unknown",
         "version": "unknown",
         "installedAt": "2026-04-06T13:49:46.767Z",
-        "lastUpdated": "2026-04-06T13:49:46.767Z"
+        "lastUpdated": "2026-07-02T10:54:11.276Z"
       }
     ],
     "security-guidance@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/security-guidance/2.0.3",
-        "version": "2.0.3",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/security-guidance/2.0.6",
+        "version": "2.0.6",
         "installedAt": "2026-04-06T13:50:01.332Z",
-        "lastUpdated": "2026-06-03T10:32:31.473Z"
+        "lastUpdated": "2026-06-15T10:35:06.555Z"
       }
     ],
     "claude-code-wakatime@wakatime": [
@@ -74,16 +74,16 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/unknown",
         "version": "unknown",
         "installedAt": "2026-05-08T11:22:39.287Z",
-        "lastUpdated": "2026-05-08T11:22:39.287Z"
+        "lastUpdated": "2026-07-02T10:54:11.276Z"
       }
     ],
     "slack@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/slack/1.0.0",
-        "version": "1.0.0",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/slack/1.1.0",
+        "version": "1.1.0",
         "installedAt": "2026-05-08T11:22:55.772Z",
-        "lastUpdated": "2026-05-08T11:22:55.772Z",
+        "lastUpdated": "2026-06-23T15:43:43.420Z",
         "gitCommitSha": "7b9458950d38bb01ddb48b669f9fa89bcdfd98b8"
       }
     ]

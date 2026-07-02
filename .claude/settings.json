@@ -141,7 +141,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "Notification": [
       {
@@ -295,7 +295,7 @@
   },
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "showClearContextOnPlanAccept": true,
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
@@ -307,5 +307,6 @@
   "verbose": false,
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "autoConnectIde": true
+  "autoConnectIde": true,
+  "skipWorkflowUsageWarning": true
 }
