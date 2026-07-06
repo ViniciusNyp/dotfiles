@@ -4,22 +4,34 @@ tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "nikitabobko/tap"
 # Plugin manager for zsh, inspired by antigen and antibody
 brew "antidote"
+# Improved shell history for zsh, bash, fish and nushell
+brew "atuin"
 # Official Amazon AWS command-line interface
 brew "awscli"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Library for manipulating PNG images
 brew "libpng"
 # Vector graphics library with cross-device output support
 brew "cairo"
 # Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima"
-# Good-lookin' diffs with diff-highlight and more
-brew "diff-so-fancy"
 # Load/unload environment variables based on $PWD
 brew "direnv"
 # Pack, ship and run any application as a lightweight container
 brew "docker"
+# Docker CLI plugin for extended build capabilities with BuildKit
+brew "docker-buildx"
+# Isolated development environments using Docker
+brew "docker-compose"
+# Platform keystore credential helper for Docker
+brew "docker-credential-helper"
 # Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # Interact with Google Gemini AI models from the command-line
@@ -46,6 +58,10 @@ brew "jpeg"
 brew "jq"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Colorize your kubectl output
+brew "kubecolor"
+# Tool that can switch between kubectl contexts easily and create aliases
+brew "kubectx"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Lazier way to manage everything docker
@@ -72,12 +88,18 @@ brew "postgresql@14"
 brew "ripgrep"
 # CLI proxy to minimize LLM token consumption
 brew "rtk"
-# Programmatically correct mistyped console commands
-brew "thefuck"
+# Tail multiple Kubernetes pods & their containers
+brew "stern"
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # JavaScript package manager
 brew "yarn"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
 # Pluggable terminal workspace, with terminal multiplexer as the base feature
 brew "zellij"
 # Shell extension to navigate your filesystem faster
@@ -90,8 +112,6 @@ brew "felixkratz/formulae/borders", trusted: true
 brew "felixkratz/formulae/sketchybar", trusted: true
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace", trusted: true
-# App to build and share containerised applications and microservices
-cask "docker-desktop"
 cask "font-fira-code-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-sketchybar-app-font"
@@ -99,8 +119,6 @@ cask "font-sketchybar-app-font"
 cask "ghostty"
 # Keyboard customiser
 cask "karabiner-elements"
-# Clipboard manager
-cask "maccy"
 # Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 # Minimal GUI for AI code agents

@@ -7,7 +7,8 @@ fi
 
 export EDITOR='code --wait'
 export SUDO_EDITOR="$EDITOR"
-export THEFUCK_REQUIRE_CONFIRMATION='false'
+
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
 ZFUNCDIR=${ZFUNCDIR:-$ZDOTDIR/functions}
 fpath=($ZFUNCDIR $fpath)
@@ -25,35 +26,32 @@ antidote bundle belak/zsh-utils path:editor
 antidote bundle belak/zsh-utils path:history
 antidote bundle belak/zsh-utils path:utility
 antidote bundle ohmyzsh/ohmyzsh path:plugins/git
-antidote bundle agkozak/zsh-z
 antidote bundle unixorn/fzf-zsh-plugin
 antidote bundle jeffreytse/zsh-vi-mode
 
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-eval $(thefuck --alias)
 eval "$(direnv hook zsh)"
 
 
-  if [[ -z "$ZELLIJ" ]]; then
-      if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-          zellij attach -c
-      else
-          zellij
-      fi
+  # if [[ -z "$ZELLIJ" ]]; then
+  #     if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+  #         zellij attach -c
+  #     else
+  #         zellij
+  #     fi
 
-      if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-          exit
-      fi
-  fi
+  #     if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+  #         exit
+  #     fi
+  # fi
 
 
 if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
-if command -v zellij &> /dev/null; then
-    eval "$(zellij setup --generate-auto-start zsh)"
-fi
+# if command -v zellij &> /dev/null; then
+#     eval "$(zellij setup --generate-auto-start zsh)"
+# fi
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
@@ -63,13 +61,17 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
+# atuin must bind Ctrl-R after zsh-vi-mode resets keymaps
+if command -v atuin &> /dev/null; then
+  zvm_after_init_commands+=('eval "$(atuin init zsh --disable-up-arrow)"')
+fi
+
 # File system
 alias ls='eza -lh --group-directories-first --icons'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
-alias ff="fzf --preview 'batcat --style=numbers --color=always {}'"
-alias fd='fdfind'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd='z'
 
 # Directories
@@ -81,20 +83,36 @@ alias ....='cd ../../..'
 alias n='nvim'
 alias g='git'
 alias d='docker'
-alias bat='batcat'
+# Debian ships bat/fd as batcat/fdfind
+command -v batcat &> /dev/null && alias bat='batcat'
+command -v fdfind &> /dev/null && alias fd='fdfind'
 alias lzg='lazygit'
 alias lzd='lazydocker'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias cc='claude'
-alias ccdev='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/dev.md)"'
-alias ccreview='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/review.md)"'
-alias ccresearch='claude --system-prompt "$(cat ~/.claude/plugins/marketplaces/ecc/contexts/research.md)"'
+alias ad='agent-deck'
 
+if command -v kubecolor &> /dev/null; then
+  alias kubectl='kubecolor'
+  compdef kubecolor=kubectl
+fi
+
+# yazi: cd into the directory it exits in
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
 
 # Compression
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
 alias decompress="tar -xzf"
 
+antidote bundle Aloxaf/fzf-tab
 antidote bundle zsh-users/zsh-autosuggestions
 antidote bundle zsh-users/zsh-completions
 antidote bundle belak/zsh-utils path:completion
@@ -103,3 +121,5 @@ antidote bundle romkatv/powerlevel10k
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="$HOME/.local/bin:$PATH"
