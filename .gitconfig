@@ -23,11 +23,18 @@
   skip = update-index --skip-worktree
   unskip = update-index --no-skip-worktree
 [core]
-  pager = cat
+  pager = delta
   excludesfile = ~/.gitignore_global
   editor = code --wait
   whitespace = -trailing-space
 	autocrlf = false
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  paging = never
+  line-numbers = true
+  dark = true
+  syntax-theme = Dracula
 [diff]
   mnemonicPrefix = true
   renames = true
