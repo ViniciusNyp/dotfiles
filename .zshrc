@@ -66,6 +66,19 @@ if command -v atuin &> /dev/null; then
   zvm_after_init_commands+=('eval "$(atuin init zsh --disable-up-arrow)"')
 fi
 
+# Dracula palette for fzf (appended to keep plugin bindings)
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 \
+  --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 \
+  --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 \
+  --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
+
+# fzf-tab: group headers + directory previews
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza -1 --color=always $realpath'
+
 # File system
 alias ls='eza -lh --group-directories-first --icons'
 alias lsa='ls -a'
