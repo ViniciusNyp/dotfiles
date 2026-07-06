@@ -1,0 +1,133 @@
+# SketchyBar + AeroSpace — neutral graphite islands over a transparent bar.
+# Islands via solid brackets (marcelrsoub pattern), single-listener aerospace
+# events (koenvangilst pattern), popups after FelixKratz.
+
+source "$CONFIG_DIR/colors.sh"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+##### Bar: invisible window, islands paint themselves #####
+# topmost=window keeps the bar above the hidden-menu-bar hot zone so it stays clickable
+sketchybar --bar position=top height=28 notch_display_height=38 topmost=window \
+           blur_radius=0 color=$BAR
+
+##### Defaults: flat monochrome items; popups bordered + blurred #####
+default=(
+  padding_left=4
+  padding_right=4
+  icon.font="Hack Nerd Font:Bold:15.0"
+  label.font="Hack Nerd Font:Bold:13.0"
+  icon.color=$FG
+  label.color=$FG
+  icon.padding_left=6
+  icon.padding_right=3
+  label.padding_left=3
+  label.padding_right=6
+  background.color=$BG1
+  background.corner_radius=7
+  background.height=20
+  popup.background.color=$POPUP_BG
+  popup.background.corner_radius=9
+  popup.background.border_width=2
+  popup.background.border_color=$SELECTION
+  popup.background.shadow.drawing=on
+  popup.blur_radius=50
+)
+sketchybar --default "${default[@]}"
+
+##### Left island: apple, workspaces, front app #####
+sketchybar --add item apple left \
+           --set apple icon= icon.padding_left=12 label.drawing=off \
+                 click_script="$PLUGIN_DIR/menus.sh 1"
+
+sketchybar --add event aerospace_workspace_change
+
+for sid in $(aerospace list-workspaces --all); do
+  sketchybar --add item space."$sid" left \
+    --subscribe space."$sid" mouse.entered mouse.exited mouse.exited.global \
+    --set space."$sid" \
+    drawing=off \
+    background.drawing=off \
+    background.corner_radius=6 \
+    background.height=18 \
+    icon="$sid" \
+    icon.font="Hack Nerd Font:Bold:12.0" \
+    icon.padding_left=7 \
+    icon.padding_right=2 \
+    label.font="sketchybar-app-font:Regular:14.0" \
+    label.drawing=off \
+    label.padding_left=2 \
+    label.padding_right=7 \
+    click_script="aerospace workspace $sid; sketchybar --set \$NAME popup.drawing=off" \
+    script="$PLUGIN_DIR/space_hover.sh $sid"
+done
+
+sketchybar --add item aerospace_listener left \
+           --set aerospace_listener drawing=off width=0 \
+                 script="$PLUGIN_DIR/aerospace_listener.sh" \
+           --subscribe aerospace_listener aerospace_workspace_change
+
+sketchybar --add item front_app left \
+           --set front_app icon.font="sketchybar-app-font:Regular:16.0" \
+                 label.padding_right=12 \
+                 script="$PLUGIN_DIR/front_app.sh" \
+                 click_script="$PLUGIN_DIR/menus.sh 2" \
+           --subscribe front_app front_app_switched
+
+##### Center island: now playing #####
+sketchybar --add item media center \
+           --set media drawing=off update_freq=10 icon=󰝚 icon.color=$DIM \
+                 icon.padding_left=12 label.padding_right=12 \
+                 background.drawing=on background.color=$ISLAND \
+                 background.corner_radius=10 background.height=26 \
+                 script="$PLUGIN_DIR/media.sh" \
+                 click_script="nowplaying-cli togglePlayPause"
+
+##### Right island (rightmost first): clock, weather, wifi, bt, battery, volume, cpu, ram, meeting #####
+# Left click = quick action, right click = native Control Center module / popup
+sketchybar --add item clock right \
+           --set clock update_freq=10 icon= icon.color=$DIM label.padding_right=12 \
+                 script="$PLUGIN_DIR/clock.sh" \
+                 click_script="if [ \"\$BUTTON\" = right ]; then $PLUGIN_DIR/cc.sh Clock; else $PLUGIN_DIR/popup_calendar.sh; fi" \
+           --add item wifi right \
+           --set wifi update_freq=30 \
+                 script="$PLUGIN_DIR/wifi.sh" \
+                 click_script="if [ \"\$BUTTON\" = right ]; then $PLUGIN_DIR/popup_wifi.sh; else $PLUGIN_DIR/cc.sh Wi 'x-apple.systempreferences:com.apple.wifi-settings-extension'; fi" \
+           --subscribe wifi wifi_change \
+           --add item bluetooth right \
+           --set bluetooth update_freq=30 \
+                 script="$PLUGIN_DIR/bluetooth.sh" \
+                 click_script="$PLUGIN_DIR/cc.sh Bluetooth 'x-apple.systempreferences:com.apple.BluetoothSettings'" \
+           --add item battery right \
+           --set battery update_freq=120 \
+                 script="$PLUGIN_DIR/battery.sh" \
+                 click_script="$PLUGIN_DIR/cc.sh Battery 'x-apple.systempreferences:com.apple.Battery-Settings.extension'" \
+           --subscribe battery system_woke power_source_change \
+           --add item volume right \
+           --set volume \
+                 script="$PLUGIN_DIR/volume.sh" \
+                 click_script="if [ \"\$BUTTON\" = right ]; then $PLUGIN_DIR/cc.sh Sound; else osascript -e 'set volume output muted (not (output muted of (get volume settings)))'; fi" \
+           --subscribe volume volume_change mouse.scrolled \
+           --add item cpu right \
+           --set cpu update_freq=10 icon=cpu icon.font="Hack Nerd Font:Bold:10.0" icon.color=$DIM \
+                 script="$PLUGIN_DIR/cpu.sh" \
+                 click_script="open -a 'Activity Monitor'" \
+           --add item ram right \
+           --set ram update_freq=10 icon=ram icon.font="Hack Nerd Font:Bold:10.0" icon.color=$DIM \
+                 script="$PLUGIN_DIR/ram.sh" \
+                 click_script="open -a 'Activity Monitor'" \
+           --add item meeting right \
+           --set meeting update_freq=60 icon=󰃰 icon.padding_left=12 \
+                 script="$PLUGIN_DIR/calendar.sh" \
+                 click_script="$PLUGIN_DIR/calendar.sh menu" \
+           --subscribe meeting system_woke
+
+##### Islands: solid capsules on the transparent bar #####
+sketchybar --add bracket left_island apple '/space\..*/' front_app \
+           --set left_island background.drawing=on background.color=$ISLAND \
+                 background.corner_radius=10 background.height=26 \
+           --add bracket right_island clock wifi bluetooth battery volume cpu ram meeting \
+           --set right_island background.drawing=on background.color=$ISLAND \
+                 background.corner_radius=10 background.height=26
+
+##### Force all scripts to run the first time (never do this in a script) #####
+sketchybar --update
