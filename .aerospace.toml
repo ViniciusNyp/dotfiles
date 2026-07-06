@@ -9,7 +9,7 @@ config-version = 2
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget borders active_color=0xffc8c8cc inactive_color=0xff3a3b42 width=6.0'
+    'exec-and-forget borders active_color=0xffc8c8cc inactive_color=0xff3a3b42 width=6.0 hidpi=on style=round'
 ]
 
 # Start AeroSpace at login
@@ -88,6 +88,10 @@ gaps.outer.left =       0
 gaps.outer.bottom =     0
 gaps.outer.top = [{ monitor.'built-in' = 0 }, 28]
 gaps.outer.right =      0
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -222,6 +226,7 @@ gaps.outer.right =      0
     esc = ['reload-config', 'mode main']
     r = ['flatten-workspace-tree', 'mode main'] # reset layout
     f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    m = ['fullscreen', 'mode main']
     backspace = ['close-all-windows-but-current', 'mode main']
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
