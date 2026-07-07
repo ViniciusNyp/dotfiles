@@ -136,3 +136,6 @@ antidote bundle romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# Machine-local, untracked overrides (work tooling, secrets)
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
