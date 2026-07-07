@@ -22,6 +22,14 @@ Non-obvious wiring, in dependency order:
 - Terminal is **cmux** day-to-day; Ghostty is installed but not driven directly, and the zellij config is kept but currently unused.
 - Container runtime is **colima**; compose/buildx come from Homebrew via `cliPluginsExtraDirs` in the local, untracked `~/.docker/config.json`.
 
+## Maintenance (macOS)
+
+- Bar misbehaving: `sketchybar --reload`; inspect any item with `sketchybar --query <name>`.
+- AeroSpace config edits reload automatically; force with `aerospace reload-config`.
+- After a macOS update: rebuild the menu helper (`make -C ~/.config/sketchybar/helpers/menus`) and re-check the Control Center window names in `plugins/cc.sh` if modules stop opening (list them by running a probe under sketchybar — window names need its Screen Recording grant).
+- After a `sketchybar` upgrade: delete `~/.local/share/sketchybar_lua/sketchybar.so`; the rc rebuilds SbarLua on next start.
+- Widget data sources: bluetooth = `blueutil` (+ `system_profiler` fallback), media = `nowplaying-cli`, meeting = MeetingBar via AX, ai = `agent-deck status` + `pgrep`. If one dies, its item hides or falls back rather than erroring.
+
 ## Installation
 
 To install the dotfiles, follow these steps:
