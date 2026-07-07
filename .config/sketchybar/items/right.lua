@@ -30,7 +30,7 @@ SUBS[#SUBS + 1] = "--subscribe wifi wifi_change"
 
 SBAR.add("item", "bluetooth", {
 	position = "right",
-	update_freq = 30,
+	update_freq = 5,
 	script = PLUGIN_DIR .. "/bluetooth.sh",
 	click_script = PLUGIN_DIR .. "/cc.sh Bluetooth 'x-apple.systempreferences:com.apple.BluetoothSettings'",
 })

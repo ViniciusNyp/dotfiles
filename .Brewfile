@@ -10,6 +10,8 @@ brew "atuin"
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Get/set bluetooth power and discoverable state
+brew "blueutil"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Library for manipulating PNG images
