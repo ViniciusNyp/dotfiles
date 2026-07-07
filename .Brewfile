@@ -52,6 +52,8 @@ brew "gnupg"
 brew "go"
 # Kubernetes package manager
 brew "helm@3", link: true
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
 # Image manipulation library
 brew "jpeg"
 # Lightweight and flexible command-line JSON processor
@@ -72,6 +74,8 @@ brew "lazygit"
 brew "pango"
 # Library to render SVG files using Cairo
 brew "librsvg"
+# Powerful, lightweight programming language
+brew "lua@5.4", link: true
 # Java-based project management
 brew "maven"
 # Polyglot runtime manager (asdf rust clone)
