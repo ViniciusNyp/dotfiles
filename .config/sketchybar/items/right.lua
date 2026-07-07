@@ -77,17 +77,39 @@ SBAR.add("item", "meeting", {
 })
 SUBS[#SUBS + 1] = "--subscribe meeting system_woke"
 
+-- AI trio: ai (robot + running, green), ai_wait (yellow), ai_extra (dim).
+-- ai.sh updates all three; Claude Code hooks fire ai_change for instant updates.
+SBAR.add("event", "ai_change")
+
+SBAR.add("item", "ai_extra", {
+	position = "right",
+	drawing = false,
+	icon = { drawing = false },
+	label = { color = COLORS.dim },
+	click_script = "open -a 'cmux'",
+})
+
+SBAR.add("item", "ai_wait", {
+	position = "right",
+	drawing = false,
+	icon = { drawing = false },
+	label = { color = COLORS.yellow },
+	click_script = "open -a 'cmux'",
+})
+
 SBAR.add("item", "ai", {
 	position = "right",
+	drawing = false,
 	update_freq = 10,
 	icon = { string = "󰚩" },
+	label = { color = COLORS.green },
 	script = PLUGIN_DIR .. "/ai.sh",
 	click_script = "open -a 'cmux'",
 })
-SUBS[#SUBS + 1] = "--subscribe ai system_woke"
+SUBS[#SUBS + 1] = "--subscribe ai system_woke ai_change"
 
 SBAR.add("bracket", "right_island",
-	{ "clock", "control_center", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "meeting", "ai" }, {
+	{ "clock", "control_center", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "meeting", "ai", "ai_wait", "ai_extra" }, {
 	background = {
 		drawing = true,
 		color = COLORS.island,

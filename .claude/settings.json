@@ -162,6 +162,15 @@
             "async": true
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
+            "async": true
+          }
+        ]
       }
     ],
     "PermissionRequest": [
@@ -256,6 +265,15 @@
             "command": "agent-deck hook-handler"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
+            "async": true
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -295,18 +313,19 @@
   },
   "outputStyle": "Explanatory",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "showClearContextOnPlanAccept": true,
   "autoUpdatesChannel": "latest",
-  "tui": "fullscreen",
+  "tui": "default",
   "voice": {
     "enabled": false,
     "mode": "hold"
   },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "verbose": false,
   "autoCompactEnabled": false,
   "skipAutoPermissionPrompt": true,
-  "autoConnectIde": true,
-  "skipWorkflowUsageWarning": true
+  "autoConnectIde": true
 }

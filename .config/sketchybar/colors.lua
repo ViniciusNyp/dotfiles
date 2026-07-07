@@ -11,4 +11,5 @@ return {
 	green = 0xff50fa7b,
 	red = 0xffff5555,
 	orange = 0xffffb86c,
+	yellow = 0xfff1fa8c,
 }

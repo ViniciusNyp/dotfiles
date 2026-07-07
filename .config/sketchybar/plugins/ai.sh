@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# AI agents at a glance: agent-deck session counts (running/waiting) plus a
-# best-effort count of agent CLIs (claude/codex/gemini/cursor-agent) started
-# outside agent-deck. Orange = an agent is waiting on you.
+# AI agents trio: ai = robot + running count (green), ai_wait = waiting count
+# (yellow, an agent needs input), ai_extra = best-effort count of agent CLIs
+# (claude/codex/gemini/cursor-agent) outside agent-deck (dim). Claude Code
+# hooks trigger ai_change for instant updates; the island flashes when the
+# waiting count rises. Degrades to a pure process count without agent-deck.
 CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 source "$CONFIG_DIR/colors.sh"
 
@@ -30,15 +32,35 @@ else
 fi
 
 if [ $((RUNNING + WAITING + EXTRA)) -eq 0 ]; then
-  sketchybar --set "$NAME" drawing=off
+  sketchybar --set ai drawing=off --set ai_wait drawing=off --set ai_extra drawing=off
   exit 0
 fi
 
-LABEL=""
-[ "$RUNNING" -gt 0 ] && LABEL="${RUNNING}▸"
-[ "$WAITING" -gt 0 ] && LABEL="${LABEL:+$LABEL }${WAITING}󰏤"
-[ "$EXTRA" -gt 0 ] && LABEL="${LABEL:+$LABEL }+${EXTRA}"
+ICON_COLOR=$DIM
+[ "$RUNNING" -gt 0 ] && ICON_COLOR=$GREEN
+args=(--set ai drawing=on icon.color=$ICON_COLOR label="${RUNNING}▸")
+[ "$RUNNING" -gt 0 ] && args+=(label.drawing=on) || args+=(label.drawing=off)
+if [ "$WAITING" -gt 0 ]; then
+  args+=(--set ai_wait drawing=on label="${WAITING}󰏤")
+else
+  args+=(--set ai_wait drawing=off)
+fi
+if [ "$EXTRA" -gt 0 ]; then
+  args+=(--set ai_extra drawing=on label="+${EXTRA}")
+else
+  args+=(--set ai_extra drawing=off)
+fi
+sketchybar "${args[@]}"
 
-COLOR=$FG
-[ "$WAITING" -gt 0 ] && COLOR=$ORANGE
-sketchybar --set "$NAME" drawing=on label="$LABEL" icon.color=$COLOR label.color=$COLOR
+# flash the island when something new starts waiting on the user
+STATE=/tmp/sketchybar_ai_waiting
+PREV=$(cat "$STATE" 2>/dev/null || echo 0)
+echo "$WAITING" > "$STATE"
+if [ "$WAITING" -gt "${PREV:-0}" ]; then
+  for _ in 1 2; do
+    sketchybar --animate tanh 8 --set right_island background.color=$YELLOW
+    sleep 0.35
+    sketchybar --animate tanh 8 --set right_island background.color=$ISLAND
+    sleep 0.35
+  done
+fi
