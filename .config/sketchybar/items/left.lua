@@ -3,7 +3,7 @@
 -- sketchybar keeps delivering events straight to them (no lua callbacks yet).
 SBAR.add("item", "apple", {
 	position = "left",
-	icon = { string = "", padding_left = 12 },
+	icon = { string = "\u{F0035}", padding_left = 12 }, -- nf-md-apple (native Hack NF metrics)
 	label = { drawing = false },
 	click_script = PLUGIN_DIR .. "/menus.sh 1",
 })

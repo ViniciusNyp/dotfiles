@@ -11,6 +11,13 @@ SBAR.add("item", "clock", {
 		.. PLUGIN_DIR .. "/popup_calendar.sh; fi",
 })
 
+SBAR.add("item", "control_center", {
+	position = "right",
+	icon = { string = "\u{F1DE}", color = COLORS.dim }, -- nf-fa-sliders
+	label = { drawing = false },
+	click_script = PLUGIN_DIR .. "/cc.sh Control",
+})
+
 SBAR.add("item", "wifi", {
 	position = "right",
 	update_freq = 30,
@@ -80,7 +87,7 @@ SBAR.add("item", "ai", {
 SUBS[#SUBS + 1] = "--subscribe ai system_woke"
 
 SBAR.add("bracket", "right_island",
-	{ "clock", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "meeting", "ai" }, {
+	{ "clock", "control_center", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "meeting", "ai" }, {
 	background = {
 		drawing = true,
 		color = COLORS.island,
