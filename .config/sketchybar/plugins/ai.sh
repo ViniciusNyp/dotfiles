@@ -5,14 +5,15 @@
 CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 source "$CONFIG_DIR/colors.sh"
 
-RUNNING=0 WAITING=0
+RUNNING=0 WAITING=0 IDLE=0
 HAVE_DECK=0
 if command -v agent-deck &> /dev/null; then
   HAVE_DECK=1
   STATUS=$(agent-deck status 2>/dev/null)
   RUNNING=$(grep -oE '[0-9]+ running' <<< "$STATUS" | cut -d' ' -f1)
   WAITING=$(grep -oE '[0-9]+ waiting' <<< "$STATUS" | cut -d' ' -f1)
-  RUNNING=${RUNNING:-0} WAITING=${WAITING:-0}
+  IDLE=$(grep -oE '[0-9]+ idle' <<< "$STATUS" | cut -d' ' -f1)
+  RUNNING=${RUNNING:-0} WAITING=${WAITING:-0} IDLE=${IDLE:-0}
 fi
 
 PROCS=0
@@ -21,7 +22,8 @@ for bin in claude codex gemini cursor-agent; do
 done
 
 if [ "$HAVE_DECK" -eq 1 ]; then
-  EXTRA=$((PROCS - RUNNING - WAITING))
+  # idle deck sessions keep their agent process alive; they are tracked, not extras
+  EXTRA=$((PROCS - RUNNING - WAITING - IDLE))
   [ "$EXTRA" -lt 0 ] && EXTRA=0
 else
   RUNNING=$PROCS EXTRA=0
