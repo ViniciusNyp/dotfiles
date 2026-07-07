@@ -120,13 +120,18 @@ sketchybar --add item clock right \
            --set meeting update_freq=60 icon=󰃰 icon.padding_left=12 \
                  script="$PLUGIN_DIR/calendar.sh" \
                  click_script="$PLUGIN_DIR/calendar.sh menu" \
-           --subscribe meeting system_woke
+           --subscribe meeting system_woke \
+           --add item ai right \
+           --set ai update_freq=10 icon=󰚩 \
+                 script="$PLUGIN_DIR/ai.sh" \
+                 click_script="open -a 'cmux'" \
+           --subscribe ai system_woke
 
 ##### Islands: solid capsules on the transparent bar #####
 sketchybar --add bracket left_island apple '/space\..*/' front_app \
            --set left_island background.drawing=on background.color=$ISLAND \
                  background.corner_radius=10 background.height=26 \
-           --add bracket right_island clock wifi bluetooth battery volume cpu ram meeting \
+           --add bracket right_island clock wifi bluetooth battery volume cpu ram meeting ai \
            --set right_island background.drawing=on background.color=$ISLAND \
                  background.corner_radius=10 background.height=26
 
