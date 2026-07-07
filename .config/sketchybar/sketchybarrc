@@ -7,8 +7,8 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 ##### Bar: invisible window, islands paint themselves #####
 # topmost=window keeps the bar above the hidden-menu-bar hot zone so it stays clickable
-sketchybar --bar position=top height=28 notch_display_height=38 topmost=window \
-           blur_radius=0 color=$BAR
+sketchybar --bar position=top height=28 notch_display_height=38 notch_width=200 \
+           topmost=window blur_radius=0 color=$BAR
 
 ##### Defaults: flat monochrome items; popups bordered + blurred #####
 default=(
@@ -73,14 +73,15 @@ sketchybar --add item front_app left \
                  click_script="$PLUGIN_DIR/menus.sh 2" \
            --subscribe front_app front_app_switched
 
-##### Center island: now playing #####
-sketchybar --add item media center \
+##### Media island: flows after the left island; media.sh sizes the label to stop before the notch #####
+sketchybar --add item media left \
            --set media drawing=off update_freq=10 icon=󰝚 icon.color=$DIM \
                  icon.padding_left=12 label.padding_right=12 \
                  background.drawing=on background.color=$ISLAND \
                  background.corner_radius=10 background.height=26 \
                  script="$PLUGIN_DIR/media.sh" \
-                 click_script="nowplaying-cli togglePlayPause"
+                 click_script="nowplaying-cli togglePlayPause" \
+           --subscribe media front_app_switched aerospace_workspace_change
 
 ##### Right island (rightmost first): clock, weather, wifi, bt, battery, volume, cpu, ram, meeting #####
 # Left click = quick action, right click = native Control Center module / popup
