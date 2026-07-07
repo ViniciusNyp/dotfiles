@@ -26,12 +26,9 @@ SBAR.default({
 		padding_left = 3,
 		padding_right = 6,
 	},
-	background = {
-		drawing = false, -- SbarLua enables drawing when the table is set; bash defaults kept it off
-		color = COLORS.bg1,
-		corner_radius = 7,
-		height = 20,
-	},
+	-- no default background: every drawn capsule (pills, media, brackets) sets
+	-- its own; a default one resurfaces nondeterministically under SbarLua
+	-- because pairs() may serialize color/height after drawing=off
 	popup = {
 		background = {
 			color = COLORS.popup,
