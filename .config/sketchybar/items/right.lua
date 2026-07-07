@@ -47,8 +47,8 @@ SBAR.add("item", "volume", {
 	position = "right",
 	script = PLUGIN_DIR .. "/volume.sh",
 	click_script = 'if [ "$BUTTON" = right ]; then '
-		.. PLUGIN_DIR .. "/cc.sh Sound; else "
-		.. "osascript -e 'set volume output muted (not (output muted of (get volume settings)))'; fi",
+		.. "osascript -e 'set volume output muted (not (output muted of (get volume settings)))'; else "
+		.. PLUGIN_DIR .. "/cc.sh Sound; fi",
 })
 SUBS[#SUBS + 1] = "--subscribe volume volume_change mouse.scrolled"
 

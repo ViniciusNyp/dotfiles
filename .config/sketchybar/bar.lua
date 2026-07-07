@@ -27,6 +27,7 @@ SBAR.default({
 		padding_right = 6,
 	},
 	background = {
+		drawing = false, -- SbarLua enables drawing when the table is set; bash defaults kept it off
 		color = COLORS.bg1,
 		corner_radius = 7,
 		height = 20,
