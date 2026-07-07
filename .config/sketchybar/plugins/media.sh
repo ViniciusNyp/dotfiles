@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-# Now playing via nowplaying-cli; hides when nothing plays.
+# Now playing via nowplaying-cli; hides when nothing plays, dims when paused.
 # The item flows after the left island; the label is truncated to exactly the
 # space remaining before the notch on the built-in display.
+CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
+source "$CONFIG_DIR/colors.sh"
 NOTCH_WIDTH=200      # keep in sync with --bar notch_width in sketchybarrc
 NOTCH_BAR_HEIGHT=38  # keep in sync with --bar notch_display_height
 PX_PER_CHAR=8        # Hack Bold 13 average advance
@@ -33,4 +35,10 @@ CHARS=$(jq -rn --argjson fa "$(sketchybar --query front_app)" \
 case "$CHARS" in ''|*[!0-9]*) CHARS=45 ;; esac
 
 [ ${#LABEL} -gt "$CHARS" ] && LABEL="${LABEL:0:$((CHARS - 1))}…"
-sketchybar --set "$NAME" drawing=on label="$LABEL"
+
+RATE=$(nowplaying-cli get playbackRate 2>/dev/null)
+case "$RATE" in
+  ''|null|0|0.*) ICON=󰏤 LABEL_COLOR=$DIM ;;
+  *)             ICON=󰝚 LABEL_COLOR=$FG ;;
+esac
+sketchybar --set "$NAME" drawing=on label="$LABEL" icon="$ICON" label.color=$LABEL_COLOR
