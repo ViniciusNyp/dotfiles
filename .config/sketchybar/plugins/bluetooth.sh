@@ -29,7 +29,7 @@ if [ "$POWER" = "0" ] || [ "$POWER" = "1" ]; then
   fi
   ADDRS=$($BLUEUTIL --connected --format json 2>/dev/null | jq -r 'map(.address) | sort | join(",")')
   if [ -z "$ADDRS" ]; then
-    set_item 󰂯 $DIM
+    set_item 󰂯 $FG
     exit 0
   fi
   read -r CACHED_ADDRS CACHED_ICON < "$CACHE" 2>/dev/null
@@ -60,5 +60,5 @@ elif [ "${CONNECTED:-0}" -gt 0 ]; then
   [ "$HEADPHONES" = "yes" ] && ICON=󰋋
   set_item "$ICON" $FG
 else
-  set_item 󰂯 $DIM
+  set_item 󰂯 $FG
 fi

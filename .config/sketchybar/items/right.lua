@@ -68,15 +68,6 @@ SBAR.add("item", "ram", {
 	click_script = "open -a 'Activity Monitor'",
 })
 
-SBAR.add("item", "meeting", {
-	position = "right",
-	update_freq = 60,
-	icon = { string = "󰃰", padding_left = 12 },
-	script = PLUGIN_DIR .. "/calendar.sh",
-	click_script = PLUGIN_DIR .. "/calendar.sh menu",
-})
-SUBS[#SUBS + 1] = "--subscribe meeting system_woke"
-
 -- AI trio: ai (robot + running, green), ai_wait (yellow), ai_extra (dim).
 -- ai.sh updates all three; Claude Code hooks fire ai_change for instant updates.
 SBAR.add("event", "ai_change")
@@ -109,7 +100,7 @@ SBAR.add("item", "ai", {
 SUBS[#SUBS + 1] = "--subscribe ai system_woke ai_change"
 
 SBAR.add("bracket", "right_island",
-	{ "clock", "control_center", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "meeting", "ai", "ai_wait", "ai_extra" }, {
+	{ "clock", "control_center", "wifi", "bluetooth", "battery", "volume", "cpu", "ram", "ai", "ai_wait", "ai_extra" }, {
 	background = {
 		drawing = true,
 		color = COLORS.island,
@@ -117,3 +108,22 @@ SBAR.add("bracket", "right_island",
 		height = 26,
 	},
 })
+
+-- Meeting island: separate capsule at the notch-facing edge of the right
+-- group — the only elastic width on this side, so calendar.sh's notch guard
+-- only ever has to trim this one item.
+SBAR.add("item", "meeting", {
+	position = "right",
+	update_freq = 60,
+	icon = { string = "󰃰", padding_left = 12 },
+	label = { padding_right = 12 },
+	background = {
+		drawing = true,
+		color = COLORS.island,
+		corner_radius = 10,
+		height = 26,
+	},
+	script = PLUGIN_DIR .. "/calendar.sh",
+	click_script = PLUGIN_DIR .. "/calendar.sh menu",
+})
+SUBS[#SUBS + 1] = "--subscribe meeting system_woke"

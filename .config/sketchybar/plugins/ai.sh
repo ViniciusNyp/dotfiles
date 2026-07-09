@@ -64,3 +64,6 @@ if [ "$WAITING" -gt "${PREV:-0}" ]; then
     sleep 0.35
   done
 fi
+
+# the trio changed the island's width; refit the meeting label to the notch
+NAME=meeting "$CONFIG_DIR/plugins/calendar.sh" >/dev/null 2>&1 &
