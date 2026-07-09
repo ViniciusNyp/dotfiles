@@ -27,7 +27,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "version": "unknown",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-07-02T10:54:11.275Z",
+        "lastUpdated": "2026-07-09T11:16:40.792Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -46,7 +46,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/hookify/unknown",
         "version": "unknown",
         "installedAt": "2026-04-06T13:49:46.767Z",
-        "lastUpdated": "2026-07-02T10:54:11.276Z"
+        "lastUpdated": "2026-07-09T11:16:40.791Z"
       }
     ],
     "security-guidance@claude-plugins-official": [
@@ -74,7 +74,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/unknown",
         "version": "unknown",
         "installedAt": "2026-05-08T11:22:39.287Z",
-        "lastUpdated": "2026-07-02T10:54:11.276Z"
+        "lastUpdated": "2026-07-09T11:16:40.792Z"
       }
     ],
     "slack@claude-plugins-official": [

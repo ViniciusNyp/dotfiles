@@ -53,6 +53,16 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 
 # Performance Review
 
+Severity maps to impact on the Critical | High | Medium | Low scale shared across reviewers.
+
+## Critical Impact
+
+- **[Title]**: [description with file:line references] — regression that degrades a hot path badly enough to threaten availability or SLOs
+    - **Impact**: [estimated impact: latency, memory, throughput]
+    - **Hot path?**: [yes/no, why]
+    - **Test (RED first)**: [benchmark or test that would prove the regression]
+    - **Fix**: [minimal fix]
+
 ## High Impact
 
 - **[Title]**: [description with file:line references]

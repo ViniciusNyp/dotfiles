@@ -1,5 +1,14 @@
-> This file extends [common/patterns.md](../common/patterns.md) with web-specific design-quality guidance.
-
+---
+paths:
+  - "**/*.css"
+  - "**/*.scss"
+  - "**/*.tsx"
+  - "**/*.jsx"
+  - "**/*.vue"
+  - "**/*.svelte"
+  - "**/*.html"
+  - "**/*.astro"
+---
 # Web Design Quality Standards
 
 ## Anti-Template Policy

@@ -40,7 +40,7 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 - Naming: do names reveal intent? Can you understand what a function does without reading the body?
 - No single-letter variables except iterators
 - Functions: short, doing one thing, one level of abstraction
-- Comments: only where code can't speak for itself. No commenting the obvious. No commented-out code
+- Comments: default to none — code should be self-documenting. Flag comments that explain *what* obvious code does, commented-out code, and any comment a better name/type/structure would eliminate. Accept a comment only for non-obvious context, a deliberate deviation from the standard approach, or an unavoidable caveat/gotcha that structure can't remove
 - No magic numbers or strings without named constants
 
 ### Modularity & Patterns
@@ -55,6 +55,23 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 - No rescue/catch-all that hides bugs
 - Are error messages useful for debugging?
 - Happy path vs error path clarity
+
+## Code smell baseline (Fowler)
+
+Match these against the diff even when the repo documents no standards. Two rules bind them: a documented repo standard always **overrides** the baseline (suppress the smell where the repo endorses it), and every smell is a **judgement call** ("possible Feature Envy"), never a hard violation. Skip anything tooling already enforces.
+
+- **Mysterious Name** — name doesn't reveal what it does or holds → rename; if no honest name comes, the design is murky
+- **Duplicated Code** — same logic shape in more than one hunk/file → extract, call from both
+- **Feature Envy** — a method reaches into another object's data more than its own → move it onto the data it envies
+- **Data Clumps** — the same few fields/params keep travelling together → bundle into one type
+- **Primitive Obsession** — a primitive/string standing in for a domain concept → give the concept its own small type
+- **Repeated Switches** — the same switch/if-cascade on the same type recurs → polymorphism, or one shared map
+- **Shotgun Surgery** — one logical change forces scattered edits across many files → gather what changes together
+- **Divergent Change** — one module edited for several unrelated reasons → split so each changes for one reason
+- **Speculative Generality** — abstraction/hooks for needs the spec doesn't have → delete, inline back until a real need shows
+- **Message Chains** — long `a.b().c().d()` navigation → hide the walk behind one method
+- **Middle Man** — a class/function that mostly just delegates → cut it, call the real target
+- **Refused Bequest** — a subclass ignoring most of what it inherits → drop inheritance, use composition
 
 ## Testing
 
@@ -85,8 +102,11 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 
 # Quality Review
 
+Tag every finding with **Severity: Critical | High | Medium | Low** so the auditor can compare and rank across all reviewers on one scale.
+
 ## Convention violations
 - **[Title]**: [description with file:line]
+  - **Severity**: Critical | High | Medium | Low
   - **Project pattern**: [how the project does it elsewhere]
   - **Test (RED first)**: [failing test that would catch the issue]
   - **Suggestion**: [fix aligned with project conventions]

@@ -60,22 +60,6 @@ type UserWithRole = User & {
 - Use `unknown` for external or untrusted input, then narrow it safely
 - Use generics when a value's type depends on the caller
 
-```typescript
-// WRONG: any removes type safety
-function getErrorMessage(error: any) {
-  return error.message
-}
-
-// CORRECT: unknown forces safe narrowing
-function getErrorMessage(error: unknown): string {
-  if (error instanceof Error) {
-    return error.message
-  }
-
-  return 'Unexpected error'
-}
-```
-
 ### React Props
 
 - Define component props with a named `interface` or `type`
@@ -115,65 +99,11 @@ export function formatUser(user) {
 
 ## Immutability
 
-Use spread operator for immutable updates:
-
-```typescript
-interface User {
-  id: string
-  name: string
-}
-
-// WRONG: Mutation
-function updateUser(user: User, name: string): User {
-  user.name = name // MUTATION!
-  return user
-}
-
-// CORRECT: Immutability
-function updateUser(user: Readonly<User>, name: string): User {
-  return {
-    ...user,
-    name
-  }
-}
-```
+Use the spread operator for immutable updates; type inputs as `Readonly<T>` to enforce it at compile time.
 
 ## Error Handling
 
-Use async/await with try-catch and narrow unknown errors safely:
-
-```typescript
-interface User {
-  id: string
-  email: string
-}
-
-declare function riskyOperation(userId: string): Promise<User>
-
-function getErrorMessage(error: unknown): string {
-  if (error instanceof Error) {
-    return error.message
-  }
-
-  return 'Unexpected error'
-}
-
-const logger = {
-  error: (message: string, error: unknown) => {
-    // Replace with your production logger (for example, pino or winston).
-  }
-}
-
-async function loadUser(userId: string): Promise<User> {
-  try {
-    const result = await riskyOperation(userId)
-    return result
-  } catch (error: unknown) {
-    logger.error('Operation failed', error)
-    throw new Error(getErrorMessage(error))
-  }
-}
-```
+Use async/await with try-catch and narrow `unknown` errors (`error instanceof Error`) before use.
 
 ## Input Validation
 

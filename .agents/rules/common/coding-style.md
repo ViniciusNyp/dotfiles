@@ -2,35 +2,7 @@
 
 ## Immutability (CRITICAL)
 
-ALWAYS create new objects, NEVER mutate existing ones:
-
-```
-// Pseudocode
-WRONG:  modify(original, field, value) → changes original in-place
-CORRECT: update(original, field, value) → returns new copy with change
-```
-
-Rationale: Immutable data prevents hidden side effects, makes debugging easier, and enables safe concurrency.
-
-## Core Principles
-
-### KISS (Keep It Simple)
-
-- Prefer the simplest solution that actually works
-- Avoid premature optimization
-- Optimize for clarity over cleverness
-
-### DRY (Don't Repeat Yourself)
-
-- Extract repeated logic into shared functions or utilities
-- Avoid copy-paste implementation drift
-- Introduce abstractions when repetition is real, not speculative
-
-### YAGNI (You Aren't Gonna Need It)
-
-- Do not build features or abstractions before they are needed
-- Avoid speculative generality
-- Start simple, then refactor when the pressure is real
+ALWAYS create new objects, NEVER mutate existing ones. Return a new copy with the change instead of modifying in place. This prevents hidden side effects and makes debugging easier.
 
 ## File Organization
 
@@ -77,14 +49,3 @@ Use named constants for meaningful thresholds, delays, and limits.
 ### Long Functions
 
 Split large functions into focused pieces with clear responsibilities.
-
-## Code Quality Checklist
-
-Before marking work complete:
-- [ ] Code is readable and well-named
-- [ ] Functions are small (<50 lines)
-- [ ] Files are focused (<800 lines)
-- [ ] No deep nesting (>4 levels)
-- [ ] Proper error handling
-- [ ] No hardcoded values (use constants or config)
-- [ ] No mutation (immutable patterns used)

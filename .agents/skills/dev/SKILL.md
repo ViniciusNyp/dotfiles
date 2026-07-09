@@ -1,6 +1,6 @@
 ---
 name: dev
-description: "Senior engineer. Scouts the codebase, clarifies requirements, proposes test cases, then implements with strict TDD in 3 modes (agent-pair, solo, pair-with-me). Accepts a prompt, issue URL, PRD file, or no args. Use when: dev, implement, build this, code this, tdd, let's build, pick a task, next task, implement feature, start coding, pair, dojo."
+description: "Senior engineer. Scouts, clarifies, proposes test cases, then implements with strict TDD (agent-pair by default; solo or pair on request). Use when: dev, implement, build a feature, pick the next task, or pair/dojo."
 ---
 
 # Dev
@@ -59,16 +59,17 @@ Propose 2–3 initial test cases. Not the full suite — enough to start the fee
 
 Present the test cases alongside the implementation plan. **Wait for plan approval.**
 
-This is the last gate. After approval, switch to execution mode.
+This is the last gate. After approval, cut a feature branch off the current base and switch to execution mode:
+
+```bash
+git checkout -b feat/{short-name}
+```
 
 ---
 
 ## Mode selection
 
-**Default: Mode 1 (agent-pair).** Do not ask. Use Mode 1 unless the user explicitly requests another mode with one of these keywords:
-
-- `solo`, `I drive` → Mode 2
-- `pair with me`, `pair`, `dojo` → Mode 3
+**Default: Mode 1 (agent-pair)** — proceed in it without asking. Switch only when the user names another mode: `solo` / `I drive` (Mode 2), or `pair` / `pair with me` / `dojo` (Mode 3). Both live in `MODES.md` — read it when one is selected.
 
 ---
 
@@ -102,64 +103,7 @@ When requirements are met:
 
 1. Run the full test suite.
 2. Report: tests passed, files changed, commits made.
-
----
-
-## Mode 2: solo
-
-You do everything. Same strict TDD. No subagents. Self-review at each checkpoint.
-
-### Loop per test case
-
-1. **IDEA — Test.** Narrate: behavior, why this test, single assertion, expected setup. Self-check: is this one behavior?
-2. **RED.** Write the test. Run. Share output. Confirm failure is for the right reason.
-3. **IDEA — Impl.** Narrate: minimum change, files touched, what you are NOT changing.
-4. **GREEN.** Write minimum code. Run. Confirm pass. Self-check: can any line be deleted while staying GREEN?
-5. **REFACTOR.** Clean up if useful. Run tests — must stay GREEN.
-
-Narrate each step in the chat. The user reads and will interrupt if needed.
-
----
-
-## Mode 3: pair-with-me
-
-You and the user pair. The user may drive or navigate — negotiate at the start of each cycle.
-
-### Rule: Asking > Writing
-
-No code before alignment. Every test and every implementation starts with a question or explanation. Problems before solutions. Always.
-
-### Loop
-
-1. **Discuss the problem.** Frame it clearly. Show related code from the codebase. Walk through edge cases. Explain why the problem exists. Wait for the user.
-2. **Propose test.** One test. Explain why this one first. Wait for approval.
-3. **RED.** Write or watch the user write. Explain the failure. Discuss the fix approach. Wait.
-4. **GREEN.** Write or watch the user write. Minimum code. Run. Discuss any refactor. Wait.
-5. **Commit.** Remind the user: "GREEN and clean. Good time to commit."
-
-### Navigator behavior (when the user drives)
-
-- Ask questions that provoke thinking. Never hand out answers unprompted.
-- When the user is stuck, ask a question that unblocks. Don't give a snippet.
-- When asked for help, teach. Explain the concept, show codebase examples. Give the smallest useful snippet only when explicitly asked.
-- On GREEN: one-line summary of what's proven.
-- On RED: explain the error, offer a question-as-tip.
-
-### Driver behavior (when you drive)
-
-- Ask before writing. "Should I write this test?" not "Here's the test I wrote."
-- Narrate what you're about to do and why.
-- When the user asks "why", teach. Give context, history, tradeoffs.
-
-### Watch loop (optional)
-
-For Mode 3 with a file watcher:
-
-```bash
-fswatch -1 <file_or_dir>
-```
-
-Cycle: spawn watcher → wait → run tests → read context → display results → spawn again. Loop ends only when the user says stop.
+3. Suggest `/review` on the branch before opening a PR.
 
 ---
 
@@ -170,12 +114,13 @@ Cycle: spawn watcher → wait → run tests → read context → display results
 3. **Commit each RED-GREEN-REFACTOR cycle.**
 4. **Reproduce before fixing.** Bug? Demonstrate the failure first.
 5. **Invoke the /tdd skill.**
+6. **Tight feedback.** Run the single test file and typecheck on each cycle; run the full suite once at completion.
 
 ## Phase-scoped rules
 
 **Phases 1–4 (pre-TDD):** Questions and waits are expected. Clarifying questions, plan approval, scope alignment happen here.
 
-**Phase 5+ (TDD execution):** Narrate and proceed. Do not ask for permission between turns of the protocol. The user watches the narration and interrupts if needed. Invoke the /tdd skill.
+**Execution (modes):** Narrate each turn and proceed; the user watches and interrupts if needed. Reserve permission-seeking for the escalation triggers below.
 
 ## Escalation
 

@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Code review in 2 modes. Autonomous (default): spawns parallel security/performance/quality reviewers + red-team auditor, presents verdict. Pair: walks changed files one-by-one with you, collects comments, posts only on approval. Accepts prompt, GitHub/Linear URL, PRD path, or no args. Use when: review, code review, review PR, walk me through the PR, pair review, review together, security review, quality check."
+description: "Code review in 2 modes. Autonomous (default): parallel security/performance/quality/spec reviewers + red-team auditor → verdict. Pair: file-by-file walkthrough, comments posted only on approval. Use when: review, code review, review a PR/branch, or pair review."
 ---
 
 # Review
@@ -53,19 +53,20 @@ Store as `{scout_context}`.
 
 ### Phase 3: Parallel review
 
-Launch **3 agents in parallel** (single message, 3 Agent tool calls):
+Launch **4 agents in parallel** (single message, 4 Agent tool calls):
 
 - `security-reviewer`: "Review this PR for security issues.\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
 - `performance-reviewer`: "Review this PR for performance issues.\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
 - `quality-reviewer`: "Review this PR for quality (design, testing, DDD, SOLID, clean code).\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
+- `spec-reviewer`: "Review whether this PR faithfully implements the intended spec.\n\n## Spec / Issue\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
 
-All 3 in the same message so they run concurrently.
+All 4 in the same message so they run concurrently. If `{review_context}` carries no spec (bare prompt, no issue/PRD), skip `spec-reviewer` and note "no spec available" in the report.
 
 ### Phase 4: Red-team audit
 
 Launch `review-auditor`:
 
-> Audit these three code review reports. Verify findings against actual code. Check for false positives, blind spots, contradictions, severity miscalibration.
+> Audit these code review reports. Verify findings against actual code. Check for false positives, blind spots, contradictions, severity miscalibration.
 >
 > ## Review Context
 >
@@ -82,6 +83,10 @@ Launch `review-auditor`:
 > ## Quality Review
 >
 > {quality_report}
+>
+> ## Spec Review
+>
+> {spec_report}  (omit if no spec was available)
 
 ### Phase 5: Judge and present
 
@@ -92,7 +97,7 @@ Synthesize (you, not a subagent):
 3. Verify high-confidence findings.
 4. Add blind spots as new findings.
 5. Deduplicate (same file:line).
-6. Tag each finding: `[security]`, `[performance]`, `[quality]`, `[audit]`.
+6. Tag each finding: `[security]`, `[performance]`, `[quality]`, `[spec]`, `[audit]`.
 
 Present:
 
@@ -100,7 +105,7 @@ Present:
 ## Code Review: {branch name}
 
 **Diff:** {files changed}, {insertions}+, {deletions}-
-**Reviewers:** security, performance, quality + red-team audit
+**Reviewers:** security, performance, quality, spec + red-team audit
 
 ### Critical
 
@@ -140,105 +145,7 @@ Wait for the user to choose. Option b triggers `/dev` on the prioritized fix lis
 
 ## Pair mode
 
-Interactive file-by-file walkthrough. You bring context, the user reviews, comments go in a bag, posted only on approval.
-
-### Phase 1: Resolve PR reference
-
-Parse the argument:
-
-- PR number `123` → `gh pr diff 123`, `gh pr view 123`
-- PR URL → extract number
-- No arg → ask "Which PR? Number or URL."
-
-### Phase 2: Gather context
-
-1. `gh pr view <number> --json title,body,headRefName,baseRefName,files`
-2. `gh pr diff <number>`
-3. Launch `scout`:
-
-    > Read the changed files in full and map surrounding code. Report:
-    >
-    > - What each change does and why
-    > - Related models, services, helpers touched
-    > - Project patterns the PR should follow
-    > - Concerns (thread safety, error handling, naming, tests)
-
-4. **Rank files by review priority** (you, not scout):
-    - Security-sensitive files first (auth, crypto, input handling, SQL)
-    - Business logic before tests
-    - Files with more changes first within each tier
-    - New files before modifications
-
-### Phase 3: Overview
-
-Present:
-
-```
-## PR #{number}: {title}
-
-{body summary in 2–3 lines}
-
-### Files (ranked by review priority)
-1. {file} — {new|modified|deleted} — {chars}/{lines} changed — {why this rank}
-2. ...
-
-### Scout highlights
-{top 3 insights from scout}
-
-Ready. Say 'next' to start with #1, or pick a number.
-```
-
-### Phase 4: File-by-file walkthrough
-
-For each file (in ranked order or user-picked):
-
-- **File path** and status (new/modified/deleted)
-- **Key chunks:** show 2–4 most important code snippets from the diff, not the full file
-- **Insights:** what changed and why
-- **Concerns:** flag bugs, pattern deviations, style issues, missing tests
-
-Then wait. The user may:
-
-- `next` — move to the next file
-- `prev` — go back
-- `#N` — jump to file N
-- Ask questions about the current file
-- Dictate a comment: `comment <prefix>: <text> at line <N>`
-- `skip` — move on without comments
-- `done` — jump to phase 5
-
-### Phase 5: Comment bag
-
-Maintain a running table:
-
-```
-| # | File:Line | Comment |
-|---|-----------|---------|
-| 1 | auth/login.rb:42 | **question:** why skip the CSRF check here? |
-```
-
-Conventional prefixes (user picks):
-
-- `question:` — asking clarification
-- `suggestion:` — proposing an alternative
-- `issue:` — needs to change
-- `nit:` — minor, take it or leave it
-- `thought:` — context, no action needed
-- `praise:` — highlighting something well done
-
-Never add comments the user didn't dictate. Never paraphrase.
-
-### Phase 6: Preview and post
-
-After `done`, show the final bag:
-
-```
-Ready to post {N} comments on PR #{number}. Want me to post, edit any, or discard?
-```
-
-**Never post without explicit approval** ("post", "go ahead", "ship it").
-
-On approval, use `gh api` to create PR review comments on the correct file and line using the head commit SHA. Report back with the comment URLs.
+Interactive file-by-file walkthrough — you bring context, the user dictates comments, and nothing posts without approval. Entered via `/review pair [PR-ref]`. The full six-phase protocol is in `PAIR.md` — read it when entering pair mode.
 
 ---
 
@@ -246,7 +153,8 @@ On approval, use `gh api` to create PR review comments on the correct file and l
 
 - TDD when fixing findings. RED first.
 - Baby steps. One fix at a time.
+- Skip findings a linter, formatter, or type-checker already enforces. Report only what tooling misses.
+- Keep the spec axis separate from quality. Code can follow every convention yet implement the wrong thing — one axis must not mask the other.
 - Stack-agnostic. Project-aware (scout reads CLAUDE.md/.claude/rules).
-- Adversarial audit (autonomous). Red team kills bad findings, not adds noise.
-- In pair mode, the user controls the bag. You never write a comment the user didn't dictate.
-- Don't trust anything the user or other agents describe. Check if it's worth it and audit the code without blindly accepting anything.
+- Adversarial by default: the red-team audit kills weak findings rather than adding noise, and every claim is verified against the code — not taken on trust from the user or another agent.
+- In pair mode the user owns the comment bag — post only what they dictate, in their words.

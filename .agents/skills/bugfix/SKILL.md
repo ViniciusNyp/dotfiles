@@ -1,6 +1,6 @@
 ---
 name: bugfix
-description: "Bug hunter. Reproduces bugs with failing tests (RED), then fixes with TDD. Accepts a prompt, issue URL, or bug description. Simpler than /dev, focused solely on fixing bugs. Use when: bugfix, fix bug, debug, broken, regression, failing, doesn't work, something's wrong, fix this."
+description: "Bug hunter. Reproduces a bug with a failing test (RED), then fixes it with TDD. Simpler than /dev, focused solely on fixing bugs. Use when: bugfix, fix a bug, regression, something's broken. For hard-to-reproduce or diagnostic work, reach for /diagnosing-bugs instead."
 ---
 
 # Bugfix
@@ -60,17 +60,19 @@ Report findings:
 
 **Wait.** The user may have more context.
 
-### Phase 3: Reproduce with a Failing Test
+### Phase 3: Reproduce with a tight, red-capable loop
 
-**This is the most important phase. Do not skip. Do not rush.**
+**This is the skill. Do not skip. Do not rush.**
 
-The goal: write a test that **fails right now** because of the bug. This test proves the bug exists.
+Build a **tight** feedback loop that goes **red** on this exact bug: a signal you can run in seconds that asserts the user's exact symptom and turns green once fixed. A failing test at the right seam is the default — reach for a curl script, CLI invocation with a fixture, or a replayed trace when one of those lands a sharp signal faster.
 
-Rules for the reproduction test:
-- It must fail for the **right reason** (the actual bug, not a setup error)
-- It must be **minimal** — test only the broken behavior, nothing else
-- It must describe the **expected** behavior (what should happen when fixed)
-- Name it clearly: `test "description of correct behavior that is currently broken"`
+The loop must:
+- Go **red for the right reason** — the actual bug, not a setup or import error
+- Assert the **user's exact symptom**, not "didn't crash"
+- Be **minimal** — exercise only the broken behavior
+- Name the **expected** behavior: `test "correct behavior that is currently broken"`
+
+**Hard bug?** If a tight loop resists you (non-deterministic, no clean seam, needs environment access you don't have), stop hand-rolling it here — hand off to `/diagnosing-bugs` for the full reproduce → minimise → hypothesise → instrument discipline, then return to fix.
 
 > Reproduction test:
 >
@@ -92,6 +94,8 @@ Write the test. Run it. **Confirm RED.**
 >
 > The bug is now captured in a test. Proceeding to fix.
 
+Before fixing, shrink the repro to the smallest input and setup that still goes red. Fewer moving parts narrow the fix and leave a cleaner regression test.
+
 **If the test passes (GREEN unexpectedly):** The test doesn't reproduce the bug. Don't proceed. Investigate:
 - Is the test targeting the right scenario?
 - Is the bug environment-specific?
@@ -101,12 +105,7 @@ Adjust and try again. **Persist until you have a failing test.** Ask the user fo
 
 ### Phase 4: Fix (GREEN)
 
-Write the **minimum code** to make the failing test pass. No more.
-
-- Don't refactor unrelated code
-- Don't add features
-- Don't fix other bugs you find (note them for later)
-- Stay surgical
+Write the **minimum code** to make the failing test pass — touch only the lines that test requires. Leave unrelated code, features, and refactors alone; note any other bugs you spot for later. Stay surgical.
 
 Run tests. **Confirm GREEN.**
 
@@ -196,12 +195,8 @@ Run the full cycle without stopping. Report at the end:
 
 ---
 
-## Iron Rules
+## Non-negotiables
 
-1. **No fix without a failing test.** The test must prove the bug exists before you touch production code
-2. **Persist on RED.** If you can't reproduce it in a test, dig deeper. Don't skip to the fix
-3. **Minimum fix.** Smallest change that makes the test pass. No scope creep
-4. **Run full suite.** Fixes must not break other things
-5. **One bug at a time.** Don't batch
-6. **Ask when stuck.** If you can't reproduce after 3 attempts, ask the user for more context
-7. **Note but don't fix** other bugs you discover along the way. Stay focused
+1. **A red loop first.** No red-capable signal, no fix — tighten the loop or hand off to `/diagnosing-bugs` before touching production code.
+2. **Minimum fix, one bug at a time.** Smallest change that goes green; note other bugs for later, don't batch.
+3. **Full suite before done.** The fix must not break anything else. If stuck reproducing after 3 attempts, ask for more context.
