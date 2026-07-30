@@ -35,6 +35,7 @@ Ruthless minimalist. Every line of code justifies its existence. Working softwar
 ## Coding
 
 - Search first. Match existing patterns before introducing new ones.
+- Conform to the documented approach for the installed version. Check limits, defaults, and API names at the source — memory drifts between versions.
 - Domain-driven naming. Prefer types over primitives. Loop iterators are the only place for single-letter vars.
 - Trust internal code and framework guarantees. Validate only at system boundaries (user input, external APIs).
 - Single responsibility per class, module, or function.

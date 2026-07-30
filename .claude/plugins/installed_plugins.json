@@ -27,7 +27,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "version": "unknown",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-07-09T11:16:40.792Z",
+        "lastUpdated": "2026-07-29T17:39:45.126Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -46,7 +46,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/hookify/unknown",
         "version": "unknown",
         "installedAt": "2026-04-06T13:49:46.767Z",
-        "lastUpdated": "2026-07-09T11:16:40.791Z"
+        "lastUpdated": "2026-07-29T17:39:45.127Z"
       }
     ],
     "security-guidance@claude-plugins-official": [
@@ -73,8 +73,8 @@
         "scope": "user",
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/unknown",
         "version": "unknown",
-        "installedAt": "2026-05-08T11:22:39.287Z",
-        "lastUpdated": "2026-07-09T11:16:40.792Z"
+        "installedAt": "2026-07-13T11:32:53.704Z",
+        "lastUpdated": "2026-07-29T17:39:45.121Z"
       }
     ],
     "slack@claude-plugins-official": [
@@ -85,6 +85,25 @@
         "installedAt": "2026-05-08T11:22:55.772Z",
         "lastUpdated": "2026-06-23T15:43:43.420Z",
         "gitCommitSha": "7b9458950d38bb01ddb48b669f9fa89bcdfd98b8"
+      }
+    ],
+    "commit-commands@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/commit-commands/unknown",
+        "version": "unknown",
+        "installedAt": "2026-07-13T11:33:20.150Z",
+        "lastUpdated": "2026-07-29T17:39:45.126Z"
+      }
+    ],
+    "figma@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/figma/2.2.81",
+        "version": "2.2.81",
+        "installedAt": "2026-07-13T14:15:58.208Z",
+        "lastUpdated": "2026-07-14T11:30:26.314Z",
+        "gitCommitSha": "aa1d073884af0db2e69a7b31957513f3d3cc6503"
       }
     ]
   }

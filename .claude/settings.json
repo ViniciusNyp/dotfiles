@@ -92,38 +92,7 @@
       "mcp__playwright__browser_hover",
       "mcp__playwright__browser_select_option",
       "mcp__playwright__browser_tabs",
-      "mcp__playwright__browser_wait_for",
-      "mcp__everest__everest_get_port",
-      "mcp__everest__everest_get_session",
-      "mcp__everest__everest_get_domain",
-      "mcp__everest__everest_get_status",
-      "mcp__everest__everest_reload_metadata",
-      "mcp__everest__everest_get_diff",
-      "mcp__everest__everest_get_tests_to_run",
-      "mcp__everest__everest_run_test",
-      "mcp__everest__everest_run_doctor",
-      "mcp__everest__everest_cloud_download",
-      "mcp__everest__everest_cloud_upload",
-      "mcp__everest__everest_search_nodes",
-      "mcp__everest__everest_node_info",
-      "mcp__everest__everest_query",
-      "mcp__everest__everest_integration_test_run_info",
-      "mcp__everest__everest_list_mr_tests",
-      "mcp__everest__everest_list_merge_requests",
-      "mcp__everest-ai__notify",
-      "mcp__everest-ai__validate_code",
-      "mcp__everest-ai__run_test",
-      "mcp__everest-ai__query_nodes",
-      "mcp__everest-ai__diff",
-      "mcp__everest-ai__find_code",
-      "mcp__everest-ai__find_documents",
-      "mcp__everest-ai__find_examples",
-      "mcp__everest-ai__find_guides",
-      "mcp__everest-ai__find_types",
-      "mcp__everest-ai__get_translations",
-      "mcp__everest-ai__ready",
-      "mcp__everest-ai__reload_metadata",
-      "mcp__everest-ai__create_translations"
+      "mcp__playwright__browser_wait_for"
     ],
     "deny": [
       "Read(./.env)",
@@ -141,7 +110,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-8[1m]",
+  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -300,8 +269,10 @@
     "hookify@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "claude-code-wakatime@wakatime": true,
-    "github@claude-plugins-official": true,
-    "slack@claude-plugins-official": true
+    "slack@claude-plugins-official": true,
+    "github@claude-plugins-official": false,
+    "commit-commands@claude-plugins-official": true,
+    "figma@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "wakatime": {

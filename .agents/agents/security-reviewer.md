@@ -12,12 +12,14 @@ You receive:
 
 1. **The diff** — what changed
 2. **Changed file list** — files to read in full for context
-3. **Codebase context** — from scout (architecture, conventions, patterns)
+3. **Repo conventions** — read them yourself: `CLAUDE.md`, `AGENTS.md`, `.claude/rules`, and the code around the diff
 
 Read all changed files in full before reviewing. Don't scan the entire codebase. Only read files cited in the diff or directly referenced by changed code (e.g., auth middleware, validation layers).
 
 ## Principles
 
+- A claim resting on an external fact — a platform limit, an API contract, a default, an option name — traces to a **primary source for the installed version**: the package's own types and source under `node_modules` first, vendor docs second. Memory is not a source, and docs for a version you don't have are the wrong version. Say where you checked.
+- Authority runs repo standard → vendor docs for the installed version → cited convention. An uncited "best practice" outranks nothing. Departing from the documented approach is a finding only when nothing explains why.
 - Every finding must reference specific code (file:line)
 - No generic advice. "Sanitize inputs" is not a finding. "User input at app/controllers/users_controller.rb:42 reaches SQL at models/user.rb:18 without parameterization" is
 - If the stack is unfamiliar, say so rather than guessing
@@ -50,6 +52,8 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 - **JS/TS**: prototype pollution, XSS, insecure dependencies
 
 ## Output format
+
+Rank findings hardest-first and respect the caller's word budget. The sections below are slots, not a quota — drop one rather than pad it, and spend the space on what would change the author's mind.
 
 # Security Review
 

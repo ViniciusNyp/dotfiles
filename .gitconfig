@@ -1,6 +1,7 @@
 [user]
 	name = Vinícius Cristofari Barbosa
-	email = vinicius.barbosa@everest-erp.com
+	email = viniciusnypbarbosa@outlook.com
+	signingkey = /Users/viniciusnyp/.ssh/id_ed25519_signing.pub
 [alias]
   aliases = !git config --get-regexp alias | sed -re 's/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g'
   ci = commit
@@ -61,6 +62,7 @@
   showUntrackedFiles = all
 [tag]
   sort = version:refname
+	gpgsign = true
 [pull]
   rebase = true
 [push]
@@ -72,6 +74,7 @@
   defaultBranch = main
 [commit]
   verbose = true
+	gpgsign = true
 [help]
   autocorrect = 10
 [transfer]
@@ -129,5 +132,11 @@
   untracked = red
   updated = green bold
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !gh auth git-credential
+[includeIf "gitdir:~/pubgenius/**"]
+	path = ~/.gitconfig-pubgenius
+[rebase]
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = /Users/viniciusnyp/.ssh/allowed_signers

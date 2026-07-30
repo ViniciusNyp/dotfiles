@@ -62,15 +62,21 @@ Report findings:
 
 ### Phase 3: Reproduce with a tight, red-capable loop
 
-**This is the skill. Do not skip. Do not rush.**
+**This is the skill.** Spend disproportionate effort here — a loop that goes **red** on this bug finds the cause for you; without one, no amount of reading code will.
 
-Build a **tight** feedback loop that goes **red** on this exact bug: a signal you can run in seconds that asserts the user's exact symptom and turns green once fixed. A failing test at the right seam is the default — reach for a curl script, CLI invocation with a fixture, or a replayed trace when one of those lands a sharp signal faster.
+Build a **tight** feedback loop that goes red on this exact bug: a signal you can run in seconds that asserts the user's exact symptom and turns green once fixed. A failing test at the right seam is the default — reach for a curl script, CLI invocation with a fixture, or a replayed trace when one lands a sharper signal faster. `/diagnosing-bugs` Phase 1 ranks ten ways to construct one; read it when the obvious two don't fit.
 
-The loop must:
-- Go **red for the right reason** — the actual bug, not a setup or import error
-- Assert the **user's exact symptom**, not "didn't crash"
-- Be **minimal** — exercise only the broken behavior
-- Name the **expected** behavior: `test "correct behavior that is currently broken"`
+**Seam check.** A correct seam exercises the real bug pattern *as it occurs at the call site*. If the only reachable seam is too shallow to do that — a unit test where the bug needs several callers — say so: **that itself is a finding**, and the regression test there would buy false confidence. Note it for Phase 7.
+
+Phase 3 is done when you can name **one command**, already run at least once, that is:
+
+- [ ] **Red-capable** — drives the real code path and asserts the user's exact symptom, not "didn't crash"
+- [ ] **Red for the right reason** — the bug, not a setup or import error
+- [ ] **Deterministic** — same verdict every run
+- [ ] **Fast** — seconds, not minutes
+- [ ] **Named for the behaviour** — `test "correct behavior that is currently broken"`
+
+Reading code to build a theory before that command exists is the failure this phase prevents.
 
 **Hard bug?** If a tight loop resists you (non-deterministic, no clean seam, needs environment access you don't have), stop hand-rolling it here — hand off to `/diagnosing-bugs` for the full reproduce → minimise → hypothesise → instrument discipline, then return to fix.
 
@@ -136,7 +142,7 @@ Only if the fix is ugly or the area needs cleanup:
 - Clean up, run tests, confirm GREEN
 - Keep it minimal — this is a bugfix, not a rewrite
 
-### Phase 7: Commit
+### Phase 7: Commit and close out
 
 Stage only the changed files. Commit with:
 
@@ -144,7 +150,20 @@ Stage only the changed files. Commit with:
 fix(<scope>): <what was fixed>
 ```
 
-If multiple tests were needed (complex bug), that's fine — commit them together as one logical fix.
+If multiple tests were needed (complex bug), that's fine — commit them together as one logical fix. State the cause in the message, so the next person to touch this reads why it broke rather than guessing.
+
+**Offer `/review`.** A surgical fix behind a red loop and a green suite usually doesn't need one. Say so plainly and let the user decide — but recommend it, with the reason, when the fix grew past its repro:
+
+- it touched more than the loop demanded
+- it landed in shared code, or changed a seam others depend on
+- Phase 6 refactored anything
+- Phase 3 found no correct seam, so the regression test is weaker than it looks
+
+Then ask: **what would have prevented this bug?** Answer it now, with everything you just learned:
+
+- No correct seam to lock the fix down (the Phase 3 finding) → hand off to `/improve-codebase-architecture`
+- A test that should have caught it but asserted the wrong altitude → say which, and what it should assert
+- Nothing structural, just a mistake → say so and stop; a forced lesson is worse than none
 
 ---
 
@@ -161,37 +180,9 @@ If the input describes multiple bugs:
 
 ## Pairing Modes
 
-By default, bugfix runs in **solo mode** (Phase 3 through 7 autonomously with checkpoints).
+**Solo by default** — Phases 3 through 8 run with checkpoints, and the rest of this file describes it.
 
-The user can request pairing at any point:
-
-- **"you drive"** — Claude writes tests and code, user navigates
-- **"I'll drive"** — User writes, Claude navigates (questions, coaches, runs tests)
-- **"vibe"** / **"just fix it"** — Claude goes fully autonomous, reports back when done
-
-### Driver Mode (Claude drives)
-
-Same as solo but with checkpoints at every step. Wait for user approval before advancing.
-
-### Navigator Mode (User drives)
-
-Claude's job:
-- Suggest what the reproduction test should assert
-- Run tests and report RED/GREEN
-- Ask questions: "What if the input is nil?" "Does this happen with all users or just some?"
-- Point out when a test doesn't actually reproduce the bug
-- Never write code unless asked
-
-### Autonomous Mode
-
-Run the full cycle without stopping. Report at the end:
-
-> **Bug fixed.**
->
-> - Reproduction test: `{test_file}:{line}`
-> - Fix: `{file}:{line}` — {one-line description}
-> - Tests: {n} passing, 0 failing
-> - Commit: `{commit_hash}`
+The user can name another mode at any point: `you drive` (driver), `I'll drive` (navigator), `vibe` / `just fix it` (autonomous). All three live in [MODES.md](MODES.md) — read it when one is named.
 
 ---
 

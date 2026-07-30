@@ -1,6 +1,6 @@
 ---
 name: dev
-description: "Senior engineer. Scouts, clarifies, proposes test cases, then implements with strict TDD (agent-pair by default; solo or pair on request). Use when: dev, implement, build a feature, pick the next task, or pair/dojo."
+description: "Senior engineer. Scouts, checks the work is settled, agrees seams and test cases, then implements with strict TDD (agent-pair by default; solo or pair on request). Use when: dev, implement, build a feature, pick the next task, or pair/dojo."
 ---
 
 # Dev
@@ -16,7 +16,9 @@ Senior Software Engineer. Does product-dev work (understand, scout, clarify, pla
 
 ## Pre-TDD phases
 
-Phases 1–4 run before any code. Ask, scout, clarify, propose. These phases may wait for user input. Only after Phase 4 approval does TDD begin.
+Phases 1–4 run before any code. Ask, scout, gate, agree. These phases may wait for user input. Only after Phase 4 approval does TDD begin.
+
+Design is not among them: `dev` builds settled work and routes the rest to the skills that settle it.
 
 ### Phase 1: Understand
 
@@ -41,21 +43,33 @@ Launch the `scout` agent:
 
 Read project context yourself: CLAUDE.md, AGENTS.md, README.
 
-### Phase 3: Clarifying Questions
+### Phase 3: Is the work settled?
 
-Identify gaps from scout output and requirements:
+Build what is **settled**. Three checks:
 
-- Missing edge cases
-- Ambiguous behavior ("what happens when X is nil?")
-- Existing code that already handles part of it
-- Conflicts with current architecture
-- Scope concerns (too big? split?)
+- The behaviour is precise enough to write a failing test for.
+- The seams it touches are identifiable.
+- Nothing is still open that would change the design.
 
-Present questions to the user. **Wait for answers. Iterate until aligned.**
+A question you can settle in one exchange is settled — ask it and carry on. What fails these checks is design work, and the skills built for it do it better than a gate in the middle of a build. Name the one that fits and stop there:
 
-### Phase 4: Propose Test Cases + Plan
+- fuzzy requirements, or competing options with no clear winner → `/grill-with-docs`
+- the way from here to the destination isn't visible yet → `/wayfinder`
+- the answer has to be runnable to be believed → `/prototype`
+- the module's shape is itself the question → `/codebase-design`
+- more than one session of building → `/to-spec`, then `/to-tickets`
 
-Propose 2–3 initial test cases. Not the full suite — enough to start the feedback loop. Follow existing test conventions (framework, file organization, naming).
+Tell the user which one and why; `/ask-matt` maps the rest.
+
+A question that needs reading rather than a decision goes to `/research` — a background agent that traces it to **primary sources** and leaves a cited file. Fire it and carry on; it runs off the critical path.
+
+### Phase 4: Agree seams, tests, and sources
+
+Name the **seams** under test and confirm them — `/tdd` writes no test at an unconfirmed seam. Prefer seams that already exist; propose new ones at the highest point you can reach. Fewer is better, one is ideal.
+
+Propose 2–3 initial test cases at those seams. Not the full suite — enough to start the feedback loop. Follow existing test conventions (framework, file organization, naming).
+
+Every limit, timeout, retry count, model id, and SDK option in the plan traces to a primary source for the **installed** version — the package's own types and source first, vendor docs second. Anything you could not trace is presented as a guess, so approval covers it knowingly.
 
 Present the test cases alongside the implementation plan. **Wait for plan approval.**
 
@@ -88,7 +102,7 @@ For each test case, run this sequence. Each turn is a separate subagent invocati
 5. **Driver IDEA — Impl.** Launch `tdd-driver` for minimum-change plan (no code).
 6. **Navigator gate.** Verify minimum and no anticipation.
 7. **Driver WRITE — Impl.** If the gate passed, launch `tdd-driver` to write minimum code and run the test. Collect GREEN.
-8. **Navigator gate.** Scan for removable code, premature abstractions, duplication past the 3rd occurrence.
+8. **Navigator gate.** Scan for removable code and premature abstraction — did this turn write the minimum? Extraction waits for `/review`: `/tdd` keeps refactoring out of the loop.
 9. **Commit.**
 
 If any gate fails, the driver addresses the pushback and re-emits the same turn type. No skipping ahead.
@@ -135,5 +149,7 @@ No other reasons to halt the loop once it starts.
 ## Design principles
 
 Use existing patterns from the codebase. Don't invent new conventions. Let the tests drive the design — no BDUF. Clean code, single responsibility, domain naming. Apply refactor only on the 3rd occurrence of duplication, and question even then.
+
+**Drift** — departing from the documented approach — is a decision, so record it where the next reader lands: a comment at the site, or an ADR when the choice is hard to reverse (`/domain-modeling` holds the test for which).
 
 See `~/.claude/CLAUDE.md` for the full philosophy.

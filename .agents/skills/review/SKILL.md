@@ -1,6 +1,6 @@
 ---
 name: review
-description: "Code review in 2 modes. Autonomous (default): parallel security/performance/quality/spec reviewers + red-team auditor → verdict. Pair: file-by-file walkthrough, comments posted only on approval. Use when: review, code review, review a PR/branch, or pair review."
+description: "Code review in 2 modes. Autonomous (default): the review axes the diff earns, run in parallel, then a red-team audit that drops what it can't verify → verdict. Pair: file-by-file walkthrough, comments posted only on approval. Use when: review, code review, review a PR/branch, or pair review."
 ---
 
 # Review
@@ -40,53 +40,52 @@ git diff main...HEAD --stat
 
 If empty, try `git diff HEAD~1`. If still empty, say nothing to review and stop. Store as `{diff}` and `{diff_stat}`.
 
-### Phase 2: Scout
+### Phase 2: Pick the axes
 
-Launch the `scout` agent:
+The diff already names where to look, so reviewers read the repo themselves rather than waiting on a scouting pass.
 
-> Map the codebase areas touched by these changed files. Report: architecture, patterns, conventions, test structure, error handling, project rules from CLAUDE.md/AGENTS.md/.claude/rules.
->
-> Changed files:
-> {diff_stat}
+Run the axes the diff earns, never all of them by habit:
 
-Store as `{scout_context}`.
+- `quality-reviewer` — always.
+- `spec-reviewer` — whenever `{review_context}` carries a spec. Without one, skip it and say so in the report.
+- `security-reviewer` — **mandatory** when the diff touches auth, webhooks, tokens, permissions, or deletion. Optional elsewhere.
+- `performance-reviewer` — when the diff adds loops over unbounded input, queries, network calls, or sizing constants.
+
+A one-file change usually earns one axis. Say which axes you ran and why in the report.
 
 ### Phase 3: Parallel review
 
-Launch **4 agents in parallel** (single message, 4 Agent tool calls):
+Launch the chosen agents **in a single message** so they run concurrently. Each prompt takes the shape:
 
-- `security-reviewer`: "Review this PR for security issues.\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
-- `performance-reviewer`: "Review this PR for performance issues.\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
-- `quality-reviewer`: "Review this PR for quality (design, testing, DDD, SOLID, clean code).\n\n## Review Context\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
-- `spec-reviewer`: "Review whether this PR faithfully implements the intended spec.\n\n## Spec / Issue\n{review_context}\n\n## Codebase Context\n{scout_context}\n\n## Diff\n{diff}"
-
-All 4 in the same message so they run concurrently. If `{review_context}` carries no spec (bare prompt, no issue/PRD), skip `spec-reviewer` and note "no spec available" in the report.
+> Review this PR for {axis}.
+>
+> Read the repo for conventions — `CLAUDE.md`, `AGENTS.md`, `.claude/rules`, and the files around the diff.
+>
+> Findings must be **ranked, and under 500 words.** Space is scarce on purpose: spend it on what would change the author's mind, not on everything you noticed.
+>
+> ## Review Context
+> {review_context}
+>
+> ## Diff
+> {diff}
 
 ### Phase 4: Red-team audit
+
+Always runs, whatever the axes. It is where the confidence comes from — finders propose, the auditor decides.
 
 Launch `review-auditor`:
 
 > Audit these code review reports. Verify findings against actual code. Check for false positives, blind spots, contradictions, severity miscalibration.
 >
+> Re-check every cited fact at its source. A finding resting on a fact that is wrong, or that no source backs, does not survive — say so and drop it.
+>
 > ## Review Context
 >
 > {review_context}
 >
-> ## Security Review
+> ## Reports
 >
-> {security_report}
->
-> ## Performance Review
->
-> {performance_report}
->
-> ## Quality Review
->
-> {quality_report}
->
-> ## Spec Review
->
-> {spec_report}  (omit if no spec was available)
+> {each axis that ran, under its own heading}
 
 ### Phase 5: Judge and present
 
@@ -105,7 +104,7 @@ Present:
 ## Code Review: {branch name}
 
 **Diff:** {files changed}, {insertions}+, {deletions}-
-**Reviewers:** security, performance, quality, spec + red-team audit
+**Axes:** {the ones that ran, and why} + red-team audit
 
 ### Critical
 
@@ -154,7 +153,8 @@ Interactive file-by-file walkthrough — you bring context, the user dictates co
 - TDD when fixing findings. RED first.
 - Baby steps. One fix at a time.
 - Skip findings a linter, formatter, or type-checker already enforces. Report only what tooling misses.
+- Findings are sourced or they don't ship. A claim resting on an external fact traces to a **primary source** for the installed version; **drift** — departing from the documented approach with nothing explaining why — is the shape worth hunting. The reviewers carry the mechanics; the audit drops what fails them.
 - Keep the spec axis separate from quality. Code can follow every convention yet implement the wrong thing — one axis must not mask the other.
-- Stack-agnostic. Project-aware (scout reads CLAUDE.md/.claude/rules).
+- Stack-agnostic. Project-aware: each reviewer reads CLAUDE.md/AGENTS.md/.claude/rules itself.
 - Adversarial by default: the red-team audit kills weak findings rather than adding noise, and every claim is verified against the code — not taken on trust from the user or another agent.
 - In pair mode the user owns the comment bag — post only what they dictate, in their words.
