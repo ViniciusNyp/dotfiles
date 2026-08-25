@@ -1,6 +1,6 @@
-# Git Workflow
+# Git workflow
 
-## Commit Message Format
+## Commit message format
 ```
 <type>: <description>
 
@@ -9,13 +9,13 @@
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci
 
-Note: Attribution disabled globally via ~/.claude/settings.json.
+Note: `~/.claude/settings.json` disables attribution globally.
 
-## Pull Request Workflow
+## Pull request workflow
 
 When creating PRs:
-1. Analyze full commit history (not just latest commit)
+1. Analyze the full commit history, not just the latest commit
 2. Use `git diff [base-branch]...HEAD` to see all changes
-3. Draft comprehensive PR summary
-4. Include test plan with TODOs
-5. Push with `-u` flag if new branch
+3. Draft the PR summary
+4. Include a test plan with TODOs
+5. Push with `-u` if the branch is new

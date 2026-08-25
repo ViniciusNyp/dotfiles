@@ -1,26 +1,26 @@
-# Coding Style
+# Coding style
 
 ## Immutability (CRITICAL)
 
 ALWAYS create new objects, NEVER mutate existing ones. Return a new copy with the change instead of modifying in place. This prevents hidden side effects and makes debugging easier.
 
-## File Organization
+## File organization
 
 MANY SMALL FILES > FEW LARGE FILES:
 - High cohesion, low coupling
 - 200-400 lines typical, 800 max
 - Extract utilities from large modules
-- Organize by feature/domain, not by type
+- Organize by feature or domain, not by type
 
-## Error Handling
+## Error handling
 
-ALWAYS handle errors comprehensively:
-- Handle errors explicitly at every level
+ALWAYS handle errors explicitly:
+- Handle errors at every level
 - Provide user-friendly error messages in UI-facing code
 - Log detailed error context on the server side
 - Never silently swallow errors
 
-## Input Validation
+## Input validation
 
 ALWAYS validate at system boundaries:
 - Validate all user input before processing
@@ -28,7 +28,7 @@ ALWAYS validate at system boundaries:
 - Fail fast with clear error messages
 - Never trust external data (API responses, user input, file content)
 
-## Naming Conventions
+## Naming conventions
 
 - Variables and functions: `camelCase` with descriptive names
 - Booleans: prefer `is`, `has`, `should`, or `can` prefixes
@@ -36,16 +36,16 @@ ALWAYS validate at system boundaries:
 - Constants: `UPPER_SNAKE_CASE`
 - Custom hooks: `camelCase` with a `use` prefix
 
-## Code Smells to Avoid
+## Code smells to avoid
 
-### Deep Nesting
+### Deep nesting
 
 Prefer early returns over nested conditionals once the logic starts stacking.
 
-### Magic Numbers
+### Magic numbers
 
 Use named constants for meaningful thresholds, delays, and limits.
 
-### Long Functions
+### Long functions
 
 Split large functions into focused pieces with clear responsibilities.

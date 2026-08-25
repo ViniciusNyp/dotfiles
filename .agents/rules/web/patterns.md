@@ -9,11 +9,11 @@ paths:
   - "**/*.html"
   - "**/*.astro"
 ---
-# Web Patterns
+# Web patterns
 
-## Component Composition
+## Component composition
 
-### Compound Components
+### Compound components
 
 Use compound components when related UI shares state and interaction semantics:
 
@@ -32,18 +32,18 @@ Use compound components when related UI shares state and interaction semantics:
 - Children consume via context
 - Prefer this over prop drilling for complex widgets
 
-### Render Props / Slots
+### Render props and slots
 
 - Use render props or slot patterns when behavior is shared but markup must vary
 - Keep keyboard handling, ARIA, and focus logic in the headless layer
 
-### Container / Presentational Split
+### Container and presentational split
 
 - Container components own data loading and side effects
 - Presentational components receive props and render UI
 - Presentational components should stay pure
 
-## State Management
+## State management
 
 Treat these separately:
 
@@ -57,7 +57,7 @@ Treat these separately:
 - Do not duplicate server state into client stores
 - Derive values instead of storing redundant computed state
 
-## URL As State
+## URL as state
 
 Persist shareable state in the URL:
 - filters
@@ -66,22 +66,22 @@ Persist shareable state in the URL:
 - active tab
 - search query
 
-## Data Fetching
+## Data fetching
 
-### Stale-While-Revalidate
+### Stale-while-revalidate
 
 - Return cached data immediately
 - Revalidate in the background
-- Prefer existing libraries instead of rolling this by hand
+- Prefer existing libraries over rolling this by hand
 
-### Optimistic Updates
+### Optimistic updates
 
 - Snapshot current state
 - Apply optimistic update
 - Roll back on failure
 - Emit visible error feedback when rolling back
 
-### Parallel Loading
+### Parallel loading
 
 - Fetch independent data in parallel
 - Avoid parent-child request waterfalls

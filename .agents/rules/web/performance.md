@@ -9,9 +9,9 @@ paths:
   - "**/*.html"
   - "**/*.astro"
 ---
-# Web Performance Rules
+# Web performance rules
 
-## Core Web Vitals Targets
+## Core Web Vitals targets
 
 | Metric | Target |
 |--------|--------|
@@ -21,7 +21,7 @@ paths:
 | FCP | < 1.5s |
 | TBT | < 200ms |
 
-## Bundle Budget
+## Bundle budget
 
 | Page Type | JS Budget (gzipped) | CSS Budget |
 |-----------|---------------------|------------|
@@ -29,7 +29,7 @@ paths:
 | App page | < 300kb | < 50kb |
 | Microsite | < 80kb | < 15kb |
 
-## Loading Strategy
+## Loading strategy
 
 1. Inline critical above-the-fold CSS where justified
 2. Preload the hero image and primary font only
@@ -41,7 +41,7 @@ const gsapModule = await import('gsap');
 const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 ```
 
-## Image Optimization
+## Image optimization
 
 - Explicit `width` and `height`
 - `loading="eager"` plus `fetchpriority="high"` for hero media only
@@ -49,22 +49,22 @@ const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 - Prefer AVIF or WebP with fallbacks
 - Never ship source images far beyond rendered size
 
-## Font Loading
+## Font loading
 
 - Max two font families unless there is a clear exception
 - `font-display: swap`
 - Subset where possible
 - Preload only the truly critical weight/style
 
-## Animation Performance
+## Animation performance
 
 - Animate compositor-friendly properties only
 - Use `will-change` narrowly and remove it when done
 - Prefer CSS for simple transitions
 - Use `requestAnimationFrame` or established animation libraries for JS motion
-- Avoid scroll handler churn; use IntersectionObserver or well-behaved libraries
+- Avoid scroll handler churn. Use IntersectionObserver or well-behaved libraries
 
-## Performance Checklist
+## Performance checklist
 
 - [ ] All images have explicit dimensions
 - [ ] No accidental render-blocking resources

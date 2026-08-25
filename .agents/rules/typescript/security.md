@@ -5,11 +5,11 @@ paths:
   - "**/*.js"
   - "**/*.jsx"
 ---
-# TypeScript/JavaScript Security
+# TypeScript and JavaScript security
 
-> This file extends [common/security.md](../common/security.md) with TypeScript/JavaScript specific content.
+> This file extends [common/security.md](../common/security.md) with TypeScript and JavaScript specific content.
 
-## Secret Management
+## Secret management
 
 ```typescript
 // NEVER: Hardcoded secrets
@@ -23,6 +23,6 @@ if (!apiKey) {
 }
 ```
 
-## Agent Support
+## Agent support
 
-- Use **security-reviewer** skill for comprehensive security audits
+- Use the **security-reviewer** agent for security audits

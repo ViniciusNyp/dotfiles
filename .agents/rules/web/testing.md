@@ -11,11 +11,11 @@ paths:
 ---
 > This file extends [common/testing.md](../common/testing.md) with web-specific testing content.
 
-# Web Testing Rules
+# Web testing rules
 
-## Priority Order
+## Priority order
 
-### 1. Visual Regression
+### 1. Visual regression
 
 - Screenshot key breakpoints: 320, 768, 1024, 1440
 - Test hero sections, scrollytelling sections, and meaningful states
@@ -34,7 +34,7 @@ paths:
 - Run Lighthouse or equivalent against meaningful pages
 - Keep CWV targets from [performance.md](performance.md)
 
-### 4. Cross-Browser
+### 4. Cross-browser
 
 - Minimum: Chrome, Firefox, Safari
 - Test scrolling, motion, and fallback behavior
@@ -45,7 +45,7 @@ paths:
 - Verify no overflow
 - Verify touch interactions
 
-## E2E Shape
+## E2E shape
 
 ```ts
 import { test, expect } from '@playwright/test';
@@ -59,7 +59,7 @@ test('landing hero loads', async ({ page }) => {
 - Avoid flaky timeout-based assertions
 - Prefer deterministic waits
 
-## Unit Tests
+## Unit tests
 
 - Test utilities, data transforms, and custom hooks
 - For highly visual components, visual regression often carries more signal than brittle markup assertions

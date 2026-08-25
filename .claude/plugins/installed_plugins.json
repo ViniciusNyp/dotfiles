@@ -27,7 +27,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "version": "unknown",
         "installedAt": "2026-01-27T12:30:16.934Z",
-        "lastUpdated": "2026-08-19T14:46:53.396Z",
+        "lastUpdated": "2026-08-25T13:27:04.394Z",
         "gitCommitSha": "e30768372b4150ca1bc0839d93283e8edc30d60d"
       }
     ],
@@ -46,7 +46,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/hookify/unknown",
         "version": "unknown",
         "installedAt": "2026-04-06T13:49:46.767Z",
-        "lastUpdated": "2026-08-19T14:46:53.396Z"
+        "lastUpdated": "2026-08-25T13:27:04.394Z"
       }
     ],
     "security-guidance@claude-plugins-official": [
@@ -74,7 +74,7 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/unknown",
         "version": "unknown",
         "installedAt": "2026-07-13T11:32:53.704Z",
-        "lastUpdated": "2026-08-19T14:46:53.399Z"
+        "lastUpdated": "2026-08-25T13:27:04.379Z"
       }
     ],
     "slack@claude-plugins-official": [
@@ -93,16 +93,16 @@
         "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/commit-commands/unknown",
         "version": "unknown",
         "installedAt": "2026-07-13T11:33:20.150Z",
-        "lastUpdated": "2026-08-19T14:46:53.396Z"
+        "lastUpdated": "2026-08-25T13:27:04.394Z"
       }
     ],
     "figma@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/figma/2.2.95",
-        "version": "2.2.95",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/figma/2.2.96",
+        "version": "2.2.96",
         "installedAt": "2026-07-13T14:15:58.208Z",
-        "lastUpdated": "2026-08-14T13:20:50.956Z",
+        "lastUpdated": "2026-08-21T13:37:45.731Z",
         "gitCommitSha": "aa1d073884af0db2e69a7b31957513f3d3cc6503"
       }
     ],

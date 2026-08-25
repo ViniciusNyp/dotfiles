@@ -11,13 +11,13 @@ paths:
 ---
 > This file extends [common/security.md](../common/security.md) with web-specific security content.
 
-# Web Security Rules
+# Web security rules
 
 ## Content Security Policy
 
 Always configure a production CSP.
 
-### Nonce-Based CSP
+### Nonce-based CSP
 
 Use a per-request nonce for scripts instead of `'unsafe-inline'`.
 
@@ -36,21 +36,21 @@ Content-Security-Policy:
 
 Adjust origins to the project. Do not cargo-cult this block unchanged.
 
-## XSS Prevention
+## XSS prevention
 
 - Never inject unsanitized HTML
 - Avoid `innerHTML` / `dangerouslySetInnerHTML` unless sanitized first
 - Escape dynamic template values
-- Sanitize user HTML with a vetted local sanitizer when absolutely necessary
+- Sanitize user HTML with a vetted local sanitizer when necessary
 
-## Third-Party Scripts
+## Third-party scripts
 
 - Load asynchronously
 - Use SRI when serving from a CDN
 - Audit quarterly
 - Prefer self-hosting for critical dependencies when practical
 
-## HTTPS and Headers
+## HTTPS and headers
 
 ```text
 Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
@@ -65,4 +65,4 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 - CSRF protection on state-changing forms
 - Rate limiting on submission endpoints
 - Validate client and server side
-- Prefer honeypots or light anti-abuse controls over heavy-handed CAPTCHA defaults
+- Prefer honeypots or light anti-abuse controls over CAPTCHA by default

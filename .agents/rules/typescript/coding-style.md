@@ -5,11 +5,11 @@ paths:
   - "**/*.js"
   - "**/*.jsx"
 ---
-# TypeScript/JavaScript Coding Style
+# TypeScript and JavaScript coding style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
+> This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript and JavaScript specific content.
 
-## Types and Interfaces
+## Types and interfaces
 
 Use types to make public APIs, shared models, and component props explicit, readable, and reusable.
 
@@ -36,7 +36,7 @@ export function formatUser(user: User): string {
 }
 ```
 
-### Interfaces vs. Type Aliases
+### Interfaces vs. type aliases
 
 - Use `interface` for object shapes that may be extended or implemented
 - Use `type` for unions, intersections, tuples, mapped types, and utility types
@@ -60,11 +60,11 @@ type UserWithRole = User & {
 - Use `unknown` for external or untrusted input, then narrow it safely
 - Use generics when a value's type depends on the caller
 
-### React Props
+### React props
 
 - Define component props with a named `interface` or `type`
 - Type callback props explicitly
-- Do not use `React.FC` unless there is a specific reason to do so
+- Do not use `React.FC` unless you have a specific reason
 
 ```typescript
 interface User {
@@ -82,7 +82,7 @@ function UserCard({ user, onSelect }: UserCardProps) {
 }
 ```
 
-### JavaScript Files
+### JavaScript files
 
 - In `.js` and `.jsx` files, use JSDoc when types improve clarity and a TypeScript migration is not practical
 - Keep JSDoc aligned with runtime behavior
@@ -99,13 +99,13 @@ export function formatUser(user) {
 
 ## Immutability
 
-Use the spread operator for immutable updates; type inputs as `Readonly<T>` to enforce it at compile time.
+Use the spread operator for immutable updates. Type inputs as `Readonly<T>` to enforce it at compile time.
 
-## Error Handling
+## Error handling
 
 Use async/await with try-catch and narrow `unknown` errors (`error instanceof Error`) before use.
 
-## Input Validation
+## Input validation
 
 Use Zod for schema-based validation and infer types from the schema:
 
@@ -122,8 +122,8 @@ type UserInput = z.infer<typeof userSchema>
 const validated: UserInput = userSchema.parse(input)
 ```
 
-## Console.log
+## console.log
 
 - No `console.log` statements in production code
-- Use proper logging libraries instead
+- Use a proper logging library instead
 - See hooks for automatic detection

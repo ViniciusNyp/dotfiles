@@ -9,13 +9,13 @@ paths:
   - "**/*.html"
   - "**/*.astro"
 ---
-# Web Design Quality Standards
+# Web design quality standards
 
-## Anti-Template Policy
+## Anti-template policy
 
 Do not ship generic template-looking UI. Frontend output should look intentional, opinionated, and specific to the product.
 
-### Banned Patterns
+### Banned patterns
 
 - Default card grids with uniform spacing and no hierarchy
 - Stock hero section with centered headline, gradient blob, and generic CTA
@@ -26,9 +26,9 @@ Do not ship generic template-looking UI. Frontend output should look intentional
 - Dashboard-by-numbers layouts with sidebar + cards + charts and no point of view
 - Default font stacks used without a deliberate reason
 
-### Required Qualities
+### Required qualities
 
-Every meaningful frontend surface should demonstrate at least four of these:
+Every meaningful screen should show at least four of these:
 
 1. Clear hierarchy through scale contrast
 2. Intentional rhythm in spacing, not uniform padding everywhere
@@ -41,7 +41,7 @@ Every meaningful frontend surface should demonstrate at least four of these:
 9. Motion that clarifies flow instead of distracting from it
 10. Data visualization treated as part of the design system, not an afterthought
 
-## Before Writing Frontend Code
+## Before writing frontend code
 
 1. Pick a specific style direction. Avoid vague defaults like "clean minimal".
 2. Define a palette intentionally.
@@ -49,7 +49,7 @@ Every meaningful frontend surface should demonstrate at least four of these:
 4. Gather at least a small set of real references.
 5. Use design/frontend skills where relevant.
 
-## Worthwhile Style Directions
+## Worthwhile style directions
 
 - Editorial / magazine
 - Neo-brutalism
@@ -61,9 +61,9 @@ Every meaningful frontend surface should demonstrate at least four of these:
 - Swiss / International
 - Retro-futurism
 
-Do not default to dark mode automatically. Choose the visual direction the product actually wants.
+Do not default to dark mode. Choose the visual direction the product actually wants.
 
-## Component Checklist
+## Component checklist
 
 - [ ] Does it avoid looking like a default Tailwind or shadcn template?
 - [ ] Does it have intentional hover/focus/active states?

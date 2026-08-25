@@ -1,13 +1,13 @@
-# Review — pair mode
+# Review, pair mode
 
-Interactive file-by-file walkthrough. You bring context, the user reviews, comments go in a bag, posted only on approval. Entered via `/review pair [PR-ref]`. The autonomous default lives in `SKILL.md`; the `## Principles` there still apply.
+An interactive file-by-file walkthrough. You bring context, the user reviews, comments go in a bag, and they post only on approval. Entered via `/review pair [PR-ref]`. The autonomous default lives in `SKILL.md`, and the `## Principles` there still apply.
 
 ## Phase 1: Resolve PR reference
 
 Parse the argument:
 
 - PR number `123` → `gh pr diff 123`, `gh pr view 123`
-- PR URL → extract number
+- PR URL → extract the number
 - No arg → ask "Which PR? Number or URL."
 
 ## Phase 2: Gather context
@@ -16,14 +16,14 @@ Parse the argument:
 2. `gh pr diff <number>`
 3. Launch `scout`:
 
-    > Read the changed files in full and map surrounding code. Report:
+    > Read the changed files in full and map the surrounding code. Report:
     >
     > - What each change does and why
     > - Related models, services, helpers touched
     > - Project patterns the PR should follow
     > - Concerns (thread safety, error handling, naming, tests)
 
-4. **Rank files by review priority** (you, not scout):
+4. **Rank files by review priority** yourself, not in scout:
     - Security-sensitive files first (auth, crypto, input handling, SQL)
     - Business logic before tests
     - Files with more changes first within each tier
@@ -36,10 +36,10 @@ Present:
 ```
 ## PR #{number}: {title}
 
-{body summary in 2–3 lines}
+{body summary in 2 or 3 lines}
 
 ### Files (ranked by review priority)
-1. {file} — {new|modified|deleted} — {chars}/{lines} changed — {why this rank}
+1. {file} ({new|modified|deleted}), {chars}/{lines} changed. {why this rank}
 2. ...
 
 ### Scout highlights
@@ -50,22 +50,22 @@ Ready. Say 'next' to start with #1, or pick a number.
 
 ## Phase 4: File-by-file walkthrough
 
-For each file (in ranked order or user-picked):
+For each file, in ranked order or as the user picks:
 
-- **File path** and status (new/modified/deleted)
-- **Key chunks:** show 2–4 most important code snippets from the diff, not the full file
-- **Insights:** what changed and why
-- **Concerns:** flag bugs, pattern deviations, style issues, missing tests
+- **File path** and status (new, modified, deleted)
+- **Key chunks.** Show the 2 to 4 most important code snippets from the diff, not the full file
+- **Insights.** What changed and why
+- **Concerns.** Flag bugs, pattern deviations, style issues, missing tests
 
 Then wait. The user may:
 
-- `next` — move to the next file
-- `prev` — go back
-- `#N` — jump to file N
+- `next` moves to the next file
+- `prev` goes back
+- `#N` jumps to file N
 - Ask questions about the current file
 - Dictate a comment: `comment <prefix>: <text> at line <N>`
-- `skip` — move on without comments
-- `done` — jump to phase 5
+- `skip` moves on without comments
+- `done` jumps to phase 5
 
 ## Phase 5: Comment bag
 
@@ -77,14 +77,14 @@ Maintain a running table:
 | 1 | auth/login.rb:42 | **question:** why skip the CSRF check here? |
 ```
 
-Conventional prefixes (user picks):
+Conventional prefixes, the user picks:
 
-- `question:` — asking clarification
-- `suggestion:` — proposing an alternative
-- `issue:` — needs to change
-- `nit:` — minor, take it or leave it
-- `thought:` — context, no action needed
-- `praise:` — highlighting something well done
+- `question:` asks for clarification
+- `suggestion:` proposes an alternative
+- `issue:` needs to change
+- `nit:` minor, take it or leave it
+- `thought:` context, no action needed
+- `praise:` highlights something well done
 
 Post only the comments the user dictated, in their words.
 

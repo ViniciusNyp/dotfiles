@@ -5,9 +5,9 @@ paths:
   - "**/*.js"
   - "**/*.jsx"
 ---
-# TypeScript/JavaScript Patterns
+# TypeScript and JavaScript patterns
 
-## API Response Format
+## API response format
 
 ```typescript
 interface ApiResponse<T> {
@@ -22,7 +22,7 @@ interface ApiResponse<T> {
 }
 ```
 
-## Custom Hooks Pattern
+## Custom hooks pattern
 
 ```typescript
 export function useDebounce<T>(value: T, delay: number): T {
@@ -37,7 +37,7 @@ export function useDebounce<T>(value: T, delay: number): T {
 }
 ```
 
-## Repository Pattern
+## Repository pattern
 
 ```typescript
 interface Repository<T> {

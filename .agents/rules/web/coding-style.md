@@ -11,11 +11,11 @@ paths:
 ---
 > This file extends [common/coding-style.md](../common/coding-style.md) with web-specific frontend content.
 
-# Web Coding Style
+# Web coding style
 
-## File Organization
+## File organization
 
-Organize by feature or surface area, not by file type:
+Organize by feature, not by file type:
 
 ```text
 src/
@@ -44,7 +44,7 @@ src/
     └── global.css
 ```
 
-## CSS Custom Properties
+## CSS custom properties
 
 Define design tokens as variables. Do not hardcode palette, typography, or spacing repeatedly:
 
@@ -65,7 +65,7 @@ Define design tokens as variables. Do not hardcode palette, typography, or spaci
 }
 ```
 
-## Animation-Only Properties
+## Animation-only properties
 
 Prefer compositor-friendly motion:
 - `transform`
@@ -83,7 +83,7 @@ Avoid animating layout-bound properties:
 - `border`
 - `font-size`
 
-## Semantic HTML First
+## Semantic HTML first
 
 ```html
 <header>
