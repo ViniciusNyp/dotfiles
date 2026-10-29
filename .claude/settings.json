@@ -1,302 +1,318 @@
 {
-	"env": {
-		"ENABLE_TOOL_SEARCH": "true",
-		"CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-		"CLAUDE_AUTO_BACKGROUND_TASKS": "true",
-		"CLAUDE_CODE_FORK_SUBAGENT": "1"
-	},
-	"attribution": {
-		"commit": "",
-		"pr": ""
-	},
-	"includeCoAuthoredBy": false,
-	"permissions": {
-		"allow": [
-			"Read(~/.claude)",
-			"Bash(git log:*)",
-			"Bash(git diff:*)",
-			"Bash(git tag:*)",
-			"Bash(git show-ref:*)",
-			"Bash(rtk grep *)",
-			"Bash(rtk *)",
-			"Bash(ls:*)",
-			"Bash(find:*)",
-			"Bash(grep:*)",
-			"Bash(sed:*)",
-			"Bash(cat:*)",
-			"Bash(lsof:*)",
-			"Bash(/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/*/scripts/setup-ralph-loop.sh:*)",
-			"Task",
-			"Glob",
-			"Grep",
-			"LS",
-			"Read",
-			"WebFetch",
-			"WebFetch(domain:localhost)",
-			"WebSearch",
-			"mcp__ide__getDiagnostics",
-			"mcp__plugin_slack_slack__slack_read_channel",
-			"mcp__plugin_slack_slack__slack_read_thread",
-			"mcp__plugin_slack_slack__slack_search_channels",
-			"mcp__plugin_slack_slack__slack_search_public",
-			"mcp__plugin_slack_slack__slack_send_message_draft",
-			"mcp__plugin_slack_slack__slack_search_users",
-			"mcp__claude_ai_Slack__slack_search_public_and_private",
-			"mcp__claude_ai_Slack__slack_read_channel",
-			"mcp__claude_ai_Slack__slack_read_thread",
-			"Bash(python3 -c \":*)",
-			"Bash(python3:*)",
-			"Bash(code:*)",
-			"Bash(curl:*)",
-			"Bash(perl:*)",
-			"Bash(osascript:*)",
-			"Bash(xargs:*)",
-			"Bash(npx playwright *)",
-			"Bash(npm test:*)",
-			"Bash(npm run ev-cli:*)",
-			"Bash(./ev-cli *)",
-			"Bash(wc -l ~/.claude/rules/**/*.md)",
-			"Bash(md5 *)",
-			"Bash(claude mcp *)",
-			"Bash(gh issue *)",
-			"Bash(gh project *)",
-			"Bash(gh label *)",
-			"Bash(gh search *)",
-			"Bash(gh api *)",
-			"Bash(gh pr *)",
-			"Bash(gh repo *)",
-			"Bash(evsts *)",
-			"Bash(evsts:*)",
-			"Bash(evsts api *)",
-			"Bash(evsts mr *)",
-			"Read(/private/tmp/**)",
-			"Read(//private/tmp/**)",
-			"WebFetch(domain:api.github.com)",
-			"mcp__playwright__browser_close",
-			"mcp__playwright__browser_resize",
-			"mcp__playwright__browser_console_messages",
-			"mcp__playwright__browser_handle_dialog",
-			"mcp__playwright__browser_evaluate",
-			"mcp__playwright__browser_file_upload",
-			"mcp__playwright__browser_fill_form",
-			"mcp__playwright__browser_install",
-			"mcp__playwright__browser_press_key",
-			"mcp__playwright__browser_type",
-			"mcp__playwright__browser_navigate",
-			"mcp__playwright__browser_navigate_back",
-			"mcp__playwright__browser_network_requests",
-			"mcp__playwright__browser_take_screenshot",
-			"mcp__playwright__browser_snapshot",
-			"mcp__playwright__browser_click",
-			"mcp__playwright__browser_drag",
-			"mcp__playwright__browser_hover",
-			"mcp__playwright__browser_select_option",
-			"mcp__playwright__browser_tabs",
-			"mcp__playwright__browser_wait_for"
-		],
-		"deny": [
-			"Read(./.env)",
-			"Read(./.env.*)",
-			"Read(./.env.local)",
-			"Read(./secrets/**)",
-			"Read(./*.pem)",
-			"Read(./*.key)",
-			"Read(~/.aws/credentials)",
-			"Read(~/.aws/**)",
-			"Read(~/.ssh/**)"
-		],
-		"ask": ["mcp__plugin_slack_slack__slack_send_message"],
-		"defaultMode": "auto"
-	},
-	"model": "opus[1m]",
-	"hooks": {
-		"Notification": [
-			{
-				"matcher": "permission_prompt",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
-					}
-				]
-			},
-			{
-				"matcher": "permission_prompt|elicitation_dialog",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler",
-						"async": true
-					}
-				]
-			},
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
-						"async": true
-					}
-				]
-			}
-		],
-		"PermissionRequest": [
-			{
-				"matcher": "*",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
-					}
-				]
-			},
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler"
-					}
-				]
-			}
-		],
-		"PostToolUse": [
-			{
-				"matcher": "Edit|Write|MultiEdit",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/post-edit-format.js\"",
-						"timeout": 15,
-						"async": true
-					}
-				]
-			}
-		],
-		"PreCompact": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler"
-					}
-				]
-			}
-		],
-		"PreToolUse": [
-			{
-				"matcher": "AskUserQuestion",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/ask-question-notify.js\""
-					}
-				]
-			},
-			{
-				"matcher": "Bash",
-				"hooks": [
-					{
-						"type": "command",
-						"command": "/Users/viniciusnyp/.claude/hooks/rtk-rewrite.sh"
-					}
-				]
-			}
-		],
-		"SessionEnd": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler",
-						"async": true
-					}
-				]
-			}
-		],
-		"SessionStart": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler",
-						"async": true
-					}
-				]
-			}
-		],
-		"Stop": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler"
-					}
-				]
-			},
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
-						"async": true
-					}
-				]
-			}
-		],
-		"UserPromptSubmit": [
-			{
-				"hooks": [
-					{
-						"type": "command",
-						"command": "agent-deck hook-handler",
-						"async": true
-					}
-				]
-			}
-		]
-	},
-	"workflowKeywordTriggerEnabled": false,
-	"statusLine": {
-		"type": "command",
-		"command": "~/.claude/scripts/context-bar.sh"
-	},
-	"enabledPlugins": {
-		"ralph-loop@claude-plugins-official": true,
-		"frontend-design@claude-plugins-official": true,
-		"explanatory-output-style@claude-plugins-official": true,
-		"hookify@claude-plugins-official": true,
-		"security-guidance@claude-plugins-official": true,
-		"claude-code-wakatime@wakatime": true,
-		"slack@claude-plugins-official": true,
-		"github@claude-plugins-official": false,
-		"commit-commands@claude-plugins-official": true,
-		"figma@claude-plugins-official": true,
-		"mattpocock-skills@claude-plugins-official": true
-	},
-	"extraKnownMarketplaces": {
-		"wakatime": {
-			"source": {
-				"source": "git",
-				"url": "https://github.com/wakatime/claude-code-wakatime.git"
-			}
-		}
-	},
-	"outputStyle": "Explanatory",
-	"alwaysThinkingEnabled": true,
-	"effortLevel": "high",
-	"showClearContextOnPlanAccept": true,
-	"autoUpdatesChannel": "latest",
-	"tui": "fullscreen",
-	"voice": {
-		"enabled": true,
-		"mode": "hold"
-	},
-	"skipDangerousModePermissionPrompt": true,
-	"skipWorkflowUsageWarning": true,
-	"theme": "auto",
-	"verbose": false,
-	"autoCompactEnabled": true,
-	"autoCompactWindow": 700000,
-	"skipAutoPermissionPrompt": true,
-	"autoConnectIde": true
+  "env": {
+    "ENABLE_TOOL_SEARCH": "true",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_AUTO_BACKGROUND_TASKS": "true",
+    "CLAUDE_CODE_FORK_SUBAGENT": "1"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Read(~/.claude)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git tag:*)",
+      "Bash(git show-ref:*)",
+      "Bash(rtk grep *)",
+      "Bash(rtk *)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(cat:*)",
+      "Bash(lsof:*)",
+      "Bash(/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/*/scripts/setup-ralph-loop.sh:*)",
+      "Task",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "WebFetch",
+      "WebFetch(domain:localhost)",
+      "WebSearch",
+      "mcp__ide__getDiagnostics",
+      "mcp__plugin_slack_slack__slack_read_channel",
+      "mcp__plugin_slack_slack__slack_read_thread",
+      "mcp__plugin_slack_slack__slack_search_channels",
+      "mcp__plugin_slack_slack__slack_search_public",
+      "mcp__plugin_slack_slack__slack_send_message_draft",
+      "mcp__plugin_slack_slack__slack_search_users",
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "mcp__claude_ai_Slack__slack_read_thread",
+      "Bash(python3 -c \":*)",
+      "Bash(python3:*)",
+      "Bash(code:*)",
+      "Bash(curl:*)",
+      "Bash(perl:*)",
+      "Bash(osascript:*)",
+      "Bash(xargs:*)",
+      "Bash(npx playwright *)",
+      "Bash(npm test:*)",
+      "Bash(npm run ev-cli:*)",
+      "Bash(./ev-cli *)",
+      "Bash(wc -l ~/.claude/rules/**/*.md)",
+      "Bash(md5 *)",
+      "Bash(claude mcp *)",
+      "Bash(gh issue *)",
+      "Bash(gh project *)",
+      "Bash(gh label *)",
+      "Bash(gh search *)",
+      "Bash(gh api *)",
+      "Bash(gh pr *)",
+      "Bash(gh repo *)",
+      "Bash(evsts *)",
+      "Bash(evsts:*)",
+      "Bash(evsts api *)",
+      "Bash(evsts mr *)",
+      "Read(/private/tmp/**)",
+      "Read(//private/tmp/**)",
+      "WebFetch(domain:api.github.com)",
+      "mcp__playwright__browser_close",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_handle_dialog",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_file_upload",
+      "mcp__playwright__browser_fill_form",
+      "mcp__playwright__browser_install",
+      "mcp__playwright__browser_press_key",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_navigate_back",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_drag",
+      "mcp__playwright__browser_hover",
+      "mcp__playwright__browser_select_option",
+      "mcp__playwright__browser_tabs",
+      "mcp__playwright__browser_wait_for"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./.env.local)",
+      "Read(./secrets/**)",
+      "Read(./*.pem)",
+      "Read(./*.key)",
+      "Read(~/.aws/credentials)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)"
+    ],
+    "ask": [
+      "mcp__plugin_slack_slack__slack_send_message"
+    ],
+    "defaultMode": "default"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
+            "async": true
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/post-edit-format.js\"",
+            "timeout": 15,
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/ask-question-notify.js\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.claude/hooks/rtk-rewrite.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENTDECK_PRETOOL_SYNC=1 /Users/viniciusnyp/.local/bin/agent-deck hook-handler"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENTDECK_STOP_SYNC=1 /Users/viniciusnyp/.local/bin/agent-deck hook-handler"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
+          }
+        ]
+      }
+    ]
+  },
+  "workflowKeywordTriggerEnabled": false,
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/viniciusnyp/.local/bin/agent-deck -p default usage statusline-wrap -- sh -c '~/.claude/scripts/context-bar.sh'"
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "explanatory-output-style@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "claude-code-wakatime@wakatime": true,
+    "slack@claude-plugins-official": true,
+    "github@claude-plugins-official": false,
+    "commit-commands@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "mattpocock-skills@claude-plugins-official": true,
+    "expo@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "wakatime": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/wakatime/claude-code-wakatime.git"
+      }
+    }
+  },
+  "outputStyle": "Explanatory",
+  "feedbackDrafts": "notify",
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "autoCompactWindow": 700000,
+  "showClearContextOnPlanAccept": true,
+  "askUserQuestionTimeout": "never",
+  "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "auto",
+  "verbose": false,
+  "preferredNotifChannel": "auto",
+  "autoCompactEnabled": true,
+  "teammateMode": "auto",
+  "remoteControlAtStartup": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "autoConnectIde": true
 }
