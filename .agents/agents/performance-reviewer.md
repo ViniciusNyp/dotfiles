@@ -1,6 +1,7 @@
 ---
 name: performance-reviewer
 description: Performance-focused code reviewer. Finds N+1 queries, missing indexes, memory leaks, hot loops, cache misses, blocking I/O, unnecessary allocations.
+tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
@@ -51,42 +52,14 @@ Read all changed files in full before reviewing. Don't scan the entire codebase.
 - Write amplification (updating an entire row instead of specific columns)
 - Transaction scope too wide (holding locks unnecessarily)
 
-## Output format
+## Output
 
-Rank findings hardest-first and respect the caller's word budget. The sections below are slots, not a quota. Drop one rather than pad it, and spend the space on what would change the author's mind.
+Review only: leave edits, commits, and subagents to the caller. Follow the caller's reply format; this is the default. Ranked, within the caller's word budget.
 
-# Performance review
+```
+VERDICT: APPROVE or CHANGES
+P1 [blocker|should|nit] file:line claim. Fix: smallest fix.
+```
 
-Severity maps to impact on the Critical | High | Medium | Low scale shared across reviewers.
-
-## Critical impact
-
-- **[Title]**: [description with file:line references]. A regression that degrades a hot path badly enough to threaten availability or SLOs
-    - **Impact**: [estimated impact: latency, memory, throughput]
-    - **Hot path?**: [yes/no, why]
-    - **Test (RED first)**: [benchmark or test that would prove the regression]
-    - **Fix**: [minimal fix]
-
-## High impact
-
-- **[Title]**: [description with file:line references]
-    - **Impact**: [estimated impact: latency, memory, throughput]
-    - **Hot path?**: [yes/no, why]
-    - **Test (RED first)**: [benchmark or test that would prove the regression]
-    - **Fix**: [minimal fix]
-
-## Medium impact
-
-- ...
-
-## Low impact
-
-- ...
-
-## Benchmarking suggestions
-
-- [Specific benchmarks to run to validate concerns, with commands when possible]
-
-## Checked and clean
-
-- [What you checked and found performant]
+blocker = intended case wrong. should = real bug callers will hit, within intent. nit = the rest.
+End with one line: what you checked and found clean.

@@ -71,7 +71,7 @@ Propose 2 or 3 initial test cases at those seams. Not the full suite, just enoug
 
 Every limit, timeout, retry count, model id, and SDK option in the plan traces to a primary source for the **installed** version. Read the package's own types and source first, vendor docs second. Anything you could not trace is presented as a guess, so approval covers it knowingly.
 
-Present the test cases alongside the implementation plan. **Wait for plan approval.**
+Present the test cases alongside the implementation plan. **Wait for plan approval.** Under `ship`, the ship request is the approval: post the plan and continue.
 
 This is the last gate. After approval, cut a feature branch off the current base and switch to execution mode:
 
@@ -116,8 +116,9 @@ When the first 2 or 3 tests are GREEN, propose more tests as the code reveals ne
 When requirements are met:
 
 1. Run the full test suite.
-2. Report: tests passed, files changed, commits made.
-3. Suggest `/review` on the branch before opening a PR.
+2. **Prove it** per [ship's Proof](../ship/SKILL.md#proof). UI or runtime changes get a live test on a simulator or device.
+3. Report: tests passed, proof, files changed, commits made.
+4. Under `ship`, return to it. Otherwise offer `ship` (review loop and draft PR) or `review-loop` alone.
 
 ---
 

@@ -1,160 +1,112 @@
 ---
 name: review
-description: "Code review in 2 modes. Autonomous (default): the review axes the diff earns, run in parallel, then a red-team audit that drops what it can't verify, then a verdict. Pair: file-by-file walkthrough, comments posted only on approval. Use when: review, code review, review a PR/branch, or pair review."
+description: "Code review, one round. Autonomous (default): the axes the diff earns run in parallel, a red-team audit drops what it can't verify, then a verdict. Pair: file-by-file walkthrough, comments posted only on approval. Use when: review, code review, review a PR/branch, review new changes only, or pair review. To review and fix until clean, use review-loop."
 ---
 
 # Review
 
-Two-mode code review.
+One review round. `review-loop` repeats it with fixes in between.
 
-- **Default (autonomous).** Parallel specialized reviewers, a red-team audit, then a verdict.
-- **Pair mode.** File-by-file walkthrough with a comment bag, posted on approval.
+- **Autonomous (default).** Parallel reviewers, red-team audit, verdict.
+- **Pair.** File-by-file walkthrough with a comment bag, posted on approval. Protocol in [PAIR.md](PAIR.md).
 
 ## Usage
 
-- `/review` asks what to review, default autonomous
-- `/review <prompt|url|path>` reviews current changes against the given context, autonomous
-- `/review pair <PR-ref>` enters pair mode on a PR
-- `/review pair` asks for a PR reference, then enters pair mode
+- `/review [prompt|url|path]` reviews the change against that context
+- `/review since <ref>` reviews only what changed after `<ref>` (a sha, `last`, or a PR's last reviewed commit)
+- `/review pair [PR-ref]` enters pair mode
 
-## Parse input
-
-- **Prompt.** Use it as `{review_context}` directly.
-- **URL.**
-    - GitHub issue: `gh issue view <number> --json title,body --jq '.title + "\n\n" + .body'`
-    - GitHub PR: `gh pr view <number> --json title,body --jq '.title + "\n\n" + .body'`
-    - Linear: `lineark issues read <identifier>`
-- **File path.** Read the file.
-- **No args.** Ask "What should I review? Describe it, paste an issue URL, or point me to a spec."
+Context sources: prompt as-is; GitHub issue/PR via `gh issue view` / `gh pr view --json title,body`; Linear via `lineark issues read <id>`; a path, read it. No context: ask once, then review without a spec.
 
 ---
 
-## Autonomous mode (default)
+## 1. Scope
 
-### Phase 1: Diff
+Run `git status --short`. Leave unrelated changes alone: no stash, no discard. If they mix with this change, limit the review to this change's paths; if the paths don't separate cleanly, ask.
+
+Find the base after `git fetch origin`:
 
 ```bash
-git diff main...HEAD
-git diff main...HEAD --stat
+BASE_BRANCH=$(gh pr view --json baseRefName -q .baseRefName 2>/dev/null \
+  || git symbolic-ref --short refs/remotes/origin/HEAD | sed 's|^origin/||')
+BASE=$(git merge-base HEAD "origin/$BASE_BRANCH")
 ```
 
-If empty, try `git diff HEAD~1`. If still empty, say there is nothing to review and stop. Store as `{diff}` and `{diff_stat}`.
+The change is `$BASE` to the working tree, untracked files included. With `since <ref>`, the **delta** is `<ref>` to the working tree; reviewers read the full change for context and report only on the delta. Use one diff command for the whole round. Nothing in scope: say so and stop.
 
-### Phase 2: Pick the axes
+Write the **brief**:
 
-The diff already names where to look, so reviewers read the repo themselves rather than waiting on a scouting pass.
+- Intent and out of scope, 1–2 sentences.
+- Checks: run the ones covering this change (typecheck, lint, the touched tests). Record results, including checks that were already failing. Fix what this change broke before review starts.
 
-Run the axes the diff earns, never all of them by habit:
+## 2. Pick the axes
 
-- `quality-reviewer` runs on every diff.
-- `spec-reviewer` runs whenever `{review_context}` carries a spec. Without one, skip it and say so in the report.
-- `security-reviewer` is **mandatory** when the diff touches auth, webhooks, tokens, permissions, or deletion. Optional elsewhere.
-- `performance-reviewer` runs when the diff adds loops over unbounded input, queries, network calls, or sizing constants.
+Run the axes the diff earns. Say which ran and why.
 
-A one-file change usually earns one axis. Say which axes you ran and why in the report.
+- `quality-reviewer`: every diff.
+- `spec-reviewer`: when the context carries a spec. Otherwise skip it and say so.
+- `security-reviewer`: **mandatory** when the diff touches auth, webhooks, tokens, permissions, or deletion.
+- `performance-reviewer`: loops over unbounded input, queries, network calls, sizing constants.
 
-### Phase 3: Parallel review
+A one-file change usually earns one axis.
 
-Launch the chosen agents **in a single message** so they run concurrently. Each prompt takes the shape:
+## 3. Parallel review
 
-> Review this PR for {axis}.
->
-> Read the repo for conventions: `CLAUDE.md`, `AGENTS.md`, `.claude/rules`, and the files around the diff.
->
-> Findings must be **ranked, and under 500 words.** Space is scarce on purpose. Spend it on what would change the author's mind rather than on everything you noticed.
->
-> ## Review Context
-> {review_context}
->
-> ## Diff
-> {diff}
+Launch the axes **in one message**. Each gets:
 
-### Phase 4: Red-team audit
+```
+Review only: read and run read-only commands. Leave edits, commits, pushes, PR comments, and subagents to the caller.
+Axis: {axis}. Repo: {abs path}. Base: {sha}. {Delta: <ref>..working tree, report only on it.}
+Intent: {intent} Out of scope: {scope} Checks: {results}
+See: git diff {base}; git status --short (read untracked). Read CLAUDE.md, AGENTS.md, .claude/rules, and the code around the diff.
+Find bugs, broken callers, mismatch with intent. Style only when it hides a bug. Skip what lint, formatter, or types enforce.
+Hold to the smallest change: flag code, tests, or guards the intent doesn't need. Other paths, rare cases, small perf, extra compat: nits.
+blocker = intended case wrong. should = real bug callers will hit, within intent. nit = the rest.
+Every claim traces to code, a run, or a primary source for the installed version. Under 500 words, ranked.
+Reply:
+VERDICT: APPROVE or CHANGES
+{AXIS-LETTER}1 [blocker|should|nit] file:line claim. Fix: smallest fix.
+```
 
-Always runs, whatever the axes. The confidence comes from here. Finders propose, the auditor decides.
+## 4. Red-team audit
 
-Launch `review-auditor`:
+Always runs. Finders propose, the auditor decides. Launch `review-auditor` with the brief and every axis report under its own heading:
 
-> Audit these code review reports. Verify findings against actual code. Check for false positives, blind spots, contradictions, severity miscalibration.
->
-> Re-check every cited fact at its source. A finding resting on a fact that is wrong, or that no source backs, does not survive. Say so and drop it.
->
-> ## Review Context
->
-> {review_context}
->
-> ## Reports
->
-> {each axis that ran, under its own heading}
+> Verify each finding at its source. Drop false positives and claims no source backs. Recalibrate severity with the definitions above. Add blind spots as new findings.
 
-### Phase 5: Judge and present
+## 5. Verdict
 
-Synthesize this yourself, not in a subagent:
+Synthesize yourself:
 
-1. Drop false positives flagged by the auditor.
-2. Apply severity adjustments.
-3. Verify high-confidence findings.
-4. Add blind spots as new findings.
-5. Deduplicate (same file:line).
-6. Tag each finding: `[security]`, `[performance]`, `[quality]`, `[spec]`, `[audit]`.
-
-Present:
+1. Drop what the auditor killed, apply its severities, add its blind spots.
+2. Check each surviving blocker and should yourself. Another path, rare case, or small cost is a nit whatever its label.
+3. Deduplicate by file:line. Give **stable ids** (`R1`, `R2`…) and tag the source: `[quality]` `[spec]` `[security]` `[performance]` `[audit]`.
 
 ```markdown
-## Code review: {branch name}
+## Review: {branch} {(delta since <ref>)}
 
-**Diff:** {files changed}, {insertions}+, {deletions}-
-**Axes:** {the ones that ran, and why} + red-team audit
+**Diff:** {files}, +{ins} -{del} · **Axes:** {which, why} + audit · **Checks:** {results}
 
-### Critical
+### Blockers
+- R1 [source] **title** `file:line`. {claim}. **Test (RED first):** {test}. **Fix:** {smallest fix}
 
-- [{source}] **{title}** at `{file}:{line}`
-  {description}
-  **Test (RED first):** {failing test that proves the issue}
-  **Fix:** {minimal fix}
+### Should
+### Nits
 
-### High / Medium / Low
-
-- ...
-
-### Good patterns
-
-- ...
-
-### Audit notes
-
-- ...
-
-**Verdict:** {Critical/High -> "Needs fixes" | Medium/Low only -> "Clean with suggestions" | Nothing -> "Ship it"}
+**VERDICT:** APPROVE (no blocker or should) | CHANGES
 ```
 
-### Phase 6: Next step
+## 6. Next
 
-If the verdict is not "Ship it":
-
-> **What next?**
->
-> **a)** Write the full report to `docs/reviews/{branch-name}.md`
-> **b)** Address findings (TDD, RED first, baby steps)
-> **c)** Switch to pair mode for an interactive walkthrough
-
-Wait for the user to choose. Option b triggers `/dev` on the prioritized fix list.
-
----
-
-## Pair mode
-
-An interactive file-by-file walkthrough. You bring context, the user dictates comments, and nothing posts without approval. Entered via `/review pair [PR-ref]`. The full six-phase protocol is in `PAIR.md`. Read it when entering pair mode.
+- The user asked to act on findings, or a skill called review: hand the findings to `review-loop`.
+- Otherwise stop at the verdict. Offer, in one line: write it to `docs/reviews/{branch}.md`, run `review-loop`, or switch to pair mode.
 
 ---
 
 ## Principles
 
-- TDD when fixing findings. RED first.
-- Baby steps. One fix at a time.
-- Skip findings a linter, formatter, or type-checker already enforces. Report only what tooling misses.
-- Findings are sourced or they don't ship. A claim resting on an external fact traces to a **primary source** for the installed version. **Drift**, meaning a departure from the documented approach with nothing explaining why, is the shape worth hunting. The reviewers carry the mechanics, the audit drops what fails them.
-- Keep the spec axis separate from quality. Code can follow every convention yet implement the wrong thing, and one axis must not mask the other.
-- Stack-agnostic and project-aware. Each reviewer reads CLAUDE.md, AGENTS.md, and .claude/rules itself.
-- Adversarial by default. The red-team audit kills weak findings rather than adding noise, and the auditor verifies every claim against the code rather than trusting the user or another agent.
+- **Smallest change.** Prefer findings whose fix deletes or narrows code over ones that add a lock, cache, helper, or option.
+- **Sourced findings only.** External facts trace to a primary source for the installed version. **Drift** (departing from the documented approach with nothing explaining why) is the shape worth hunting.
+- **Spec stays separate from quality.** Code can follow every convention and still build the wrong thing.
+- **Adversarial.** The audit kills weak findings rather than adding noise.
 - In pair mode the user owns the comment bag. Post only what they dictate, in their words.

@@ -136,6 +136,8 @@ If other tests break:
 
 > Full suite: {pass/fail}. {details if any breakage}
 
+UI or runtime bug: also reproduce it live and watch it pass, per [ship's Proof](../ship/SKILL.md#proof).
+
 ### Phase 6: Refactor (if needed)
 
 Only if the fix is ugly or the area needs cleanup:
@@ -152,7 +154,7 @@ fix(<scope>): <what was fixed>
 
 If multiple tests were needed (complex bug), that's fine. Commit them together as one logical fix. State the cause in the message, so the next person to touch this reads why it broke rather than guessing.
 
-**Offer `/review`.** A surgical fix behind a red loop and a green suite usually doesn't need one. Say so plainly and let the user decide. Recommend it, with the reason, when the fix grew past its repro:
+**Under `ship`, return to it** after the prevention question below. Otherwise **offer `review-loop`.** A surgical fix behind a red loop and a green suite usually doesn't need one. Say so plainly and let the user decide. Recommend it, with the reason, when the fix grew past its repro:
 
 - it touched more than the loop demanded
 - it landed in shared code, or changed a seam others depend on

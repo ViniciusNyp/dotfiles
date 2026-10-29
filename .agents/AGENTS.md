@@ -71,4 +71,8 @@ Skip for: typo fixes, doc-only edits, IDE renames, single-line comment changes, 
 9. **Change production code OR tests per step, not both together.** Keep one side honest.
 10. **Baby steps.** Explore raw data first. Let the failing test dictate the next line. Let tests demand abstractions rather than anticipating them.
 
+## PubGenius
+
+In any credithawk repo or worktree (including `~/.t3/worktrees/`), read `~/pubgenius/AGENTS.md` first. It maps where shared notes, plans and docs live outside the repo.
+
 @RTK.md

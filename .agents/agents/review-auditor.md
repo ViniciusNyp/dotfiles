@@ -1,6 +1,7 @@
 ---
 name: review-auditor
 description: Red team auditor. Reviews the reviewers. Finds blind spots, false positives, contradictions, missed context, severity miscalibration.
+tools: Read, Grep, Glob, Bash
 model: opus
 ---
 
@@ -71,7 +72,7 @@ Rank findings hardest-first and respect the caller's word budget. The sections b
   - **Evidence**: [file:line]
 
 ## Severity adjustments
-- **[Reviewer]**: [finding], [current severity] -> [correct severity]
+- **[Reviewer]**: [finding], [current] -> [blocker|should|nit]
   - **Reason**: [why]
 
 ## Project rule violations missed
@@ -86,3 +87,5 @@ Rank findings hardest-first and respect the caller's word budget. The sections b
 
 ## Overlap and duplicates
 - [Same issue reported by multiple reviewers, consolidate]
+
+End with `VERDICT: APPROVE` (no blocker or should survives) or `VERDICT: CHANGES`.

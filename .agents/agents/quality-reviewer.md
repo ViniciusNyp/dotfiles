@@ -1,6 +1,7 @@
 ---
 name: quality-reviewer
 description: Code quality reviewer. Design, architecture, testing, naming, SOLID, DDD, clean code, error handling, modularity, readability.
+tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
@@ -100,32 +101,14 @@ Match these against the diff even when the repo documents no standards. Two rule
 - Are the tests coupled to implementation details? (will they break on refactor?)
 - Is the test describing behavior or verifying structure?
 
-## Output format
+## Output
 
-Rank findings hardest-first and respect the caller's word budget. The sections below are slots, not a quota. Drop one rather than pad it, and spend the space on what would change the author's mind.
+Review only: leave edits, commits, and subagents to the caller. Follow the caller's reply format; this is the default. Ranked, within the caller's word budget.
 
-# Quality review
+```
+VERDICT: APPROVE or CHANGES
+Q1 [blocker|should|nit] file:line claim. Fix: smallest fix.
+```
 
-Tag every finding with **Severity: Critical | High | Medium | Low** so the auditor can compare and rank across all reviewers on one scale.
-
-## Convention violations
-- **[Title]**: [description with file:line]
-  - **Severity**: Critical | High | Medium | Low
-  - **Project pattern**: [how the project does it elsewhere]
-  - **Test (RED first)**: [failing test that would catch the issue]
-  - **Suggestion**: [fix aligned with project conventions]
-
-## Design concerns
-- ...
-
-## Testing issues
-- ...
-
-## Readability issues
-- ...
-
-## Good patterns introduced
-- [Explicitly acknowledge what's done well. This matters]
-
-## Checked and clean
-- [What you reviewed and found solid]
+blocker = intended case wrong. should = real bug callers will hit, within intent. nit = the rest.
+End with one line: what you checked and found clean.

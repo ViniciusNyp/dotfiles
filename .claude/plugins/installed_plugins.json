@@ -11,16 +11,6 @@
         "gitCommitSha": "66682fb0513aec308e68d71740e2b0394a29d884"
       }
     ],
-    "ralph-loop@claude-plugins-official": [
-      {
-        "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/ralph-loop/1.0.1",
-        "version": "1.0.1",
-        "installedAt": "2026-01-26T15:34:47.296Z",
-        "lastUpdated": "2026-10-28T12:53:24.257Z",
-        "gitCommitSha": "f8c5e7a1dcb71b10cb74586224b5401f3de5db28"
-      }
-    ],
     "frontend-design@claude-plugins-official": [
       {
         "scope": "user",
