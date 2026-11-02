@@ -103,7 +103,6 @@ alias lzg='lazygit'
 alias lzd='lazydocker'
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias cc='claude'
-alias ad='agent-deck'
 
 if command -v kubecolor &> /dev/null; then
   alias kubectl='kubecolor'
@@ -139,3 +138,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Machine-local, untracked overrides (work tooling, secrets)
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+# Android SDK
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"

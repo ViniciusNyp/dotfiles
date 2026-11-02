@@ -64,11 +64,11 @@
     "github@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/f8c5e7a1dcb7",
-        "version": "f8c5e7a1dcb7",
+        "installPath": "/Users/viniciusnyp/.claude/plugins/cache/claude-plugins-official/github/a7ba5b93db0c",
+        "version": "a7ba5b93db0c",
         "installedAt": "2026-07-13T11:32:53.704Z",
-        "lastUpdated": "2026-10-28T12:53:24.259Z",
-        "gitCommitSha": "f8c5e7a1dcb71b10cb74586224b5401f3de5db28"
+        "lastUpdated": "2026-10-30T19:21:15.179Z",
+        "gitCommitSha": "a7ba5b93db0c7c8d17f3f1d25853adca79598a1a"
       }
     ],
     "slack@claude-plugins-official": [
