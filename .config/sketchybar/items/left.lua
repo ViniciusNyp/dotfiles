@@ -1,13 +1,7 @@
--- Left island: apple, workspace pills, front app. Then the media island.
+-- Left island: workspace pills, front app. Then the media island. Read-only:
+-- hover for details, the native menu bar (top-edge hover) for controls.
 -- Plugins stay shell scripts; SUBS collects native --subscribe calls so
 -- sketchybar keeps delivering events straight to them (no lua callbacks yet).
-SBAR.add("item", "apple", {
-	position = "left",
-	icon = { string = "\u{F0035}", padding_left = 12 }, -- nf-md-apple (native Hack NF metrics)
-	label = { drawing = false },
-	click_script = PLUGIN_DIR .. "/menus.sh 1",
-})
-
 SBAR.add("event", "aerospace_workspace_change")
 
 local aerospace = io.popen("aerospace list-workspaces --all")
@@ -28,7 +22,6 @@ for sid in aerospace:lines() do
 			padding_left = 2,
 			padding_right = 7,
 		},
-		click_script = "aerospace workspace " .. sid .. "; sketchybar --set $NAME popup.drawing=off",
 		script = PLUGIN_DIR .. "/space_hover.sh " .. sid,
 	})
 	SUBS[#SUBS + 1] = "--subscribe space." .. sid .. " mouse.entered mouse.exited mouse.exited.global"
@@ -48,7 +41,6 @@ SBAR.add("item", "front_app", {
 	icon = { font = "sketchybar-app-font:Regular:16.0" },
 	label = { padding_right = 12 },
 	script = PLUGIN_DIR .. "/front_app.sh",
-	click_script = PLUGIN_DIR .. "/menus.sh 2",
 })
 SUBS[#SUBS + 1] = "--subscribe front_app front_app_switched"
 
@@ -66,11 +58,10 @@ SBAR.add("item", "media", {
 		height = 26,
 	},
 	script = PLUGIN_DIR .. "/media.sh",
-	click_script = "nowplaying-cli togglePlayPause",
 })
 SUBS[#SUBS + 1] = "--subscribe media front_app_switched aerospace_workspace_change"
 
-SBAR.add("bracket", "left_island", { "apple", "/space\\..*/", "front_app" }, {
+SBAR.add("bracket", "left_island", { "/space\\..*/", "front_app" }, {
 	background = {
 		drawing = true,
 		color = COLORS.island,

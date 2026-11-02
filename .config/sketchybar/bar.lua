@@ -1,11 +1,10 @@
--- Bar: invisible window, islands paint themselves.
--- topmost=window keeps the bar above the hidden-menu-bar hot zone (clickability)
+-- Bar: invisible window, islands paint themselves. Not topmost, so hovering
+-- the top edge still reveals the native menu bar (wifi, bluetooth, sound...).
 SBAR.bar({
 	position = "top",
 	height = 28,
 	notch_display_height = 38,
 	notch_width = 200,
-	topmost = "window",
 	blur_radius = 0,
 	color = COLORS.bar,
 })

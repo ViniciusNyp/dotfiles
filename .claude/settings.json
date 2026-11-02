@@ -116,25 +116,6 @@
             "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
           }
         ]
-      },
-      {
-        "matcher": "permission_prompt|elicitation_dialog",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
-            "async": true
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
-            "async": true
-          }
-        ]
       }
     ],
     "PermissionRequest": [
@@ -144,14 +125,6 @@
           {
             "type": "command",
             "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/notification-event.js\""
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
           }
         ]
       }
@@ -165,16 +138,6 @@
             "command": "node \"/Users/viniciusnyp/.claude/scripts/hooks/post-edit-format.js\"",
             "timeout": 15,
             "async": true
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
           }
         ]
       }
@@ -197,72 +160,13 @@
             "command": "/Users/viniciusnyp/.claude/hooks/rtk-rewrite.sh"
           }
         ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "AGENTDECK_PRETOOL_SYNC=1 /Users/viniciusnyp/.local/bin/agent-deck hook-handler"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "AGENTDECK_STOP_SYNC=1 /Users/viniciusnyp/.local/bin/agent-deck hook-handler"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "sleep 1; /opt/homebrew/bin/sketchybar --trigger ai_change",
-            "async": true
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/viniciusnyp/.local/bin/agent-deck hook-handler"
-          }
-        ]
       }
     ]
   },
   "workflowKeywordTriggerEnabled": false,
   "statusLine": {
     "type": "command",
-    "command": "/Users/viniciusnyp/.local/bin/agent-deck -p default usage statusline-wrap -- sh -c '~/.claude/scripts/context-bar.sh'"
+    "command": "sh -c '~/.claude/scripts/context-bar.sh'"
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,

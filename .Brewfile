@@ -1,4 +1,3 @@
-tap "asheshgoplani/tap"
 tap "asmvik/formulae", "https://github.com/asmvik/homebrew-formulae.git"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "nikitabobko/tap"
@@ -10,8 +9,6 @@ brew "atuin"
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
-# Get/set bluetooth power and discoverable state
-brew "blueutil"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Library for manipulating PNG images
@@ -110,8 +107,6 @@ brew "yq"
 brew "zellij"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Terminal session manager for AI coding agents
-brew "asheshgoplani/tap/agent-deck", trusted: true
 # A window border system for macOS
 brew "felixkratz/formulae/borders", trusted: true
 # Custom macOS statusbar with shell plugin, interaction and graph support

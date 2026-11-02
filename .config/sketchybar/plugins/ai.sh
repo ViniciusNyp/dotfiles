@@ -1,62 +1,75 @@
 #!/usr/bin/env bash
-# AI agents trio: ai = robot + running count (green), ai_wait = waiting count
-# (yellow, an agent needs input), ai_extra = best-effort count of agent CLIs
-# (claude/codex/gemini/cursor-agent) outside agent-deck (dim). Claude Code
-# hooks trigger ai_change for instant updates; the island flashes when the
-# waiting count rises. Degrades to a pure process count without agent-deck.
+# T3 Code agents, read straight from its local projection DB (read-only, ~10ms).
+# ai = robot + running count (green), ai_wait = threads waiting on you (yellow).
+# Hover lists the active threads. Hidden when nothing is active or T3 is absent.
 CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
 source "$CONFIG_DIR/colors.sh"
+DB="$HOME/.t3/userdata/statev2.sqlite"
 
-RUNNING=0 WAITING=0 IDLE=0
-HAVE_DECK=0
-if command -v agent-deck &> /dev/null; then
-  HAVE_DECK=1
-  STATUS=$(agent-deck status 2>/dev/null)
-  RUNNING=$(grep -oE '[0-9]+ running' <<< "$STATUS" | cut -d' ' -f1)
-  WAITING=$(grep -oE '[0-9]+ waiting' <<< "$STATUS" | cut -d' ' -f1)
-  IDLE=$(grep -oE '[0-9]+ idle' <<< "$STATUS" | cut -d' ' -f1)
-  RUNNING=${RUNNING:-0} WAITING=${WAITING:-0} IDLE=${IDLE:-0}
-fi
+active_threads() {
+  [ -r "$DB" ] || return
+  sqlite3 -readonly -separator $'\t' "$DB" "
+    WITH runs AS (
+      SELECT thread_id, status FROM orchestration_v2_projection_runs
+      WHERE status IN ('queued','preparing','starting','running','waiting')
+    ), asks AS (
+      SELECT thread_id FROM orchestration_v2_projection_runtime_requests
+      WHERE status = 'pending'
+    )
+    SELECT CASE WHEN t.thread_id IN (SELECT thread_id FROM asks)
+                  OR t.thread_id IN (SELECT thread_id FROM runs WHERE status = 'waiting')
+                THEN 'wait' ELSE 'run' END, t.title
+    FROM orchestration_v2_projection_threads t
+    WHERE t.deleted_at IS NULL AND t.archived_at IS NULL
+      AND (t.thread_id IN (SELECT thread_id FROM runs) OR t.thread_id IN (SELECT thread_id FROM asks))
+    ORDER BY 1 DESC, t.updated_at DESC" 2>/dev/null
+}
 
-PROCS=0
-for bin in claude codex gemini cursor-agent; do
-  PROCS=$((PROCS + $(pgrep -x "$bin" 2>/dev/null | wc -l)))
-done
+case "$SENDER" in
+  mouse.entered)
+    sketchybar --remove '/popup\.ai\..*/' >/dev/null 2>&1
+    args=() i=0
+    while IFS=$'\t' read -r state title; do
+      [ -z "$state" ] && continue
+      COLOR=$GREEN
+      [ "$state" = wait ] && COLOR=$YELLOW
+      args+=(--add item "popup.ai.$i" popup.ai
+        --set "popup.ai.$i" icon=● icon.color=$COLOR label="${title:0:50}")
+      i=$((i + 1))
+    done < <(active_threads)
+    [ "$i" -gt 0 ] && sketchybar "${args[@]}" --set ai popup.drawing=on
+    exit 0
+    ;;
+  mouse.exited|mouse.exited.global)
+    sketchybar --set ai popup.drawing=off
+    exit 0
+    ;;
+esac
 
-if [ "$HAVE_DECK" -eq 1 ]; then
-  # idle deck sessions keep their agent process alive; they are tracked, not extras
-  EXTRA=$((PROCS - RUNNING - WAITING - IDLE))
-  [ "$EXTRA" -lt 0 ] && EXTRA=0
+STATES=$(active_threads | cut -f1)
+RUNNING=$(grep -c '^run$' <<< "$STATES")
+WAITING=$(grep -c '^wait$' <<< "$STATES")
+
+# Polls are the common case: do nothing unless the counts changed
+STATE=/tmp/sketchybar_ai_state
+read -r PREV_RUNNING PREV_WAITING 2>/dev/null < "$STATE"
+[ "$SENDER" = routine ] && [ "$RUNNING $WAITING" = "$PREV_RUNNING $PREV_WAITING" ] && exit 0
+echo "$RUNNING $WAITING" > "$STATE"
+
+if [ $((RUNNING + WAITING)) -eq 0 ]; then
+  sketchybar --set ai drawing=off --set ai_wait drawing=off
 else
-  RUNNING=$PROCS EXTRA=0
+  args=(--set ai drawing=on label="${RUNNING}▸")
+  [ "$RUNNING" -gt 0 ] && args+=(icon.color=$GREEN label.drawing=on) || args+=(icon.color=$DIM label.drawing=off)
+  [ "$WAITING" -gt 0 ] && args+=(--set ai_wait drawing=on label="${WAITING}󰏤") || args+=(--set ai_wait drawing=off)
+  sketchybar "${args[@]}"
 fi
 
-if [ $((RUNNING + WAITING + EXTRA)) -eq 0 ]; then
-  sketchybar --set ai drawing=off --set ai_wait drawing=off --set ai_extra drawing=off
-  exit 0
-fi
+# the island width changed; refit the meeting label to the notch (AX call, keep rare)
+NAME=meeting "$CONFIG_DIR/plugins/calendar.sh" >/dev/null 2>&1 &
 
-ICON_COLOR=$DIM
-[ "$RUNNING" -gt 0 ] && ICON_COLOR=$GREEN
-args=(--set ai drawing=on icon.color=$ICON_COLOR label="${RUNNING}▸")
-[ "$RUNNING" -gt 0 ] && args+=(label.drawing=on) || args+=(label.drawing=off)
-if [ "$WAITING" -gt 0 ]; then
-  args+=(--set ai_wait drawing=on label="${WAITING}󰏤")
-else
-  args+=(--set ai_wait drawing=off)
-fi
-if [ "$EXTRA" -gt 0 ]; then
-  args+=(--set ai_extra drawing=on label="+${EXTRA}")
-else
-  args+=(--set ai_extra drawing=off)
-fi
-sketchybar "${args[@]}"
-
-# flash the island when something new starts waiting on the user
-STATE=/tmp/sketchybar_ai_waiting
-PREV=$(cat "$STATE" 2>/dev/null || echo 0)
-echo "$WAITING" > "$STATE"
-if [ "$WAITING" -gt "${PREV:-0}" ]; then
+# flash the island when something new starts waiting on you
+if [ "$WAITING" -gt "${PREV_WAITING:-0}" ]; then
   for _ in 1 2; do
     sketchybar --animate tanh 8 --set right_island background.color=$YELLOW
     sleep 0.35
@@ -64,6 +77,3 @@ if [ "$WAITING" -gt "${PREV:-0}" ]; then
     sleep 0.35
   done
 fi
-
-# the trio changed the island's width; refit the meeting label to the notch
-NAME=meeting "$CONFIG_DIR/plugins/calendar.sh" >/dev/null 2>&1 &
