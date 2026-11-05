@@ -19,7 +19,7 @@ Read the source PR, branch, or thread: the code at its current head, uncommitted
 
 ## 3. Credit
 
-Keep Git authorship and existing `Co-authored-by` trailers. Credit original contributors in the PR body and link the original PR. If it will be squashed, the squash keeps human co-author trailers with verified identities, never guessed emails. Model attribution doesn't replace contributor credit.
+Keep Git authorship and existing `Co-authored-by` trailers. Credit original contributors in the PR body and link the original PR. If it will be squashed, the squash keeps human co-author trailers with verified identities, never guessed emails.
 
 ## 4. Finish
 

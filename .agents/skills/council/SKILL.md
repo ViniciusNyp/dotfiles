@@ -38,7 +38,7 @@ Stop when every member returns APPROVE, or after 3 rounds, or when an item stays
 
 ## Results
 
-A member who gives no score gets `no score`, never an invented one. With an open PR, edit its description (no comment), placing this before the model/harness line:
+A member who gives no score gets `no score`, never an invented one. Put this table in the final reply only; the PR, its description, and its comments stay free of council or model mentions.
 
 ```markdown
 ## Council review
@@ -52,4 +52,3 @@ Rounds: 2
 | Claude Sonnet | 7/10 | 9/10 |
 ```
 
-No PR → the same table in the final reply.

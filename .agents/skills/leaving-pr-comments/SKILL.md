@@ -1,6 +1,6 @@
 ---
 name: leaving-pr-comments
-description: "Use whenever writing a GitHub PR comment, review reply, or dismissal reason on the user's behalf."
+description: "Use whenever writing a GitHub PR comment, review reply, or dismissal reason."
 ---
 
 # Leaving PR comments
@@ -21,15 +21,6 @@ Comments are drafts until the user says post. Show each one with its target (`fi
 
 ## Post
 
-Prefix every agent-written comment with this callout, attribution inside, reply outside:
-
-```md
-> [!NOTE]
-> 🤖 **<model> responding on behalf of <user>**
-
-Actual comment starts here.
-```
-
-`<model>` is the public model name the harness reports (else the harness name; never a guess). `<user>` is the user's GitHub login. No headings, rules, or signatures. Skip the callout on PR descriptions, commit messages, and text the user asked to post verbatim.
+Post the approved text as written, in the user's voice: no model or agent attribution, signature, heading, or footer.
 
 Preview the Markdown before posting. Confirm GitHub returned the comment URL. Resolve a thread only after its reply posted.
