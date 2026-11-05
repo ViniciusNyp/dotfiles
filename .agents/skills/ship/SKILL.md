@@ -17,12 +17,12 @@ Everything outside the task's own branch and draft PR stays a draft on disk: Sla
 
 1. **Build.** Bug → [`bugfix`](../bugfix/SKILL.md) in autonomous mode. Everything else → [`dev`](../dev/SKILL.md). The ship request is the plan approval: post the plan and continue. Work that isn't settled (dev Phase 3) stops here with the route to the skill that settles it. Branch off the latest base first if you're on it.
 2. **Prove it.** See Proof. Every change in the diff has evidence before review starts.
-3. **Review.** Run [`review-loop`](../review-loop/SKILL.md), committing each round. Re-prove behavior that review fixes touched.
-4. **Open the draft PR.** Rebase onto the latest base, re-run checks. Then:
+3. **Review.** Run [`review-loop`](../review-loop/SKILL.md), or [`council`](../council/SKILL.md) when the user said council, committing each round. Re-prove behavior that review fixes touched.
+4. **Open the draft PR.** Reuse the branch's PR if one exists. Rebase onto the latest base, re-run checks. Then:
    - Title: the repo's convention (check AGENTS.md and recent merged PRs). Says why it matters, not what files changed.
-   - Body: shaped by the `pr` skill, then `/unslop`. Open with the problem in the user's words, then the fix. One line on how it was proven. Nothing about review rounds, merge or deploy status.
+   - Body: shaped by the `pr` skill, then `/unslop`. Open with the problem in the user's words, then the fix. One line on how it was proven. Nothing about review rounds, merge or deploy status. Check title, body, and attachments for secrets and private details.
    - `gh pr create --draft --base <base> --assignee @me --label <labels matching the change>`. Labels come from `gh label list`; pick the ones recent merged PRs of the same kind used.
-5. **Watch CI.** In T3 Code, `watch_pull_request` and end the turn; elsewhere run `gh pr checks <n> --watch` under the Monitor tool. Fix real failures with proof, push, repeat. A flake gets one rerun and a note.
+5. **Watch CI** with [`babysit-pr`](../babysit-pr/SKILL.md) (`--until green`) until required checks pass. Its fixes need proof like any other.
 6. **Report.** First line: a question if one blocks you, else the PR link. Then: proof per change, review ledger summary, decisions made for the user, follow-ups, remaining risks. In T3 Code, `unwatch_pull_request` before reporting.
 
 ## Proof

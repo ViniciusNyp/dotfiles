@@ -18,7 +18,7 @@ Everything else in ship's "Stay local" still binds: no messages, no reviewer req
 
 ## Babysit
 
-After ship's step 5, keep watching (`watch_pull_request` in T3 Code). Act only on checks and comments newer than the latest push. Verify every bot finding at its source before changing code; fix real ones with proof, decline the rest with a written reason drafted for the user. Keep the PR at the size the goal needs.
+After ship's step 5, keep running [`babysit-pr`](../babysit-pr/SKILL.md) (`--until ready` when the repo has Greptile or Macroscope) until the merge gate passes. Dismissal reasons follow [`leaving-pr-comments`](../leaving-pr-comments/SKILL.md); posting them is part of this grant.
 
 ## Merge gate
 
